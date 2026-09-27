@@ -59,11 +59,18 @@ def authors_of(entry: dict) -> list[str]:
     return [a.strip() for a in raw.split(" and ") if a.strip()]
 
 
+# Authors who publish under an initial, verified against the official
+# proceedings page. Writing out a first name they do not use would be a guess,
+# not a correction. D. Sculley: NeurIPS 2019 lists "D. Sculley"
+# (proceedings.neurips.cc, Ovadia et al. 2019), as does arXiv 1906.02530.
+PUBLISHED_AS_INITIAL = {"Sculley, D.", "Sculley, D"}
+
+
 def given_is_only_initials(author: str) -> bool:
     """The rule is "not *just* initials", so flag only a fully abbreviated given
     name: 'Efron, B.' and 'Liu, Y. H.' yes; 'Hu, Edward J.' no; and
     'Buchanan, E. Kelly' no -- that is the byline the author publishes under."""
-    if "," not in author:
+    if "," not in author or author.strip() in PUBLISHED_AS_INITIAL:
         return False
     given = author.split(",", 1)[1].strip()
     if not given:

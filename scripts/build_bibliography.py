@@ -7,7 +7,7 @@ The August 2026 ARR submission was desk-rejected for its references: several
 did not report the full author list, and none carried a DOI or ACL Anthology
 link. The bibliography had been a hand-written `thebibliography` block, so
 every author list was whatever someone had typed, and "et al." had crept into
-25 of the 53 entries. One entry (Nixon et al., 2019) was simply missing two
+27 of the 53 entries. One entry (Nixon et al., 2019) was simply missing two
 authors.
 
 Rather than hand-fix it, the bibliography is now *derived*. Nothing below is
@@ -112,6 +112,10 @@ ARXIV: dict[str, tuple[str, str, str, str | None]] = {
     "theisen2023ensembles":     ("2305.12313", "inproceedings", NEURIPS, None),
     "kondratyuk2020ensembling": ("2005.00570", "article", "arXiv preprint arXiv:2005.00570", None),
     "lobacheva2020power":       ("2007.08483", "inproceedings", NEURIPS, "2375--2385"),
+    # Venues confirmed on the official proceedings pages: NeurIPS 2019
+    # (proceedings.neurips.cc) and ICLR 2020 (iclr.cc/virtual_2020).
+    "ovadia2019trust":          ("1906.02530", "inproceedings", NEURIPS, None),
+    "ashukha2020pitfalls":      ("2002.06470", "inproceedings", ICLR, None),
 }
 
 YEAR = {  # publication year of the *venue*, which is not always the arXiv year
@@ -128,6 +132,7 @@ YEAR = {  # publication year of the *venue*, which is not always the arXiv year
     "mirzadeh2024gsmsymbolic": "2024", "zhang2024gsm1k": "2024",
     "abe2022deep": "2022", "theisen2023ensembles": "2023",
     "kondratyuk2020ensembling": "2020", "lobacheva2020power": "2020",
+    "ovadia2019trust": "2019", "ashukha2020pitfalls": "2020",
 }
 
 # key -> (DOI, entry type, venue, fallback pages)
@@ -193,7 +198,46 @@ def fetch_anthology(aid: str) -> str:
     return fetch(f"https://aclanthology.org/{aid}.bib").decode().strip()
 
 
+def fetch_arxiv_abs(aid: str) -> dict:
+    """The same record from the abstract page's citation_* meta tags.
+
+    Fallback for when the export API refuses this host (it has answered HTTP
+    406 to every query form for hours at a time). On 2026-09-27 all 33 entries
+    then in the bibliography came back identical, title and author list, from
+    both routes, so which one ran does not change the output.
+    """
+    import html
+    page = fetch(f"https://arxiv.org/abs/{aid}").decode()
+
+    def meta(name: str) -> list[str]:
+        return [html.unescape(v) for v in
+                re.findall(r'<meta name="' + name + r'" content="([^"]*)"', page)]
+
+    authors = []
+    for a in meta("citation_author"):          # "Family, Given"
+        family, _, given = a.partition(", ")
+        authors.append(f"{given} {family}".strip() if given else family)
+    titles = meta("citation_title")
+    if not titles or not authors:
+        raise RuntimeError(f"arXiv abs page for {aid} carried no citation meta")
+    return {"title": " ".join(titles[0].split()), "authors": authors}
+
+
 def fetch_arxiv(ids: list[str]) -> dict[str, dict]:
+    """Batched API first; the abstract pages if the API refuses us."""
+    try:
+        return fetch_arxiv_api(ids)
+    except RuntimeError as e:
+        print(f"arXiv API unavailable ({str(e).splitlines()[-1]}); "
+              "reading the abstract pages instead", file=sys.stderr)
+    out = {}
+    for aid in ids:
+        out[aid] = fetch_arxiv_abs(aid)
+        time.sleep(1)
+    return out
+
+
+def fetch_arxiv_api(ids: list[str]) -> dict[str, dict]:
     """Batched; the API caps a reply at max_results entries."""
     ns = {"a": "http://www.w3.org/2005/Atom"}
     out: dict[str, dict] = {}
@@ -267,6 +311,9 @@ def bib_authors(names: list[str]) -> str:
             parts.append(f"{family}, {tex(given)}")
             continue
         toks = tex(n).split()
+        # A bare initial ("D Sculley", as arXiv's meta tags give it) gets its
+        # full stop, so both arXiv routes and the proceedings agree: "D. Sculley".
+        toks = [t + "." if len(t) == 1 and t.isupper() else t for t in toks]
         parts.append(toks[0] if len(toks) == 1
                      else f"{toks[-1]}, {' '.join(toks[:-1])}")
     return " and\n            ".join(parts)

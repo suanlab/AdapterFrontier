@@ -261,6 +261,24 @@ def main():
     else:
         print(f"  SKIP: {fb} not found")
 
+    # 11b. Does the null track that budget advantage? (§1, §4; post-hoc)
+    header("11b. Headline null vs the baseline's budget advantage")
+    fd = ROOT / "analysis/budget_dose_response.json"
+    if fd.exists():
+        d = json.loads(fd.read_text())
+        np_ = d["near_parity"]
+        tally(check("headline slice pools", d["n_pools"], 23))
+        tally(check("headline slice cells", d["n_cells"], 92))
+        tally(check("Spearman(ratio, mean delta)", d["spearman_rho_ratio_vs_mean_delta"], -0.28, tol=0.006))
+        tally(check("Spearman p", d["spearman_p"], 0.20, tol=0.006))
+        tally(check("near-parity (<=1.3x) pools", np_["n_pools"], 6))
+        tally(check("near-parity cells", np_["n_cells"], 24))
+        tally(check("near-parity SUPPORTED", np_["supported"], 0))
+        tally(check("near-parity REVERSED", np_["reversed"], 9))
+        tally(check("near-parity min ratio", round(np_["min_ratio"], 2), 0.90, tol=0.006))
+    else:
+        print(f"  SKIP: {fd} not found")
+
 
     # 12. Diversity-feature leakage bound (L1c)
     header("12. Diversity-feature leakage check")

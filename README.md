@@ -13,7 +13,7 @@ This repository supports **JSON-level reproducibility** (every headline number r
 
 ```bash
 pip install -r requirements-verify.txt       # numpy/scipy/sklearn/matplotlib/pytest
-python3 scripts/reproduce_paper_numbers.py   # 145 assertions, all PASS
+python3 scripts/reproduce_paper_numbers.py   # 154 assertions, all PASS
 python3 -m pytest tests/ -q                  # 17 tests
 ```
 
@@ -26,7 +26,7 @@ the ACL Anthology, the arXiv API and Crossref by
 
 ```bash
 python3 scripts/build_bibliography.py --check   # fails if the .bib drifted
-python3 scripts/check_bibliography.py --online  # resolves all 53 identifiers
+python3 scripts/check_bibliography.py --online  # resolves every DOI and URL
 ```
 
 This re-derives every headline number in the paper from the released JSONs:
