@@ -13,7 +13,7 @@ This repository supports **JSON-level reproducibility** (every headline number r
 
 ```bash
 pip install -r requirements-verify.txt       # numpy/scipy/sklearn/matplotlib/pytest
-python3 scripts/reproduce_paper_numbers.py   # 154 assertions, all PASS
+python3 scripts/reproduce_paper_numbers.py   # 168 assertions, all PASS
 python3 -m pytest tests/ -q                  # 17 tests
 ```
 
@@ -38,14 +38,18 @@ the pool's compute), the four-way multiple-comparison sensitivity, the
 three protocol-sensitivity shortcuts (S1-S3), and the temperature control
 on the calibration arm.
 
-Headline: 0 of 92 clean encoder cells improve accuracy over the stronger
-single adapter, and 33.7% are significantly worse. 52 of the same 92 improve
-ECE — but that comparison is against a single adapter picked by validation
-accuracy and never calibrated. On the six pools whose logits cache survives,
-fitting one temperature on the held-out `val_combine` split takes the
-ensemble from better-calibrated in 4/6 pools to 2/6 (mean ΔECE −0.032). The
-ECE gain is confidence shrinkage, and a scalar reproduces it at 1x inference
-cost instead of Nx.
+Headline: against a single adapter given more training compute than the
+pool, 0 of 92 clean encoder cells improve accuracy and 33.7% are significantly
+worse. Decoders, against baselines with the same advantage, come out
+differently: 19 of 100 cells improve, none are worse, mean +0.56pp, all on
+MNLI (`analysis/family_split.py`). Both families improve ECE (52/92, 57/100),
+but against a single adapter picked by validation accuracy and never
+calibrated. On the six encoder pools whose logits cache survives, fitting one
+temperature on the held-out `val_combine` split takes the ensemble from
+better-calibrated in 4/6 pools to 2/6 (mean ΔECE −0.032): the encoder ECE gain
+is confidence shrinkage, which a scalar reproduces at 1x compute instead of
+Nx. No decoder logits cache survives, so the decoder ECE gain is untested
+against a temperature.
 
 Note: a fourth shortcut (contaminated benchmark) and the GSM8K
 contamination probe behind it were **retracted on 2026-07-28** — the probe
@@ -63,7 +67,9 @@ written by `scripts/apply_corpus_bh_fdr.py`. The corpus-wide
 ```bash
 python3 analysis/plot_protocol_sensitivity.py # Figure 1 (body)
 python3 analysis/protocol_sensitivity.py      # S1-S3 shortcut numbers
-python3 analysis/temperature_control.py       # recalibration control (title claim)
+python3 analysis/temperature_control.py       # recalibration control (encoder pools)
+python3 analysis/family_split.py              # encoder vs decoder, same n_rank baseline
+python3 analysis/budget_dose_response.py      # does the null track the baseline's budget?
 python3 analysis/correction_sensitivity.py    # four-way correction grid
 python3 analysis/baseline_budget_audit.py     # measured baseline GPU-hours
 python3 analysis/plot_frontier_scatter.py     # appendix figure

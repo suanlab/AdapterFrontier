@@ -1,0 +1,139 @@
+{
+ "note": "Clean classification cells, post-FDR unless marked pre. Encoder = BERT/RoBERTa/DeBERTa; decoder = the rest.",
+ "encoder": {
+  "n_pools": 23,
+  "acc_vs_n_rank": {
+   "n": 92,
+   "supported": 0,
+   "reversed": 31,
+   "pct_supported": 0.0,
+   "pct_reversed": 33.7
+  },
+  "acc_vs_n_rank_pre_fdr": {
+   "n": 92,
+   "supported": 0,
+   "reversed": 38,
+   "pct_supported": 0.0,
+   "pct_reversed": 41.3
+  },
+  "acc_mean_delta_pp": -1.27,
+  "acc_median_delta_pp": -0.89,
+  "acc_median_ci_halfwidth_pp": 0.94,
+  "acc_cells_excluding_plus_1pp": 67,
+  "pools_with_a_supported_cell": 0,
+  "supported_cells_by_task": {},
+  "acc_by_method": {
+   "greedy_soup": {
+    "n": 23,
+    "supported": 0,
+    "reversed": 5,
+    "pct_supported": 0.0,
+    "pct_reversed": 21.7
+   },
+   "logit_avg": {
+    "n": 23,
+    "supported": 0,
+    "reversed": 8,
+    "pct_supported": 0.0,
+    "pct_reversed": 34.8
+   },
+   "majority_vote": {
+    "n": 23,
+    "supported": 0,
+    "reversed": 10,
+    "pct_supported": 0.0,
+    "pct_reversed": 43.5
+   },
+   "soft_vote": {
+    "n": 23,
+    "supported": 0,
+    "reversed": 8,
+    "pct_supported": 0.0,
+    "pct_reversed": 34.8
+   }
+  },
+  "ece_vs_n_rank": {
+   "n": 92,
+   "supported": 52,
+   "reversed": 17,
+   "pct_supported": 56.5,
+   "pct_reversed": 18.5
+  },
+  "acc_vs_best_of_n": {
+   "n": 120,
+   "supported": 12,
+   "reversed": 14,
+   "pct_supported": 10.0,
+   "pct_reversed": 11.7
+  }
+ },
+ "decoder": {
+  "n_pools": 25,
+  "acc_vs_n_rank": {
+   "n": 100,
+   "supported": 19,
+   "reversed": 0,
+   "pct_supported": 19.0,
+   "pct_reversed": 0.0
+  },
+  "acc_vs_n_rank_pre_fdr": {
+   "n": 100,
+   "supported": 31,
+   "reversed": 1,
+   "pct_supported": 31.0,
+   "pct_reversed": 1.0
+  },
+  "acc_mean_delta_pp": 0.56,
+  "acc_median_delta_pp": 0.54,
+  "acc_median_ci_halfwidth_pp": 0.77,
+  "acc_cells_excluding_plus_1pp": 40,
+  "pools_with_a_supported_cell": 8,
+  "supported_cells_by_task": {
+   "mnli": 19
+  },
+  "acc_by_method": {
+   "greedy_soup": {
+    "n": 25,
+    "supported": 4,
+    "reversed": 0,
+    "pct_supported": 16.0,
+    "pct_reversed": 0.0
+   },
+   "logit_avg": {
+    "n": 25,
+    "supported": 4,
+    "reversed": 0,
+    "pct_supported": 16.0,
+    "pct_reversed": 0.0
+   },
+   "majority_vote": {
+    "n": 25,
+    "supported": 5,
+    "reversed": 0,
+    "pct_supported": 20.0,
+    "pct_reversed": 0.0
+   },
+   "soft_vote": {
+    "n": 25,
+    "supported": 6,
+    "reversed": 0,
+    "pct_supported": 24.0,
+    "pct_reversed": 0.0
+   }
+  },
+  "ece_vs_n_rank": {
+   "n": 100,
+   "supported": 57,
+   "reversed": 10,
+   "pct_supported": 57.0,
+   "pct_reversed": 10.0
+  },
+  "acc_vs_best_of_n": {
+   "n": 100,
+   "supported": 36,
+   "reversed": 0,
+   "pct_supported": 36.0,
+   "pct_reversed": 0.0
+  }
+ }
+}

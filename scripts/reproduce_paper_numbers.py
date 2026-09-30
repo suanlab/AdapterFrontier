@@ -280,6 +280,33 @@ def main():
         print(f"  SKIP: {fd} not found")
 
 
+    # 11c. The decoder half of the headline comparison (abstract, §1, §4)
+    header("11c. Encoder vs decoder against the same n_rank single")
+    ff = ROOT / "analysis/family_split.json"
+    if ff.exists():
+        d = json.loads(ff.read_text())
+        e, dec = d["encoder"], d["decoder"]
+        tally(check("encoder acc cells", e["acc_vs_n_rank"]["n"], 92))
+        tally(check("encoder acc SUPPORTED", e["acc_vs_n_rank"]["supported"], 0))
+        tally(check("decoder pools", dec["n_pools"], 25))
+        tally(check("decoder acc cells", dec["acc_vs_n_rank"]["n"], 100))
+        tally(check("decoder acc SUPPORTED (post-FDR)", dec["acc_vs_n_rank"]["supported"], 19))
+        tally(check("decoder acc REVERSED (post-FDR)", dec["acc_vs_n_rank"]["reversed"], 0))
+        tally(check("decoder acc SUPPORTED (pre-FDR)", dec["acc_vs_n_rank_pre_fdr"]["supported"], 31))
+        tally(check("decoder acc mean delta pp", dec["acc_mean_delta_pp"], 0.56, tol=0.006))
+        tally(check("decoder SUPPORTED cells all on MNLI", dec["supported_cells_by_task"], {"mnli": 19}))
+        tally(check("decoder pools with a SUPPORTED cell", dec["pools_with_a_supported_cell"], 8))
+        tally(check("decoder ECE SUPPORTED", dec["ece_vs_n_rank"]["supported"], 57))
+        tally(check("decoder ECE REVERSED", dec["ece_vs_n_rank"]["reversed"], 10))
+        tally(check("decoder acc SUPPORTED vs best_of_n (S2)", dec["acc_vs_best_of_n"]["supported"], 36))
+    else:
+        print(f"  SKIP: {ff} not found")
+    ft = ROOT / "analysis/temperature_control.json"
+    if ft.exists():
+        pools = [p["pool_id"] for p in json.loads(ft.read_text())["pools"]]
+        tally(check("temperature-control pools are all encoders",
+                     all(any(e in p for e in ("bert", "roberta", "deberta")) for p in pools), True))
+
     # 12. Diversity-feature leakage bound (L1c)
     header("12. Diversity-feature leakage check")
     fl = ROOT / "analysis/leakage_check_diversity.json"
