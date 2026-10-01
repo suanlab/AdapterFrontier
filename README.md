@@ -13,7 +13,7 @@ This repository supports **JSON-level reproducibility** (every headline number r
 
 ```bash
 pip install -r requirements-verify.txt       # numpy/scipy/sklearn/matplotlib/pytest
-python3 scripts/reproduce_paper_numbers.py   # 168 assertions, all PASS
+python3 scripts/reproduce_paper_numbers.py   # 184 assertions, all PASS
 python3 -m pytest tests/ -q                  # 17 tests
 ```
 
@@ -42,7 +42,10 @@ Headline: against a single adapter given more training compute than the
 pool, 0 of 92 clean encoder cells improve accuracy and 33.7% are significantly
 worse. Decoders, against baselines with the same advantage, come out
 differently: 19 of 100 cells improve, none are worse, mean +0.56pp, all on
-MNLI (`analysis/family_split.py`). Both families improve ECE (52/92, 57/100),
+MNLI (`analysis/family_split.py`). Four of those come from one
+baseline that failed to train (Qwen-2.5-3B MNLI, 19 of 20 members); with
+every comparison whose arms mostly failed removed, decoders give 15/96 and
+encoders still 0/72 (`analysis/training_health.py`). Both families improve ECE (52/92, 57/100),
 but against a single adapter picked by validation accuracy and never
 calibrated. On the six encoder pools whose logits cache survives, fitting one
 temperature on the held-out `val_combine` split takes the ensemble from
@@ -70,6 +73,8 @@ python3 analysis/protocol_sensitivity.py      # S1-S3 shortcut numbers
 python3 analysis/temperature_control.py       # recalibration control (encoder pools)
 python3 analysis/family_split.py              # encoder vs decoder, same n_rank baseline
 python3 analysis/budget_dose_response.py      # does the null track the baseline's budget?
+python3 analysis/training_health.py           # drop arms that failed to train (test-free)
+python3 analysis/frontier_family_baseline.py  # frontier vs an encoder/decoder-only model
 python3 analysis/correction_sensitivity.py    # four-way correction grid
 python3 analysis/baseline_budget_audit.py     # measured baseline GPU-hours
 python3 analysis/plot_frontier_scatter.py     # appendix figure

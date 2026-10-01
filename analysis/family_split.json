@@ -21,6 +21,10 @@
   "acc_median_ci_halfwidth_pp": 0.94,
   "acc_cells_excluding_plus_1pp": 67,
   "pools_with_a_supported_cell": 0,
+  "pools_with_a_reversed_cell": 11,
+  "pools_mean_delta_positive": 3,
+  "pools_mean_delta_negative": 20,
+  "pool_sign_test_p": 0.00049,
   "supported_cells_by_task": {},
   "acc_by_method": {
    "greedy_soup": {
@@ -88,6 +92,10 @@
   "acc_median_ci_halfwidth_pp": 0.77,
   "acc_cells_excluding_plus_1pp": 40,
   "pools_with_a_supported_cell": 8,
+  "pools_with_a_reversed_cell": 0,
+  "pools_mean_delta_positive": 22,
+  "pools_mean_delta_negative": 3,
+  "pool_sign_test_p": 0.00016,
   "supported_cells_by_task": {
    "mnli": 19
   },

@@ -299,8 +299,46 @@ def main():
         tally(check("decoder ECE SUPPORTED", dec["ece_vs_n_rank"]["supported"], 57))
         tally(check("decoder ECE REVERSED", dec["ece_vs_n_rank"]["reversed"], 10))
         tally(check("decoder acc SUPPORTED vs best_of_n (S2)", dec["acc_vs_best_of_n"]["supported"], 36))
+        tally(check("encoder pools with mean delta < 0", e["pools_mean_delta_negative"], 20))
+        tally(check("decoder pools with mean delta > 0", dec["pools_mean_delta_positive"], 22))
+        tally(check("encoder pool sign test p < 0.001", e["pool_sign_test_p"] < 0.001, True))
+        tally(check("decoder pool sign test p < 0.001", dec["pool_sign_test_p"] < 0.001, True))
     else:
         print(f"  SKIP: {ff} not found")
+
+    # 11d. Training health: drop comparisons whose arms mostly failed to train
+    header("11d. Robustness to arms that failed to train (test-free)")
+    fh = ROOT / "analysis/training_health.json"
+    if fh.exists():
+        d = json.loads(fh.read_text())
+        tally(check("flags identical at thresholds 0.80/0.85/0.90",
+                     len({tuple(v) for v in d["flagged_by_threshold"].values()}), 1))
+        tally(check("Qwen-3B MNLI baseline flagged",
+                     "baseline_compute_matched_mnli_qwen25_3b" in d["flagged_manifests"], True))
+        tally(check("Qwen-3B MNLI baseline: 1 of 20 trained",
+                     d["health"]["baseline_compute_matched_mnli_qwen25_3b"]["trained"], 1))
+        k = d["decoder"]["both_arms_trained"]
+        tally(check("decoder, both arms trained: cells", k["n_cells"], 96))
+        tally(check("decoder, both arms trained: SUPPORTED", k["supported"], 15))
+        tally(check("decoder, both arms trained: REVERSED", k["reversed"], 0))
+        k = d["encoder"]["both_arms_trained"]
+        tally(check("encoder, both arms trained: cells", k["n_cells"], 72))
+        tally(check("encoder, both arms trained: SUPPORTED", k["supported"], 0))
+        tally(check("encoder, both arms trained: % REVERSED", k["pct_reversed"], 33.3, tol=0.06))
+    else:
+        print(f"  SKIP: {fh} not found")
+
+    # 11e. Is the frontier just the encoder/decoder split?
+    header("11e. Frontier vs a family-only baseline (same folds)")
+    fb2 = ROOT / "analysis/frontier_family_baseline.json"
+    if fb2.exists():
+        d = json.loads(fb2.read_text())["r2_lopo"]
+        tally(check("frontier features R2 (headline)", d["frontier_features"], 0.597, tol=0.002))
+        tally(check("family-only R2", d["family_only"], 0.203, tol=0.002))
+        tally(check("features + family R2", d["features_plus_family"], 0.569, tol=0.002))
+    else:
+        print(f"  SKIP: {fb2} not found")
+
     ft = ROOT / "analysis/temperature_control.json"
     if ft.exists():
         pools = [p["pool_id"] for p in json.loads(ft.read_text())["pools"]]

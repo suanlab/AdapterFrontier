@@ -1,0 +1,439 @@
+{
+ "note": "Post hoc, test-free. An adapter failed if its final train loss >= 0.85 x ln(num_labels); a comparison is excluded when a majority of either arm failed.",
+ "threshold": 0.85,
+ "flagged_manifests": [
+  "baseline_compute_matched_anli_bert_large",
+  "baseline_compute_matched_mnli_bert_large",
+  "baseline_compute_matched_mnli_qwen25_3b",
+  "pool_b_anli_bert_large"
+ ],
+ "flagged_by_threshold": {
+  "0.8": [
+   "baseline_compute_matched_anli_bert_large",
+   "baseline_compute_matched_mnli_bert_large",
+   "baseline_compute_matched_mnli_qwen25_3b",
+   "pool_b_anli_bert_large"
+  ],
+  "0.85": [
+   "baseline_compute_matched_anli_bert_large",
+   "baseline_compute_matched_mnli_bert_large",
+   "baseline_compute_matched_mnli_qwen25_3b",
+   "pool_b_anli_bert_large"
+  ],
+  "0.9": [
+   "baseline_compute_matched_anli_bert_large",
+   "baseline_compute_matched_mnli_bert_large",
+   "baseline_compute_matched_mnli_qwen25_3b",
+   "pool_b_anli_bert_large"
+  ]
+ },
+ "health": {
+  "baseline_compute_matched_agnews_bert_base": {
+   "n": 16,
+   "trained": 16,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_agnews_bert_large": {
+   "n": 16,
+   "trained": 16,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_agnews_qwen25_05b": {
+   "n": 16,
+   "trained": 16,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_agnews_qwen25_15b": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_agnews_tinyllama_11b": {
+   "n": 13,
+   "trained": 13,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_anli_bert_large": {
+   "n": 20,
+   "trained": 1,
+   "fraction_trained": 0.05
+  },
+  "baseline_compute_matched_anli_qwen25_05b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_anli_qwen25_15b": {
+   "n": 17,
+   "trained": 16,
+   "fraction_trained": 0.941
+  },
+  "baseline_compute_matched_anli_roberta_base": {
+   "n": 20,
+   "trained": 17,
+   "fraction_trained": 0.85
+  },
+  "baseline_compute_matched_anli_tinyllama_11b": {
+   "n": 14,
+   "trained": 14,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_bert": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_bert_large": {
+   "n": 20,
+   "trained": 5,
+   "fraction_trained": 0.25
+  },
+  "baseline_compute_matched_mnli_pythia_14b": {
+   "n": 6,
+   "trained": 6,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_qwen25_05b": {
+   "n": 19,
+   "trained": 19,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_qwen25_15b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_qwen25_3b": {
+   "n": 20,
+   "trained": 1,
+   "fraction_trained": 0.05
+  },
+  "baseline_compute_matched_mnli_roberta_base": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_smollm2_17b": {
+   "n": 14,
+   "trained": 14,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_mnli_tinyllama_11b": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_qnli_bert_base": {
+   "n": 18,
+   "trained": 18,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_qnli_bert_large": {
+   "n": 10,
+   "trained": 8,
+   "fraction_trained": 0.8
+  },
+  "baseline_compute_matched_qnli_qwen25_05b": {
+   "n": 18,
+   "trained": 18,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_qnli_qwen25_15b": {
+   "n": 16,
+   "trained": 16,
+   "fraction_trained": 1.0
+  },
+  "baseline_compute_matched_qnli_tinyllama_11b": {
+   "n": 17,
+   "trained": 16,
+   "fraction_trained": 0.941
+  },
+  "baseline_compute_matched_sst2_bert": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_agnews_bert_base": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_a_agnews_bert_large": {
+   "n": 18,
+   "trained": 18,
+   "fraction_trained": 1.0
+  },
+  "pool_a_agnews_qwen25_05b": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_a_agnews_qwen25_15b": {
+   "n": 18,
+   "trained": 18,
+   "fraction_trained": 1.0
+  },
+  "pool_a_agnews_tinyllama_11b": {
+   "n": 14,
+   "trained": 14,
+   "fraction_trained": 1.0
+  },
+  "pool_a_anli_bert_large": {
+   "n": 20,
+   "trained": 11,
+   "fraction_trained": 0.55
+  },
+  "pool_a_anli_qwen25_05b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_anli_qwen25_15b": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_a_anli_roberta_base": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_anli_tinyllama_11b": {
+   "n": 15,
+   "trained": 15,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_bert": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_bert_large": {
+   "n": 11,
+   "trained": 9,
+   "fraction_trained": 0.818
+  },
+  "pool_a_mnli_pythia_14b": {
+   "n": 7,
+   "trained": 7,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_qwen25_05b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_qwen25_15b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_qwen25_3b": {
+   "n": 21,
+   "trained": 18,
+   "fraction_trained": 0.857
+  },
+  "pool_a_mnli_roberta_base": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_smollm2_17b": {
+   "n": 15,
+   "trained": 15,
+   "fraction_trained": 1.0
+  },
+  "pool_a_mnli_tinyllama_11b": {
+   "n": 13,
+   "trained": 13,
+   "fraction_trained": 1.0
+  },
+  "pool_a_qnli_bert_base": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_a_qnli_bert_large": {
+   "n": 18,
+   "trained": 17,
+   "fraction_trained": 0.944
+  },
+  "pool_a_qnli_qwen25_05b": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_a_qnli_qwen25_15b": {
+   "n": 15,
+   "trained": 15,
+   "fraction_trained": 1.0
+  },
+  "pool_a_qnli_tinyllama_11b": {
+   "n": 18,
+   "trained": 18,
+   "fraction_trained": 1.0
+  },
+  "pool_a_sst2_bert": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_b_agnews_bert_base": {
+   "n": 19,
+   "trained": 19,
+   "fraction_trained": 1.0
+  },
+  "pool_b_agnews_qwen25_05b": {
+   "n": 21,
+   "trained": 21,
+   "fraction_trained": 1.0
+  },
+  "pool_b_anli_bert_large": {
+   "n": 16,
+   "trained": 7,
+   "fraction_trained": 0.438
+  },
+  "pool_b_anli_roberta_base": {
+   "n": 24,
+   "trained": 24,
+   "fraction_trained": 1.0
+  },
+  "pool_b_mnli_bert": {
+   "n": 24,
+   "trained": 24,
+   "fraction_trained": 1.0
+  },
+  "pool_b_mnli_bert_large": {
+   "n": 24,
+   "trained": 21,
+   "fraction_trained": 0.875
+  },
+  "pool_b_mnli_qwen25_05b": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_b_mnli_qwen25_15b": {
+   "n": 19,
+   "trained": 19,
+   "fraction_trained": 1.0
+  },
+  "pool_b_mnli_roberta_base": {
+   "n": 24,
+   "trained": 24,
+   "fraction_trained": 1.0
+  },
+  "pool_b_mnli_tinyllama_11b": {
+   "n": 21,
+   "trained": 21,
+   "fraction_trained": 1.0
+  },
+  "pool_b_qnli_bert_base": {
+   "n": 19,
+   "trained": 19,
+   "fraction_trained": 1.0
+  },
+  "pool_b_qnli_qwen25_05b": {
+   "n": 19,
+   "trained": 19,
+   "fraction_trained": 1.0
+  },
+  "pool_b_sst2_bert": {
+   "n": 24,
+   "trained": 24,
+   "fraction_trained": 1.0
+  },
+  "pool_c_agnews_bert_base_method_mixed": {
+   "n": 15,
+   "trained": 15,
+   "fraction_trained": 1.0
+  },
+  "pool_c_agnews_qwen25_05b_method_mixed": {
+   "n": 14,
+   "trained": 14,
+   "fraction_trained": 1.0
+  },
+  "pool_c_mnli_bert_large_method_mixed": {
+   "n": 20,
+   "trained": 10,
+   "fraction_trained": 0.5
+  },
+  "pool_c_mnli_bert_method_mixed": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_c_mnli_qwen25_05b_method_mixed": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_c_mnli_qwen25_15b_method_mixed": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_c_mnli_roberta_base_method_mixed": {
+   "n": 20,
+   "trained": 20,
+   "fraction_trained": 1.0
+  },
+  "pool_c_mnli_tinyllama_11b_method_mixed": {
+   "n": 15,
+   "trained": 15,
+   "fraction_trained": 1.0
+  },
+  "pool_c_qnli_bert_base_method_mixed": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  },
+  "pool_c_qnli_qwen25_05b_method_mixed": {
+   "n": 17,
+   "trained": 17,
+   "fraction_trained": 1.0
+  }
+ },
+ "encoder": {
+  "all": {
+   "n_cells": 92,
+   "n_pools": 23,
+   "supported": 0,
+   "reversed": 31,
+   "pct_reversed": 33.7
+  },
+  "both_arms_trained": {
+   "n_cells": 72,
+   "n_pools": 18,
+   "supported": 0,
+   "reversed": 24,
+   "pct_reversed": 33.3
+  },
+  "excluded_pools": [
+   "pool_a_anli_bert_large",
+   "pool_a_mnli_bert_large",
+   "pool_b_anli_bert_large",
+   "pool_b_mnli_bert_large",
+   "pool_c_mnli_bert_large_method_mixed"
+  ]
+ },
+ "decoder": {
+  "all": {
+   "n_cells": 100,
+   "n_pools": 25,
+   "supported": 19,
+   "reversed": 0,
+   "pct_reversed": 0.0
+  },
+  "both_arms_trained": {
+   "n_cells": 96,
+   "n_pools": 24,
+   "supported": 15,
+   "reversed": 0,
+   "pct_reversed": 0.0
+  },
+  "excluded_pools": [
+   "pool_a_mnli_qwen25_3b"
+  ]
+ }
+}

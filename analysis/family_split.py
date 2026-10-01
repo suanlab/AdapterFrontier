@@ -28,6 +28,8 @@ import re
 import statistics
 from pathlib import Path
 
+from scipy.stats import binomtest
+
 ROOT = Path(__file__).resolve().parent.parent
 ANALYSIS = ROOT / "analysis"
 OUT = ANALYSIS / "family_split.json"
@@ -90,6 +92,14 @@ def main() -> None:
                and c["metric"] == "acc"]
         pools = sorted({c["pool"] for c in acc})
         sup_pools = sorted({c["pool"] for c in acc if c["post"] == "supported"})
+        rev_pools = sorted({c["pool"] for c in acc if c["post"] == "reversed"})
+        # Pool level, the inferential unit of L1d: one mean delta per pool
+        # (averaging its four method cells), then a two-sided sign test.
+        pool_mean = {p: statistics.mean(c["delta"] for c in acc if c["pool"] == p)
+                     for p in pools}
+        n_pos = sum(v > 0 for v in pool_mean.values())
+        n_neg = sum(v < 0 for v in pool_mean.values())
+        sign_p = binomtest(n_pos, n_pos + n_neg, 0.5).pvalue
         out[fam] = {
             "n_pools": len(pools),
             "acc_vs_n_rank": verdicts(acc),
@@ -100,6 +110,10 @@ def main() -> None:
                 (c["ci_high"] - c["ci_low"]) / 2 for c in acc), 2),
             "acc_cells_excluding_plus_1pp": sum(c["ci_high"] < 0.01 for c in acc),
             "pools_with_a_supported_cell": len(sup_pools),
+            "pools_with_a_reversed_cell": len(rev_pools),
+            "pools_mean_delta_positive": n_pos,
+            "pools_mean_delta_negative": n_neg,
+            "pool_sign_test_p": round(float(sign_p), 5),
             "supported_cells_by_task": dict(collections.Counter(
                 c["task"] for c in acc if c["post"] == "supported")),
             "acc_by_method": {m: verdicts([c for c in acc if c["method"] == m])
@@ -118,6 +132,9 @@ def main() -> None:
               f"{o['acc_median_ci_halfwidth_pp']}pp")
         print(f"  SUPPORTED by task: {o['supported_cells_by_task']}; "
               f"{o['pools_with_a_supported_cell']} pools with >=1")
+        print(f"  pool level       : mean delta >0 in {o['pools_mean_delta_positive']}, <0 in "
+              f"{o['pools_mean_delta_negative']} (sign test p = {o['pool_sign_test_p']}); "
+              f"{o['pools_with_a_reversed_cell']} pools with a REVERSED cell")
         print(f"  ece vs n_rank    : {e['supported']}/{e['n']} SUP, {e['reversed']} REV")
         print(f"  acc vs best_of_n : {b['supported']}/{b['n']} SUP ({b['pct_supported']}%)")
     print(f"wrote {OUT}")

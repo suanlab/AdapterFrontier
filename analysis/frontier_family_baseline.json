@@ -1,0 +1,17 @@
+{
+ "note": "Post hoc. Same slice (accuracy vs n_rank), rows, LOPO folds and ridge as the headline frontier R^2.",
+ "n_cells": 192,
+ "n_pools": 48,
+ "n_decoder_pools": 25,
+ "r2_lopo": {
+  "family_only": 0.203,
+  "frontier_features": 0.597,
+  "features_plus_family": 0.569
+ },
+ "features_over_family": 0.394,
+ "skipped_folds": {
+  "family_only": 0,
+  "frontier_features": 0,
+  "features_plus_family": 0
+ }
+}
