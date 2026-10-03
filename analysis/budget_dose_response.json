@@ -9,7 +9,7 @@
   "n_pools": 6,
   "n_cells": 24,
   "supported": 0,
-  "reversed": 9,
+  "reversed": 8,
   "min_ratio": 0.896,
   "max_ratio": 1.251
  },
@@ -65,8 +65,8 @@
    "mean_delta_pp": -0.9424350483953132,
    "n_cells": 4,
    "supported": 0,
-   "reversed": 2,
-   "unsupported": 2
+   "reversed": 1,
+   "unsupported": 3
   },
   {
    "pool_id": "pool_b_agnews_bert_base",
@@ -74,8 +74,8 @@
    "mean_delta_pp": -0.6990131578947368,
    "n_cells": 4,
    "supported": 0,
-   "reversed": 1,
-   "unsupported": 3
+   "reversed": 0,
+   "unsupported": 4
   },
   {
    "pool_id": "pool_c_mnli_bert_large_method_mixed",

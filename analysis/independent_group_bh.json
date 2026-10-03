@@ -1,0 +1,25 @@
+{
+  "q": 0.05,
+  "representative": "soft_vote",
+  "arms": {
+    "accuracy": {
+      "n_groups": 139,
+      "bh_cutoff_p": 0.0168983101689831,
+      "supported": 27,
+      "reversed": 20
+    },
+    "ece": {
+      "n_groups": 113,
+      "bh_cutoff_p": 0.0356,
+      "supported": 78,
+      "reversed": 6
+    }
+  },
+  "total": {
+    "n": 252,
+    "supported": 105,
+    "reversed": 26,
+    "pct_supported": 41.7,
+    "pct_reversed": 10.3
+  }
+}

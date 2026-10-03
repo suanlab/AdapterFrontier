@@ -39,9 +39,23 @@ def holm(pvals: list[float]) -> list[float]:
     return adj
 
 
+def arm_holm(arm: str) -> dict[str, float]:
+    """Holm over every cell of one arm (the corpus-wide procedure, per arm).
+
+    Uses `p_for_bh`, the arm's valid p-value written by apply_bh_by_arm.py:
+    the stored ECE `sign_flip_p` tests the wrong null (L14) and must not enter
+    any correction.
+    """
+    files = [f for f in sorted(glob.glob(str(ROOT / "analysis/*_cm_*.json")))
+             if f.endswith("_ECE.json") == (arm == "ECE")]
+    ps = [json.loads(Path(f).read_text())["p_for_bh"] for f in files]
+    return dict(zip(files, holm(ps)))
+
+
 def load(arm: str = "accuracy") -> list[dict]:
     """Clean encoder cells vs n_rank, one arm."""
     out = []
+    corpus_holm = arm_holm(arm)
     for f in sorted(glob.glob(str(ROOT / "analysis/*_cm_*.json"))):
         m = PAT.match(Path(f).name)
         if not m or m.group("k") != "n_rank":
@@ -52,8 +66,8 @@ def load(arm: str = "accuracy") -> list[dict]:
         if "hellaswag" in pool or "gsm8k" in pool or any(t in pool for t in DECODER):
             continue
         d = json.loads(Path(f).read_text())
-        out.append({"p": d["sign_flip_p"], "lo": d["ci_low"], "hi": d["ci_high"],
-                    "holm_corpus": d.get("holm_adjusted_p_batch"),
+        out.append({"p": d["p_for_bh"], "lo": d["ci_low"], "hi": d["ci_high"],
+                    "holm_corpus": corpus_holm[f],
                     "bh": d.get("bh_q_value")})
     return out
 
@@ -72,7 +86,7 @@ def procedures(cells) -> dict:
     h_tab = holm(ps)
     return {
         "raw_ci": counts(cells, [c["lo"] > 0 or c["hi"] < 0 for c in cells]),
-        "holm_corpus_m1028": counts(cells, [(c["holm_corpus"] or 1) <= 0.05 for c in cells]),
+        "holm_corpus_by_arm": counts(cells, [(c["holm_corpus"] or 1) <= 0.05 for c in cells]),
         "holm_within_table": counts(cells, [a <= 0.05 for a in h_tab]),
         "bh_corpus_q05": counts(cells, [(c["bh"] or 1) <= 0.05 for c in cells]),
     }
@@ -103,9 +117,12 @@ def main() -> int:
         "accuracy_reversed_pct_max": max(rev_range),
         "note": ("SUPPORTED=0 is invariant to the correction procedure and is the robust "
                  "claim. The REVERSED rate is procedure-dependent: the pre-registered "
-                 "corpus-wide Holm yields 0, within-table Holm 16, corpus-wide BH 31, "
-                 "and the raw per-cell CI 38. The paper reports the BH figure and states "
-                 "this dependence explicitly."),
+                 "corpus-wide Holm (per arm) yields "
+                 f"{acc['holm_corpus_by_arm']['reversed']}, within-table Holm "
+                 f"{acc['holm_within_table']['reversed']}, per-arm BH "
+                 f"{acc['bh_corpus_q05']['reversed']}, and the raw per-cell CI "
+                 f"{acc['raw_ci']['reversed']}. The paper reports the BH figure and "
+                 "states this dependence explicitly."),
     }
     p = ROOT / "analysis/correction_sensitivity.json"
     p.write_text(json.dumps(out, indent=2))

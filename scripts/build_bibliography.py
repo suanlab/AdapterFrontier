@@ -116,9 +116,11 @@ ARXIV: dict[str, tuple[str, str, str, str | None]] = {
     # (proceedings.neurips.cc) and ICLR 2020 (iclr.cc/virtual_2020).
     "ovadia2019trust":          ("1906.02530", "inproceedings", NEURIPS, None),
     "ashukha2020pitfalls":      ("2002.06470", "inproceedings", ICLR, None),
+    "wang2023loraensembles":    ("2310.00035", "article", "arXiv preprint arXiv:2310.00035", None),
 }
 
 YEAR = {  # publication year of the *venue*, which is not always the arXiv year
+    "wang2023loraensembles": "2023",
     "hu2021lora": "2022", "wortsman2022model": "2022", "yadav2023ties": "2023",
     "yu2024dare": "2024", "dora": "2024", "pissa": "2024", "adalora": "2023",
     "vera": "2024", "mole": "2024", "molora": "2023", "hydralora": "2024",

@@ -831,34 +831,81 @@
     "all": {
       "best_of_n": {
         "n_cells": 320,
-        "pct_supported": 27.2,
-        "pct_reversed": 6.6,
+        "pct_supported": 22.2,
+        "pct_reversed": 6.2,
         "mean_diff_pp": -0.2425839140100182
       },
       "n_rank": {
         "n_cells": 192,
-        "pct_supported": 9.9,
-        "pct_reversed": 16.1,
+        "pct_supported": 7.3,
+        "pct_reversed": 15.1,
         "mean_diff_pp": -0.3173731052429529
       },
-      "delta_pct_supported": 17.3,
+      "delta_pct_supported": 14.9,
       "delta_mean_diff_pp": 0.075
     },
     "encoder": {
       "best_of_n": {
         "n_cells": 160,
-        "pct_supported": 12.5,
-        "pct_reversed": 11.2,
+        "pct_supported": 8.1,
+        "pct_reversed": 10.6,
         "mean_diff_pp": -0.8174445392361489
       },
       "n_rank": {
         "n_cells": 92,
         "pct_supported": 0.0,
-        "pct_reversed": 33.7,
+        "pct_reversed": 31.5,
         "mean_diff_pp": -1.2674953429697202
       },
-      "delta_pct_supported": 12.5,
+      "delta_pct_supported": 8.1,
       "delta_mean_diff_pp": 0.45
+    },
+    "matched_pools": {
+      "all": {
+        "n_pools": 48,
+        "best_of_n": {
+          "n_cells": 192,
+          "pct_supported": 22.4,
+          "pct_reversed": 3.6,
+          "mean_diff_pp": 0.3581358195722955
+        },
+        "n_rank": {
+          "n_cells": 192,
+          "pct_supported": 7.3,
+          "pct_reversed": 15.1,
+          "mean_diff_pp": -0.3173731052429529
+        }
+      },
+      "encoder": {
+        "n_pools": 23,
+        "best_of_n": {
+          "n_cells": 92,
+          "pct_supported": 9.8,
+          "pct_reversed": 7.6,
+          "mean_diff_pp": 0.05366310683542146
+        },
+        "n_rank": {
+          "n_cells": 92,
+          "pct_supported": 0.0,
+          "pct_reversed": 31.5,
+          "mean_diff_pp": -1.2674953429697202
+        }
+      },
+      "decoder": {
+        "n_pools": 25,
+        "best_of_n": {
+          "n_cells": 100,
+          "pct_supported": 34.0,
+          "pct_reversed": 0.0,
+          "mean_diff_pp": 0.6382507152902197
+        },
+        "n_rank": {
+          "n_cells": 100,
+          "pct_supported": 14.0,
+          "pct_reversed": 0.0,
+          "mean_diff_pp": 0.556739353465673
+        }
+      }
     }
   },
   "S2b_strict_encoder_by_method": {
@@ -871,7 +918,7 @@
     "logit_avg": {
       "n_cells": 23,
       "pct_supported": 0.0,
-      "pct_reversed": 34.8,
+      "pct_reversed": 30.4,
       "mean_diff_pp": -1.2451511914407245
     },
     "majority_vote": {
@@ -883,7 +930,7 @@
     "soft_vote": {
       "n_cells": 23,
       "pct_supported": 0.0,
-      "pct_reversed": 34.8,
+      "pct_reversed": 30.4,
       "mean_diff_pp": -1.2037919236584806
     }
   },
@@ -896,7 +943,7 @@
           "n_cells": 36,
           "task_mean_diff_pp": 0.013,
           "task_level_reads_as": "no effect",
-          "reversed_cells_inside": 1,
+          "reversed_cells_inside": 0,
           "supported_cells_inside": 0
         },
         {
@@ -912,8 +959,8 @@
           "n_cells": 84,
           "task_mean_diff_pp": -0.012,
           "task_level_reads_as": "no effect",
-          "reversed_cells_inside": 18,
-          "supported_cells_inside": 19
+          "reversed_cells_inside": 17,
+          "supported_cells_inside": 14
         },
         {
           "task": "qnli",
@@ -934,9 +981,9 @@
       ],
       "n_tasks": 5,
       "n_tasks_reading_as_no_effect": 4,
-      "significant_cells_hidden_in_neutral_tasks": 46,
+      "significant_cells_hidden_in_neutral_tasks": 39,
       "cells_in_neutral_tasks": 164,
-      "pct_hidden_significant": 28.0
+      "pct_hidden_significant": 23.8
     },
     "encoder": {
       "neutral_threshold_pp": 0.5,
@@ -946,7 +993,7 @@
           "n_cells": 16,
           "task_mean_diff_pp": -0.273,
           "task_level_reads_as": "no effect",
-          "reversed_cells_inside": 1,
+          "reversed_cells_inside": 0,
           "supported_cells_inside": 0
         },
         {
@@ -962,7 +1009,7 @@
           "n_cells": 36,
           "task_mean_diff_pp": -1.233,
           "task_level_reads_as": "hurts",
-          "reversed_cells_inside": 18,
+          "reversed_cells_inside": 17,
           "supported_cells_inside": 0
         },
         {
@@ -984,9 +1031,9 @@
       ],
       "n_tasks": 5,
       "n_tasks_reading_as_no_effect": 2,
-      "significant_cells_hidden_in_neutral_tasks": 1,
+      "significant_cells_hidden_in_neutral_tasks": 0,
       "cells_in_neutral_tasks": 24,
-      "pct_hidden_significant": 4.2
+      "pct_hidden_significant": 0.0
     }
   }
 }

@@ -44,13 +44,26 @@
     "numpy_version": "2.2.6",
     "cuda_visible_devices": null
   },
-  "bh_q_value": 0.20781777710391988,
+  "bh_q_value": 0.22719529411764705,
   "bh_pass": false,
   "bh_q_threshold": 0.05,
-  "bh_batch_size": 1028,
-  "bh_batch_hash": "42134bec54977d15",
+  "bh_batch_size": 462,
+  "bh_batch_hash": "fc141e532835efb9",
   "holm_adjusted_p_batch": 1.0,
   "adjudication_pre_fdr": "unsupported",
   "adjudication_post_fdr": "unsupported",
-  "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction."
+  "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction.",
+  "legacy_mixed_batch": {
+    "bh_q_value": 0.20781777710391988,
+    "bh_pass": false,
+    "bh_q_threshold": 0.05,
+    "bh_batch_size": 1028,
+    "bh_batch_hash": "42134bec54977d15",
+    "holm_adjusted_p_batch": 1.0,
+    "adjudication_post_fdr": "unsupported",
+    "adjudication": "unsupported"
+  },
+  "bh_arm": "ece",
+  "p_for_bh": 0.1668,
+  "ece_p_paired_bootstrap": 0.1668
 }

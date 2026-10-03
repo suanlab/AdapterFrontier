@@ -13,7 +13,7 @@ This repository supports **JSON-level reproducibility** (every headline number r
 
 ```bash
 pip install -r requirements-verify.txt       # numpy/scipy/sklearn/matplotlib/pytest
-python3 scripts/reproduce_paper_numbers.py   # 192 assertions, all PASS
+python3 scripts/reproduce_paper_numbers.py   # 220 assertions, all PASS
 python3 -m pytest tests/ -q                  # 17 tests
 ```
 

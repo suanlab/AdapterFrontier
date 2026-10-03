@@ -1,0 +1,38 @@
+{
+  "q": 0.05,
+  "n_cells": 1028,
+  "arms": {
+    "accuracy": {
+      "n_cells": 566,
+      "bh_cutoff_p": 0.014498550144985502,
+      "bh_batch_hash": "70a99a18ac0d8df8",
+      "counts_pre_fdr": {
+        "supported": 143,
+        "unsupported": 336,
+        "reversed": 87
+      },
+      "counts_post_fdr": {
+        "unsupported": 401,
+        "supported": 89,
+        "reversed": 76
+      },
+      "median_p": 0.12768723127687232
+    },
+    "ece": {
+      "n_cells": 462,
+      "bh_cutoff_p": 0.028,
+      "bh_batch_hash": "fc141e532835efb9",
+      "counts_pre_fdr": {
+        "unsupported": 170,
+        "supported": 196,
+        "reversed": 96
+      },
+      "counts_post_fdr": {
+        "unsupported": 179,
+        "supported": 190,
+        "reversed": 93
+      },
+      "median_p": 0.0012
+    }
+  }
+}

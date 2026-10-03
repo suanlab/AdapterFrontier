@@ -2,11 +2,11 @@
   "Enc acc": {
     "n": 64,
     "blind_mean_delta_pp": -3.3196147118882946,
-    "blind_pct_reversed": 30,
+    "blind_pct_reversed": 28,
     "blind_median_cost": 20,
     "routed_mean_delta_pp": 0.40892011760867863,
     "routed_pct_reversed": 8,
-    "routed_median_cost": 1
+    "routed_median_cost": 5
   },
   "Dec acc": {
     "n": 50,
@@ -44,7 +44,7 @@
     "routed_pct_reversed": 3,
     "routed_median_cost": 17
   },
-  "_note": "Groups are (pool, baseline_kind, metric) excluding baseline_* self-comparison pools and requiring soft_vote. 'Routed' is a per-group oracle over the available rules, in-sample to the corpus the D1-D5 rules were derived from (L11). Cost is adapter forward-passes per query: N for vote-based rules, 1 for greedy_soup.",
+  "_note": "Groups are (pool, baseline_kind, metric) excluding baseline_* self-comparison pools and requiring soft_vote. 'Routed' is a per-group oracle over the available rules, in-sample to the corpus the D1-D5 rules were derived from (L11). Cost is adapter forward-passes per query: N for vote-based rules and chosen_count for greedy_soup, which averages a member subset's logits rather than merging weights.",
   "_oracle_rule_counts": {
     "greedy_soup": 62,
     "majority_vote": 25,

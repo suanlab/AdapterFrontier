@@ -14,9 +14,13 @@ match exactly (Dec acc 50, Dec ECE 50, Enc ECE 63) and the fourth does not
 (Enc acc: 64 here, 54 published). We regenerate the whole table rather than
 keep a row we cannot reproduce.
 
-Cost model, as the caption states: vote-based rules (`soft_vote`,
-`logit_avg`, `majority_vote`) run one forward pass per pool member, so they
-cost N; `greedy_soup` emits a single merged checkpoint and costs 1.
+Cost model: vote-based rules (`soft_vote`, `logit_avg`, `majority_vote`) run
+one forward pass per pool member, so they cost N. `greedy_soup` is *not* a
+weight-space merge: ensemble_eval.greedy_soup_selection picks a subset of
+members on val_selection and averages their logits, so it costs one forward
+pass per chosen member, `chosen_count` (1 to 13 in the corpus, more than 1 in
+62 of 74 results). An earlier version priced it at 1, as if it emitted one
+merged checkpoint, which understated the routed cost.
 
 Usage: python3 analysis/cost_savings.py
 """
@@ -35,6 +39,24 @@ DECODER = ("qwen", "llama", "mistral", "tinyllama", "pythia", "smollm")
 VOTE_RULES = {"soft_vote", "logit_avg", "majority_vote"}
 CELL = re.compile(r"^(?P<pool>.+?)_cm_(?P<method>[a-z_]+?)_vs_"
                   r"(?P<kind>best_of_n|n_rank|n_steps|n_data)(?P<ece>_ECE)?\.json$")
+
+
+def greedy_counts() -> dict[str, int]:
+    """chosen_count of greedy_soup per pool, from the ensemble results."""
+    out = {}
+    for f in glob.glob(str(ROOT / "ensemble_results/*.json")):
+        try:
+            d = json.loads(Path(f).read_text())
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        g = (d.get("methods") or {}).get("greedy_soup") or {}
+        # ensemble_eval.py records chosen_count; the multichoice evaluator
+        # records the chosen list itself as chosen_adapters.
+        if "chosen_count" in g:
+            out[d.get("pool_id") or Path(f).stem] = int(g["chosen_count"])
+        elif "chosen_adapters" in g:
+            out[d.get("pool_id") or Path(f).stem] = len(g["chosen_adapters"])
+    return out
 
 
 def pool_sizes() -> dict[str, int]:
@@ -72,6 +94,7 @@ def load_groups() -> dict[tuple, dict]:
 
 def main() -> int:
     sizes = pool_sizes()
+    chosen = greedy_counts()
     groups = load_groups()
     slices: dict[str, list] = defaultdict(list)
 
@@ -89,7 +112,7 @@ def main() -> int:
             "routed_rule": best[0],
             "routed_delta": best[1]["delta_pp"],
             "routed_reversed": best[1]["verdict"] == "reversed",
-            "routed_cost": 1 if best[0] == "greedy_soup" else n,
+            "routed_cost": chosen[pool] if best[0] == "greedy_soup" else n,
         })
 
     order = [("encoder_accuracy", "Enc acc"), ("decoder_accuracy", "Dec acc"),
@@ -134,8 +157,9 @@ def main() -> int:
                     "self-comparison pools and requiring soft_vote. 'Routed' is a "
                     "per-group oracle over the available rules, in-sample to the "
                     "corpus the D1-D5 rules were derived from (L11). Cost is "
-                    "adapter forward-passes per query: N for vote-based rules, 1 "
-                    "for greedy_soup.")
+                    "adapter forward-passes per query: N for vote-based rules and "
+                    "chosen_count for greedy_soup, which averages a member subset's "
+                    "logits rather than merging weights.")
     out["_oracle_rule_counts"] = dict(picks)
     p = ROOT / "analysis/cost_savings.json"
     p.write_text(json.dumps(out, indent=2))

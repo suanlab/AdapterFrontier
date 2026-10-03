@@ -53,7 +53,8 @@ def main():
         try:
             d = json.loads(Path(fn).read_text())
             cells.append({
-                "p": d.get("sign_flip_p"),
+                "arm": d.get("bh_arm"),
+                "p": d.get("p_for_bh"),
                 "pre": d.get("adjudication_pre_fdr"),
                 "post": d.get("adjudication_post_fdr"),
                 "q": d.get("bh_q_value"),
@@ -69,24 +70,27 @@ def main():
 
     sup_post = sum(1 for c in cells if c["post"] == "supported")
     rev_post = sum(1 for c in cells if c["post"] == "reversed")
-    tally(check("% SUPPORTED (post-FDR, from JSON field)", round(100*sup_post/n, 1), 29.5, tol=0.5))
-    tally(check("% REVERSED  (post-FDR, from JSON field)", round(100*rev_post/n, 1), 16.9, tol=0.5))
+    tally(check("% SUPPORTED (post-FDR, per-arm BH)", round(100*sup_post/n, 1), 27.1, tol=0.06))
+    tally(check("% REVERSED  (post-FDR, per-arm BH)", round(100*rev_post/n, 1), 16.4, tol=0.06))
 
-    # Independent re-derivation from raw p-values: must agree with stored fields.
-    ps_with_pre = sorted([(c["p"], c["pre"]) for c in cells if c["p"] is not None])
-    m, q = len(ps_with_pre), 0.05
-    cutoff = 0.0
-    for k, (p, _) in enumerate(ps_with_pre, 1):
-        if p <= k*q/m: cutoff = p
-    sup_recomp = sum(1 for p, v in ps_with_pre if v == "supported" and p <= cutoff)
-    rev_recomp = sum(1 for p, v in ps_with_pre if v == "reversed" and p <= cutoff)
-    tally(check("BH-FDR cutoff (recomputed)", round(cutoff, 4), 0.0248, tol=0.005))
-    tally(check("Stored post-FDR SUPPORTED == recomputed", sup_post, sup_recomp))
-    tally(check("Stored post-FDR REVERSED  == recomputed", rev_post, rev_recomp))
+    # BH is run per arm (accuracy, ECE), each over valid p-values
+    # (scripts/apply_bh_by_arm.py; the old single batch mixed in ECE p-values
+    # that tested the wrong null, L14). Re-derive each arm independently.
+    tally(check("every cell has a BH arm", sorted({c["arm"] for c in cells}), ["accuracy", "ece"]))
+    for arm, want_cut in (("accuracy", 0.0145), ("ece", 0.0280)):
+        arm_cells = [c for c in cells if c["arm"] == arm]
+        ps = sorted((c["p"], c["pre"], c["post"]) for c in arm_cells)
+        m, q, cutoff = len(ps), 0.05, 0.0
+        for k, (pv, _, _) in enumerate(ps, 1):
+            if pv <= k*q/m: cutoff = pv
+        rec = sum(1 for pv, pre, _ in ps if pre in ("supported", "reversed") and pv <= cutoff)
+        stored = sum(1 for _, _, post in ps if post in ("supported", "reversed"))
+        tally(check(f"{arm}: BH cutoff (recomputed)", round(cutoff, 4), want_cut, tol=0.0006))
+        tally(check(f"{arm}: stored post-FDR significant == recomputed", stored, rec))
 
-    # Audit trail: every cell shares the same batch hash (single corpus).
+    # Audit trail: one batch hash per arm.
     hashes = {c["batch_hash"] for c in cells if c["batch_hash"]}
-    tally(check("All cells share one bh_batch_hash", len(hashes), 1))
+    tally(check("one bh_batch_hash per arm", len(hashes), 2))
 
     # 2. Frontier R²
     header("2. Frontier R² (§3, Table 5)")
@@ -205,13 +209,13 @@ def main():
                      round(s1["encoder"]["mean_inflation_pp"], 2), 1.30, tol=0.02))
         s2 = d["S2_no_compute_match"]
         tally(check("S2 weak-baseline SUPPORTED %",
-                     s2["all"]["best_of_n"]["pct_supported"], 27.2, tol=0.1))
+                     s2["all"]["best_of_n"]["pct_supported"], 22.2, tol=0.1))
         tally(check("S2 compute-matched SUPPORTED %",
-                     s2["all"]["n_rank"]["pct_supported"], 9.9, tol=0.1))
+                     s2["all"]["n_rank"]["pct_supported"], 7.3, tol=0.1))
         tally(check("S2 encoder strict SUPPORTED % (headline: zero)",
                      s2["encoder"]["n_rank"]["pct_supported"], 0.0, tol=0.001))
         tally(check("S2 encoder strict REVERSED %",
-                     s2["encoder"]["n_rank"]["pct_reversed"], 33.7, tol=0.1))
+                     s2["encoder"]["n_rank"]["pct_reversed"], 31.5, tol=0.1))
         tally(check("S2 encoder strict n_cells",
                      s2["encoder"]["n_rank"]["n_cells"], 92))
         tally(check("S2 encoder strict mean Δ (pp)",
@@ -220,12 +224,22 @@ def main():
         by_m = d["S2b_strict_encoder_by_method"]
         tally(check("S2b all methods at 0% SUPPORTED",
                      max(v["pct_supported"] for v in by_m.values()), 0.0, tol=0.001))
+        mp = s2["matched_pools"]
+        tally(check("S2 matched: pools carrying both baselines", mp["all"]["n_pools"], 48))
+        tally(check("S2 matched: SUPPORTED % vs best_of_n", mp["all"]["best_of_n"]["pct_supported"], 22.4, tol=0.06))
+        tally(check("S2 matched: SUPPORTED % vs n_rank", mp["all"]["n_rank"]["pct_supported"], 7.3, tol=0.06))
+        tally(check("S2 matched encoder: SUP % best_of_n -> n_rank",
+                     (mp["encoder"]["best_of_n"]["pct_supported"], mp["encoder"]["n_rank"]["pct_supported"]), (9.8, 0.0)))
+        tally(check("S2 matched decoder: SUP % best_of_n -> n_rank",
+                     (mp["decoder"]["best_of_n"]["pct_supported"], mp["decoder"]["n_rank"]["pct_supported"]), (34.0, 14.0)))
         s3 = d["S3_aggregate_reporting"]["all"]
+        tally(check("S3 cells hidden in no-effect tasks", s3["significant_cells_hidden_in_neutral_tasks"], 39))
+        tally(check("S3 % hidden", s3["pct_hidden_significant"], 23.8, tol=0.06))
         mnli = next(t for t in s3["tasks"] if t["task"] == "mnli")
         tally(check("S3 MNLI task mean reads as no-effect",
                      mnli["task_level_reads_as"], "no effect"))
         tally(check("S3 significant cells hidden inside MNLI",
-                     mnli["reversed_cells_inside"] + mnli["supported_cells_inside"], 37))
+                     mnli["reversed_cells_inside"] + mnli["supported_cells_inside"], 31))
     else:
         print(f"  SKIP: {fp} not found")
 
@@ -240,12 +254,12 @@ def main():
                      d["summary"]["accuracy_supported_zero_under_all_procedures"], True))
         tally(check("accuracy REVERSED, raw CI", acc["raw_ci"]["reversed"], 38))
         tally(check("accuracy REVERSED, within-table Holm", acc["holm_within_table"]["reversed"], 16))
-        tally(check("accuracy REVERSED, corpus Holm", acc["holm_corpus_m1028"]["reversed"], 0))
-        tally(check("accuracy REVERSED, corpus BH", acc["bh_corpus_q05"]["reversed"], 31))
-        tally(check("ECE SUPPORTED, corpus BH", ece["bh_corpus_q05"]["supported"], 52))
-        tally(check("ECE SUPPORTED, within-table Holm", ece["holm_within_table"]["supported"], 46))
+        tally(check("accuracy REVERSED, corpus Holm", acc["holm_corpus_by_arm"]["reversed"], 0))
+        tally(check("accuracy REVERSED, corpus BH", acc["bh_corpus_q05"]["reversed"], 29))
+        tally(check("ECE SUPPORTED, corpus BH", ece["bh_corpus_q05"]["supported"], 51))
+        tally(check("ECE SUPPORTED, within-table Holm", ece["holm_within_table"]["supported"], 43))
         tally(check("ECE SUPPORTED, corpus Holm (nothing survives)",
-                     ece["holm_corpus_m1028"]["supported"], 0))
+                     ece["holm_corpus_by_arm"]["supported"], 0))
     else:
         print(f"  SKIP: {fc} not found")
 
@@ -274,7 +288,7 @@ def main():
         tally(check("near-parity (<=1.3x) pools", np_["n_pools"], 6))
         tally(check("near-parity cells", np_["n_cells"], 24))
         tally(check("near-parity SUPPORTED", np_["supported"], 0))
-        tally(check("near-parity REVERSED", np_["reversed"], 9))
+        tally(check("near-parity REVERSED", np_["reversed"], 8))
         tally(check("near-parity min ratio", round(np_["min_ratio"], 2), 0.90, tol=0.006))
     else:
         print(f"  SKIP: {fd} not found")
@@ -290,15 +304,15 @@ def main():
         tally(check("encoder acc SUPPORTED", e["acc_vs_n_rank"]["supported"], 0))
         tally(check("decoder pools", dec["n_pools"], 25))
         tally(check("decoder acc cells", dec["acc_vs_n_rank"]["n"], 100))
-        tally(check("decoder acc SUPPORTED (post-FDR)", dec["acc_vs_n_rank"]["supported"], 19))
+        tally(check("decoder acc SUPPORTED (post-FDR)", dec["acc_vs_n_rank"]["supported"], 14))
         tally(check("decoder acc REVERSED (post-FDR)", dec["acc_vs_n_rank"]["reversed"], 0))
         tally(check("decoder acc SUPPORTED (pre-FDR)", dec["acc_vs_n_rank_pre_fdr"]["supported"], 31))
         tally(check("decoder acc mean delta pp", dec["acc_mean_delta_pp"], 0.56, tol=0.006))
-        tally(check("decoder SUPPORTED cells all on MNLI", dec["supported_cells_by_task"], {"mnli": 19}))
-        tally(check("decoder pools with a SUPPORTED cell", dec["pools_with_a_supported_cell"], 8))
+        tally(check("decoder SUPPORTED cells all on MNLI", dec["supported_cells_by_task"], {"mnli": 14}))
+        tally(check("decoder pools with a SUPPORTED cell", dec["pools_with_a_supported_cell"], 5))
         tally(check("decoder ECE SUPPORTED", dec["ece_vs_n_rank"]["supported"], 57))
         tally(check("decoder ECE REVERSED", dec["ece_vs_n_rank"]["reversed"], 10))
-        tally(check("decoder acc SUPPORTED vs best_of_n (S2)", dec["acc_vs_best_of_n"]["supported"], 36))
+        tally(check("decoder acc SUPPORTED vs best_of_n (S2)", dec["acc_vs_best_of_n"]["supported"], 34))
         tally(check("encoder pools with mean delta < 0", e["pools_mean_delta_negative"], 20))
         tally(check("decoder pools with mean delta > 0", dec["pools_mean_delta_positive"], 22))
         tally(check("encoder pool sign test p < 0.001", e["pool_sign_test_p"] < 0.001, True))
@@ -319,12 +333,12 @@ def main():
                      d["health"]["baseline_compute_matched_mnli_qwen25_3b"]["trained"], 1))
         k = d["decoder"]["both_arms_trained"]
         tally(check("decoder, both arms trained: cells", k["n_cells"], 96))
-        tally(check("decoder, both arms trained: SUPPORTED", k["supported"], 15))
+        tally(check("decoder, both arms trained: SUPPORTED", k["supported"], 10))
         tally(check("decoder, both arms trained: REVERSED", k["reversed"], 0))
         k = d["encoder"]["both_arms_trained"]
         tally(check("encoder, both arms trained: cells", k["n_cells"], 72))
         tally(check("encoder, both arms trained: SUPPORTED", k["supported"], 0))
-        tally(check("encoder, both arms trained: % REVERSED", k["pct_reversed"], 33.3, tol=0.06))
+        tally(check("encoder, both arms trained: % REVERSED", k["pct_reversed"], 31.9, tol=0.06))
     else:
         print(f"  SKIP: {fh} not found")
 
@@ -488,7 +502,7 @@ def main():
     if fp6.exists():
         d = json.loads(fp6.read_text())
         expected = {   # n, blind dpp, blind %REV, blind cost, routed dpp, routed %REV, routed cost
-            "Enc acc": (64, -3.3, 30, 20, +0.4, 8, 1),
+            "Enc acc": (64, -3.3, 28, 20, +0.4, 8, 5),
             "Dec acc": (50, +0.6, 0, 18, +0.8, 0, 15),
             "Enc ECE": (63, +2.4, 10, 20, +3.6, 2, 20),
             "Dec ECE": (50, +3.5, 0, 18, +3.6, 0, 18),
@@ -507,6 +521,49 @@ def main():
             tally(check(f"{row} routed median cost", s["routed_median_cost"], rc))
     else:
         print(f"  SKIP: {fp6} not found")
+
+    # ---- Independence robustness (App. app:stats): one soft_vote cell per unit, BH per arm.
+    header("Independent-group BH (App. app:stats)")
+    fp7 = ROOT / "analysis/independent_group_bh.json"
+    if fp7.exists():
+        d = json.loads(fp7.read_text())
+        tally(check("groups, accuracy arm", d["arms"]["accuracy"]["n_groups"], 139))
+        tally(check("groups, ECE arm", d["arms"]["ece"]["n_groups"], 113))
+        tally(check("BH cutoff, accuracy groups", round(d["arms"]["accuracy"]["bh_cutoff_p"], 4), 0.0169, tol=6e-5))
+        tally(check("BH cutoff, ECE groups", round(d["arms"]["ece"]["bh_cutoff_p"], 4), 0.0356, tol=6e-5))
+        tally(check("groups SUPPORTED post-FDR", d["total"]["supported"], 105))
+        tally(check("groups REVERSED post-FDR", d["total"]["reversed"], 26))
+        tally(check("groups SUPPORTED %", d["total"]["pct_supported"], 41.7, tol=0.06))
+        tally(check("groups REVERSED %", d["total"]["pct_reversed"], 10.3, tol=0.06))
+        ece_rev = [f for f in ROOT.glob("analysis/*_cm_*_ECE.json")
+                   if json.loads(f.read_text())["adjudication_post_fdr"] == "reversed"]
+        tally(check("ECE cells REVERSED post-FDR", len(ece_rev), 93))
+        tally(check("... of which majority_vote", sum("_cm_majority_vote_" in f.name for f in ece_rev), 75))
+    else:
+        print(f"  SKIP: {fp7} not found")
+
+    # ---- App. app:ecequal (per-rule ECE, post-FDR) and the corpus split behind Fig. landscape.
+    header("ECE by rule (App. app:ecequal) and corpus split")
+    sys.path.insert(0, str(ROOT / "analysis"))
+    from protocol_sensitivity import load_accuracy_cells
+    enc_pools = sorted({c["pool_id"] for c in load_accuracy_cells()
+                        if c["family"] == "encoder" and c["baseline_kind"] == "n_rank"})
+    def ece_verdict(pool, m):
+        f = ROOT / f"analysis/{pool}_cm_{m}_vs_n_rank_ECE.json"
+        return json.loads(f.read_text())["adjudication_post_fdr"]
+    prob_rules = ("soft_vote", "logit_avg", "greedy_soup")
+    by_rule = {m: sum(ece_verdict(p, m) == "supported" for p in enc_pools)
+               for m in prob_rules + ("majority_vote",)}
+    for m, n in (("soft_vote", 17), ("logit_avg", 15), ("greedy_soup", 16), ("majority_vote", 3)):
+        tally(check(f"encoder ECE SUPPORTED, {m}", by_rule[m], n))
+    tally(check("probability-averaging ECE SUPPORTED of 69", sum(by_rule[m] for m in prob_rules), 48))
+    tally(check("pools SUPPORTED on all three averaging rules",
+                sum(all(ece_verdict(p, m) == "supported" for m in prob_rules) for p in enc_pools), 14))
+    names = [f.name for f in ROOT.glob("analysis/*_cm_*.json")]
+    tally(check("baseline self-comparison cells", sum(n.startswith("baseline_") for n in names), 100))
+    tally(check("smoke-test cells", sum(n.startswith("smoke") for n in names), 1))
+    tally(check("HellaSwag main-pool cells",
+                sum("hellaswag" in n and not n.startswith("baseline_") for n in names), 100))
 
     header("Summary")
     total = passes + fails

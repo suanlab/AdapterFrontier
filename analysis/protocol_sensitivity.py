@@ -182,6 +182,23 @@ def s2_no_compute_match(cells: list[dict]) -> dict:
             block["delta_mean_diff_pp"] = round(
                 block["best_of_n"]["mean_diff_pp"] - block["n_rank"]["mean_diff_pp"], 3)
         out[label] = block
+    # Same pools, same methods, only the baseline changes. The rows above use
+    # every cell each baseline has (320 best_of_n vs 192 n_rank), so their
+    # difference mixes the baseline with the pool set; this block holds the
+    # set fixed to the 48 pools that carry both, per family.
+    key = lambda c: (c["pool_id"], c["method"])
+    have = defaultdict(set)
+    for c in cells:
+        have[key(c)].add(c["baseline_kind"])
+    both = {k for k, v in have.items() if {"best_of_n", "n_rank"} <= v}
+    matched = {}
+    for label, fam in (("all", None), ("encoder", "encoder"), ("decoder", "decoder")):
+        sub = [c for c in cells if key(c) in both and (fam is None or c["family"] == fam)]
+        block = {"n_pools": len({c["pool_id"] for c in sub})}
+        for kind in ("best_of_n", "n_rank"):
+            block[kind] = _verdict_stats([c for c in sub if c["baseline_kind"] == kind])
+        matched[label] = block
+    out["matched_pools"] = matched
     return out
 
 

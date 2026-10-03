@@ -399,15 +399,15 @@
    "n_cells": 92,
    "n_pools": 23,
    "supported": 0,
-   "reversed": 31,
-   "pct_reversed": 33.7
+   "reversed": 29,
+   "pct_reversed": 31.5
   },
   "both_arms_trained": {
    "n_cells": 72,
    "n_pools": 18,
    "supported": 0,
-   "reversed": 24,
-   "pct_reversed": 33.3
+   "reversed": 23,
+   "pct_reversed": 31.9
   },
   "excluded_pools": [
    "pool_a_anli_bert_large",
@@ -421,14 +421,14 @@
   "all": {
    "n_cells": 100,
    "n_pools": 25,
-   "supported": 19,
+   "supported": 14,
    "reversed": 0,
    "pct_reversed": 0.0
   },
   "both_arms_trained": {
    "n_cells": 96,
    "n_pools": 24,
-   "supported": 15,
+   "supported": 10,
    "reversed": 0,
    "pct_reversed": 0.0
   },

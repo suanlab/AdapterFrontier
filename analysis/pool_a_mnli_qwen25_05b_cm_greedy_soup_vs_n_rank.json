@@ -27,7 +27,7 @@
   "stats_backend": "compute_match.local",
   "n_boot": 5000,
   "seed": 0,
-  "adjudication": "supported",
+  "adjudication": "unsupported",
   "provenance": {
     "schema_version": 1,
     "timestamp_utc": "2026-04-22T05:44:40.900658+00:00",
@@ -44,13 +44,25 @@
     "numpy_version": "2.2.6",
     "cuda_visible_devices": null
   },
-  "bh_q_value": 0.044199580041995805,
-  "bh_pass": true,
+  "bh_q_value": 0.06685595176746062,
+  "bh_pass": false,
   "bh_q_threshold": 0.05,
-  "bh_batch_size": 1028,
-  "bh_batch_hash": "42134bec54977d15",
+  "bh_batch_size": 566,
+  "bh_batch_hash": "70a99a18ac0d8df8",
   "holm_adjusted_p_batch": 1.0,
   "adjudication_pre_fdr": "supported",
-  "adjudication_post_fdr": "supported",
-  "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction."
+  "adjudication_post_fdr": "unsupported",
+  "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction.",
+  "legacy_mixed_batch": {
+    "bh_q_value": 0.044199580041995805,
+    "bh_pass": true,
+    "bh_q_threshold": 0.05,
+    "bh_batch_size": 1028,
+    "bh_batch_hash": "42134bec54977d15",
+    "holm_adjusted_p_batch": 1.0,
+    "adjudication_post_fdr": "supported",
+    "adjudication": "supported"
+  },
+  "bh_arm": "accuracy",
+  "p_for_bh": 0.021497850214978503
 }
