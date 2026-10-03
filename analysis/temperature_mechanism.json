@@ -1,0 +1,92 @@
+{
+ "note": "Post hoc. T_eq fitted label-free on test; T* is the NLL-optimal temperature of the mean-logit model on val_combine.",
+ "n_pools": 6,
+ "teq_reproduces_ensemble_ece_within_0p01": 5,
+ "rule_predicts_improvement": 5,
+ "pools": [
+  {
+   "pool_id": "pool_a_agnews_roberta_base_local10",
+   "n_adapters": 10,
+   "T_eq": 1.0418483533848313,
+   "T_star": 1.3393401950329227,
+   "kl_at_T_eq": 0.0003099431050941348,
+   "kl_at_T1": 0.0005126739852130413,
+   "ece_ensemble": 0.01604391681520562,
+   "ece_mean_T1": 0.01958914546197965,
+   "ece_mean_T_eq": 0.017441649950648595,
+   "ece_mean_T_star": 0.017481972590873134,
+   "predicted_ensemble_improves": true,
+   "observed_ensemble_improves": true
+  },
+  {
+   "pool_id": "pool_a_anli_roberta_base_local10",
+   "n_adapters": 10,
+   "T_eq": 1.0388318881844263,
+   "T_star": 3.824023853333719,
+   "kl_at_T_eq": 0.00022242730483412743,
+   "kl_at_T1": 0.0005028684972785413,
+   "ece_ensemble": 0.2506004571914673,
+   "ece_mean_T1": 0.26135374903678893,
+   "ece_mean_T_eq": 0.25333224137624105,
+   "ece_mean_T_star": 0.05799604058265686,
+   "predicted_ensemble_improves": true,
+   "observed_ensemble_improves": true
+  },
+  {
+   "pool_id": "pool_a_boolq_roberta_base_local10",
+   "n_adapters": 10,
+   "T_eq": 1.2877182478818854,
+   "T_star": 0.9896717398549196,
+   "kl_at_T_eq": 0.0038376664742827415,
+   "kl_at_T1": 0.011814434081315994,
+   "ece_ensemble": 0.039630814794371236,
+   "ece_mean_T1": 0.02513028225585227,
+   "ece_mean_T_eq": 0.04776312014378539,
+   "ece_mean_T_star": 0.025012701704232348,
+   "predicted_ensemble_improves": false,
+   "observed_ensemble_improves": false
+  },
+  {
+   "pool_id": "pool_a_qnli_roberta_base_local10",
+   "n_adapters": 10,
+   "T_eq": 1.0321203043114968,
+   "T_star": 1.0147724181422249,
+   "kl_at_T_eq": 0.00011733730207197368,
+   "kl_at_T1": 0.00025806663325056434,
+   "ece_ensemble": 0.009374929423301672,
+   "ece_mean_T1": 0.011998484141218025,
+   "ece_mean_T_eq": 0.011647111161084522,
+   "ece_mean_T_star": 0.011841712446247656,
+   "predicted_ensemble_improves": false,
+   "observed_ensemble_improves": true
+  },
+  {
+   "pool_id": "pool_b_sst2_bert_local6",
+   "n_adapters": 6,
+   "T_eq": 1.0570525930441907,
+   "T_star": 1.6166925587959229,
+   "kl_at_T_eq": 0.0004384550848044455,
+   "kl_at_T1": 0.0007631224580109119,
+   "ece_ensemble": 0.02714745010648455,
+   "ece_mean_T1": 0.03685511997767857,
+   "ece_mean_T_eq": 0.03467594861984253,
+   "ece_mean_T_star": 0.04342927285603115,
+   "predicted_ensemble_improves": true,
+   "observed_ensemble_improves": true
+  },
+  {
+   "pool_id": "pool_c_mnli_roberta_base_method_mixed_local8",
+   "n_adapters": 8,
+   "T_eq": 1.425389593301198,
+   "T_star": 1.0443571792934339,
+   "kl_at_T_eq": 0.01077849231660366,
+   "kl_at_T1": 0.0484265498816967,
+   "ece_ensemble": 0.0525464276027388,
+   "ece_mean_T1": 0.024718732825967635,
+   "ece_mean_T_eq": 0.06570908472784551,
+   "ece_mean_T_star": 0.022053393944756316,
+   "predicted_ensemble_improves": false,
+   "observed_ensemble_improves": false
+  }
+ ]
+}

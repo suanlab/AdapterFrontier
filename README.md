@@ -13,7 +13,7 @@ This repository supports **JSON-level reproducibility** (every headline number r
 
 ```bash
 pip install -r requirements-verify.txt       # numpy/scipy/sklearn/matplotlib/pytest
-python3 scripts/reproduce_paper_numbers.py   # 184 assertions, all PASS
+python3 scripts/reproduce_paper_numbers.py   # 192 assertions, all PASS
 python3 -m pytest tests/ -q                  # 17 tests
 ```
 
@@ -71,6 +71,7 @@ written by `scripts/apply_corpus_bh_fdr.py`. The corpus-wide
 python3 analysis/plot_protocol_sensitivity.py # Figure 1 (body)
 python3 analysis/protocol_sensitivity.py      # S1-S3 shortcut numbers
 python3 analysis/temperature_control.py       # recalibration control (encoder pools)
+python3 analysis/temperature_mechanism.py     # why: the ensemble as an implicit temperature
 python3 analysis/family_split.py              # encoder vs decoder, same n_rank baseline
 python3 analysis/budget_dose_response.py      # does the null track the baseline's budget?
 python3 analysis/training_health.py           # drop arms that failed to train (test-free)
@@ -82,7 +83,7 @@ python3 analysis/plot_info_mechanism.py       # appendix figure
 python3 analysis/plot_scaling_curves.py       # appendix figure
 python3 analysis/plot_verdict_landscape.py    # appendix figure
 python3 analysis/plot_two_regime.py           # appendix figure
-python3 analysis/cost_savings.py              # Table 12 (cost of blind ensembling)
+python3 analysis/cost_savings.py              # cost-of-blind-ensembling table (App. cost)
 
 # Re-fit frontier regression with drop diagnostics + method-onehot ablation
 python3 analysis/frontier.py --out analysis/frontier_with_drop_audit.json

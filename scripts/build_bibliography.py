@@ -152,6 +152,7 @@ CROSSREF: dict[str, tuple[str, str, str, str | None]] = {
     "efron1979bootstrap": ("10.1214/aos/1176344552", "article", "The Annals of Statistics", "1--26"),
     "kwon2023efficient": ("10.1145/3600006.3613165", "inproceedings",
                           "Proceedings of the 29th Symposium on Operating Systems Principles (SOSP)", None),
+    "mackay1992evidence": ("10.1162/neco.1992.4.5.720", "article", "Neural Computation", None),
 }
 
 # Crossref registers Efron (1979) as "B. Efron"; the same publisher spells him

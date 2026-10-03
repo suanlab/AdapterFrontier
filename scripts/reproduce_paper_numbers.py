@@ -339,6 +339,26 @@ def main():
     else:
         print(f"  SKIP: {fb2} not found")
 
+    # 11f. Why one temperature replaces the population (App. tempmech)
+    header("11f. The ensemble as an implicit temperature (App. tempmech)")
+    fm = ROOT / "analysis/temperature_mechanism.json"
+    if fm.exists():
+        d = json.loads(fm.read_text())
+        by = {p["pool_id"]: p for p in d["pools"]}
+        tally(check("tempmech pools", d["n_pools"], 6))
+        tally(check("T_eq reproduces ensemble ECE within 0.01", d["teq_reproduces_ensemble_ece_within_0p01"], 5))
+        tally(check("rule predicts ECE improvement", d["rule_predicts_improvement"], 5))
+        a = by["pool_a_anli_roberta_base_local10"]
+        tally(check("ANLI T_eq", round(a["T_eq"], 2), 1.04, tol=0.006))
+        tally(check("ANLI T*", round(a["T_star"], 1), 3.8, tol=0.06))
+        tally(check("ANLI ensemble ECE", round(a["ece_ensemble"], 2), 0.25, tol=0.006))
+        tally(check("ANLI mean model ECE at T*", round(a["ece_mean_T_star"], 2), 0.06, tol=0.006))
+        tally(check("BoolQ/MNLI T_eq in [1.3, 1.45]",
+                     all(1.25 <= by[k]["T_eq"] <= 1.45 for k in ("pool_a_boolq_roberta_base_local10",
+                                                                  "pool_c_mnli_roberta_base_method_mixed_local8")), True))
+    else:
+        print(f"  SKIP: {fm} not found")
+
     ft = ROOT / "analysis/temperature_control.json"
     if ft.exists():
         pools = [p["pool_id"] for p in json.loads(ft.read_text())["pools"]]
