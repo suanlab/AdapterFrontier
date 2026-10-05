@@ -42,6 +42,8 @@ def main() -> int:
         if not m:
             continue
         d = json.loads(Path(f).read_text())
+        if d.get("excluded_from_multiplicity"):     # HellaSwag, smoke test
+            continue
         reps["ece" if m.group("ece") else "accuracy"].append(
             (Path(f).name, d["p_for_bh"], d["adjudication_pre_fdr"]))
     out = {"q": Q, "representative": "soft_vote", "arms": {}}

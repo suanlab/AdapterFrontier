@@ -1,0 +1,15 @@
+{
+  "model": "bert-base-uncased",
+  "task": "snli",
+  "recipe": "pool",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "epochs": 2.0,
+  "batch_size": 32,
+  "seed": 11,
+  "train_rows": 20000,
+  "train_loss": 0.6848716888427734,
+  "train_loss_over_ln3": 0.6233970763908622,
+  "acc_full_validation": 0.8025807762649868,
+  "train_runtime_s": 132.2
+}

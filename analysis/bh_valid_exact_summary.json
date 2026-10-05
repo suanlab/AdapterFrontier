@@ -1,0 +1,48 @@
+{
+  "q": 0.05,
+  "n_cells": 1028,
+  "n_excluded": 101,
+  "arms": {
+    "accuracy": {
+      "n_cells": 515,
+      "bh_cutoff_p": 0.012660335802414213,
+      "bh_batch_hash": "520be8678b086b99",
+      "counts_pre_fdr": {
+        "supported": 139,
+        "unsupported": 314,
+        "reversed": 62
+      },
+      "counts_post_fdr": {
+        "unsupported": 383,
+        "supported": 83,
+        "reversed": 49
+      },
+      "counts_holm_whole_arm": {
+        "unsupported": 471,
+        "reversed": 25,
+        "supported": 19
+      },
+      "min_p": 0.0
+    },
+    "ece": {
+      "n_cells": 412,
+      "bh_cutoff_p": 0.028,
+      "bh_batch_hash": "e1cfb7d0a06960d8",
+      "counts_pre_fdr": {
+        "unsupported": 155,
+        "supported": 181,
+        "reversed": 76
+      },
+      "counts_post_fdr": {
+        "unsupported": 164,
+        "supported": 175,
+        "reversed": 73
+      },
+      "counts_holm_whole_arm": {
+        "unsupported": 412
+      },
+      "min_p": 0.0001999600079984003
+    }
+  },
+  "valid_cells_with_changed_verdict_vs_previous": 6
+}

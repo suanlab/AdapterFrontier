@@ -33,6 +33,7 @@ Usage: python3 analysis/temperature_control.py
 from __future__ import annotations
 
 import glob
+import zlib
 import json
 from pathlib import Path
 
@@ -145,8 +146,30 @@ def main() -> int:
         C = arm(L[b][test], y_test, T_single)
         D = arm(ens_logits[test], y_test, T_ens)
 
+        # paired bootstrap over test examples, both arms temperature-scaled
+        # (2026-10-04 panel, E-M3): ECE and NLL differences, single - ensemble
+        def probs(z, T):
+            z = z / T; z = z - z.max(-1, keepdims=True); e = np.exp(z)
+            return e / e.sum(-1, keepdims=True)
+        pS, pE = probs(L[b][test], T_single), probs(ens_logits[test], T_ens)
+        cS, kS = pS.max(-1), (pS.argmax(-1) == y_test).astype(float)
+        cE, kE = pE.max(-1), (pE.argmax(-1) == y_test).astype(float)
+        nS = -np.log(np.clip(pS[np.arange(len(y_test)), y_test], 1e-12, 1))
+        nE = -np.log(np.clip(pE[np.arange(len(y_test)), y_test], 1e-12, 1))
+        rng = np.random.RandomState(zlib.crc32(pid.encode()) % (2**31))
+        boots = []
+        for _ in range(2000):
+            i = rng.randint(0, len(y_test), len(y_test))
+            boots.append(ece_equal_mass(cS[i], kS[i]) - ece_equal_mass(cE[i], kE[i]))
+        ece_ci = [float(v) for v in np.quantile(boots, [0.025, 0.975])]
+        d_nll = nS - nE
+        nll_boot = [d_nll[rng.randint(0, len(d_nll), len(d_nll))].mean() for _ in range(2000)]
+        nll_ci = [float(v) for v in np.quantile(nll_boot, [0.025, 0.975])]
+
         rows.append({
             "pool_id": pid, "n_adapters": int(L.shape[0]), "n_test": int(len(test)),
+            "both_scaled_ece_gain_ci95": ece_ci,
+            "both_scaled_nll_gain": float(d_nll.mean()), "both_scaled_nll_gain_ci95": nll_ci,
             "T_single": T_single, "T_ensemble": T_ens,
             "ece": {"ensemble": A[0], "single": B[0],
                     "single_temp": C[0], "ensemble_temp": D[0]},
@@ -178,6 +201,16 @@ def main() -> int:
     m_tmp = float(np.mean([r["gain_vs_temp_scaled"] for r in rows]))
     m_both = float(np.mean([r["gain_temp_both"] for r in rows]))
 
+    print("\nboth arms temperature-scaled, per pool (single - ensemble; positive = ensemble better):")
+    for r in rows:
+        print(f"  {r['pool_id'][:40]:40s} dECE {r['gain_temp_both']:+.4f} {r['both_scaled_ece_gain_ci95']}  "
+              f"dNLL {r['both_scaled_nll_gain']:+.4f} {r['both_scaled_nll_gain_ci95']}")
+    no_anli = [r for r in rows if "anli" not in r["pool_id"]]
+    m_unc_x = float(np.mean([r["gain_vs_uncalibrated"] for r in no_anli]))
+    m_tmp_x = float(np.mean([r["gain_vs_temp_scaled"] for r in no_anli]))
+    m_both_x = float(np.mean([r["gain_temp_both"] for r in no_anli]))
+    print(f"  without ANLI ({len(no_anli)} pools): mean gain vs uncalibrated {m_unc_x:+.4f}, "
+          f"vs scaled single {m_tmp_x:+.4f}, both scaled {m_both_x:+.4f}")
     print("\nensemble better calibrated than ... (positive = ensemble wins)")
     print(f"  uncalibrated single           {w_unc}/{n} pools   mean {m_unc:+.4f}")
     print(f"  temperature-scaled single     {w_tmp}/{n} pools   mean {m_tmp:+.4f}")
@@ -196,6 +229,8 @@ def main() -> int:
                  "best_of_n pools, not the headline n_rank slice, so direction transfers and "
                  "magnitude does not."),
         "n_pools": n, "n_bins": N_BINS,
+        "without_anli": {"n_pools": len(no_anli), "mean_gain_vs_uncalibrated": m_unc_x,
+                         "mean_gain_vs_temp_scaled": m_tmp_x, "mean_gain_temp_both": m_both_x},
         "ensemble_better_than": {
             "uncalibrated_single": {"pools": w_unc, "mean_ece_gain": m_unc},
             "temperature_scaled_single": {"pools": w_tmp, "mean_ece_gain": m_tmp},

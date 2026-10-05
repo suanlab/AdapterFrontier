@@ -27,7 +27,7 @@
   "stats_backend": "compute_match.local_ece",
   "n_boot": 5000,
   "seed": 0,
-  "adjudication": "unsupported",
+  "adjudication": "excluded",
   "provenance": {
     "schema_version": 1,
     "timestamp_utc": "2026-05-14T08:05:39.664455+00:00",
@@ -44,14 +44,10 @@
     "numpy_version": "2.2.6",
     "cuda_visible_devices": null
   },
-  "bh_q_value": 0.73744,
-  "bh_pass": false,
   "bh_q_threshold": 0.05,
-  "bh_batch_size": 462,
-  "bh_batch_hash": "fc141e532835efb9",
   "holm_adjusted_p_batch": 1.0,
   "adjudication_pre_fdr": "unsupported",
-  "adjudication_post_fdr": "unsupported",
+  "adjudication_post_fdr": "excluded",
   "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction.",
   "legacy_mixed_batch": {
     "bh_q_value": 0.8739048708212656,
@@ -65,5 +61,15 @@
   },
   "bh_arm": "ece",
   "p_for_bh": 0.6692,
-  "ece_p_paired_bootstrap": 0.6692
+  "ece_p_paired_bootstrap": 0.6692,
+  "legacy_per_arm_mc": {
+    "p_for_bh": 0.6692,
+    "bh_q_value": 0.73744,
+    "bh_pass": false,
+    "bh_batch_size": 462,
+    "bh_batch_hash": "fc141e532835efb9",
+    "adjudication_post_fdr": "unsupported",
+    "adjudication": "unsupported"
+  },
+  "excluded_from_multiplicity": "hellaswag_evaluator_inconsistent"
 }

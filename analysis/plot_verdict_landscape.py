@@ -79,6 +79,8 @@ def main():
 
     # Bigger figure to give text room; taller row pitch so y-labels read clearly
     fig, ax = plt.subplots(figsize=(13, max(10, len(pools) * 0.20)))
+    keep = np.isfinite(M).any(axis=1)          # drop pools with no adjudicated cell (excluded HellaSwag)
+    M = M[keep]; pools = [p for p, k in zip(pools, keep) if k]
     ax.imshow(M, aspect='auto', cmap=cmap, norm=norm, interpolation='nearest')
     # NaN cells: light cream
     nan_mask = ~np.isfinite(M)
@@ -99,8 +101,9 @@ def main():
     ax.set_xticklabels(short_cols, rotation=75, ha='right', fontsize=11)
     ax.tick_params(axis='both', which='major', labelsize=10)
 
-    ax.set_title(f'Verdict landscape: {int(np.isfinite(M).sum())} adjudicated cells across {len(pools)} pools\n'
-                 'green=supported, gray=unsupported, red=reversed (white=cell not generated)', fontsize=14)
+    n_valid_pools = int(np.isfinite(M).any(axis=1).sum())
+    ax.set_title(f'{int(np.isfinite(M).sum())} adjudicated cells across {n_valid_pools} pools '
+                 '(white: not generated, or excluded HellaSwag cells)', fontsize=14, pad=42)
     legend_elems = [
         mpatches.Patch(color='#2ca02c', label='supported (CI > 0)'),
         mpatches.Patch(color='#bbbbbb', label='unsupported (CI ⊃ 0)'),

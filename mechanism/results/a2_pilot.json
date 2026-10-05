@@ -1,0 +1,745 @@
+{
+  "_note": "EXPLORATORY A2 pilot on SNLI dev_test; PREREG_AB.md \u00a73.",
+  "git_sha": "ad1fe515b167b1d3568cb0fe3e57181f2c9dd6d8",
+  "backbones": {
+    "bert-base-uncased": {
+      "status": "ok",
+      "cells": {
+        "r8_e2": {
+          "dev_test_acc_mean": 0.8056543084476046,
+          "dev_test_acc_sd": 0.004081450296678894,
+          "dev_test_acc_by_seed": [
+            0.8039614017267649,
+            0.8026917216861351,
+            0.8103098019299136
+          ],
+          "tokens_per_seed": 1054480,
+          "gpu_seconds_by_seed": [
+            354.1,
+            149.0,
+            133.9
+          ]
+        },
+        "r8_e4": {
+          "dev_test_acc_mean": 0.8198747249026578,
+          "dev_test_acc_sd": 0.002466362330173224,
+          "dev_test_acc_by_seed": [
+            0.8171660741493144,
+            0.8219908583037074,
+            0.8204672422549517
+          ],
+          "tokens_per_seed": 2108960,
+          "gpu_seconds_by_seed": [
+            581.8,
+            275.4,
+            261.2
+          ]
+        },
+        "r32_e2": {
+          "dev_test_acc_mean": 0.8179278821736923,
+          "dev_test_acc_sd": 0.007818590308959202,
+          "dev_test_acc_by_seed": [
+            0.8113255459624175,
+            0.8158963941086846,
+            0.8265617064499746
+          ],
+          "tokens_per_seed": 1054480,
+          "gpu_seconds_by_seed": [
+            332.9,
+            127.9,
+            126.8
+          ]
+        },
+        "r32_e4": {
+          "dev_test_acc_mean": 0.8325715253089555,
+          "dev_test_acc_sd": 0.003195291364174156,
+          "dev_test_acc_by_seed": [
+            0.8296089385474861,
+            0.8321482986287455,
+            0.8359573387506348
+          ],
+          "tokens_per_seed": 2108960,
+          "gpu_seconds_by_seed": [
+            654.6,
+            265.8,
+            261.0
+          ]
+        }
+      },
+      "pairings": [
+        {
+          "ensemble": "r8_e2",
+          "single": "r8_e2",
+          "selected_seed": 103,
+          "delta": -0.0002539360081259545,
+          "delta_ci95": [
+            -0.007110208227526663,
+            0.006856272219400711
+          ],
+          "D": 0.004401557474183138,
+          "G": 0.0,
+          "S": 0.004655493482309092,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r8_e4",
+          "selected_seed": 103,
+          "delta": -0.010411376333164024,
+          "delta_ci95": [
+            -0.017775520568816656,
+            -0.0030472320975114273
+          ],
+          "D": 0.004401557474183138,
+          "G": 0.01422041645505323,
+          "S": 0.0005925173522939309,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r32_e2",
+          "selected_seed": 103,
+          "delta": -0.016505840528186932,
+          "delta_ci95": [
+            -0.02463179278821737,
+            -0.008125952260030472
+          ],
+          "D": 0.004401557474183138,
+          "G": 0.012273573726087728,
+          "S": 0.008633824276282343,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": -0.02590147282884714,
+          "delta_ci95": [
+            -0.03504316912138141,
+            -0.016505840528186898
+          ],
+          "D": 0.004401557474183138,
+          "G": 0.026917216861350957,
+          "S": 0.0033858134416793195,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r8_e2",
+          "selected_seed": 103,
+          "delta": 0.011427120365667842,
+          "delta_ci95": [
+            0.003809040121889284,
+            0.01904520060944642
+          ],
+          "D": 0.0018621973929237035,
+          "G": -0.01422041645505323,
+          "S": 0.004655493482309092,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r8_e4",
+          "selected_seed": 103,
+          "delta": 0.0012696800406297726,
+          "delta_ci95": [
+            -0.004062976130015236,
+            0.006602336211274758
+          ],
+          "D": 0.0018621973929237035,
+          "G": 0.0,
+          "S": 0.0005925173522939309,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r32_e2",
+          "selected_seed": 103,
+          "delta": -0.004824784154393136,
+          "delta_ci95": [
+            -0.012696800406297613,
+            0.003301168105637379
+          ],
+          "D": 0.0018621973929237035,
+          "G": -0.0019468427289655033,
+          "S": 0.008633824276282343,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": -0.014220416455053342,
+          "delta_ci95": [
+            -0.022092432706957845,
+            -0.0063484002031488065
+          ],
+          "D": 0.0018621973929237035,
+          "G": 0.012696800406297726,
+          "S": 0.0033858134416793195,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r8_e2",
+          "selected_seed": 103,
+          "delta": 0.02031488065007625,
+          "delta_ci95": [
+            0.01218892839004571,
+            0.028440832910106652
+          ],
+          "D": 0.012696800406297615,
+          "G": -0.012273573726087728,
+          "S": 0.004655493482309092,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r8_e4",
+          "selected_seed": 103,
+          "delta": 0.01015744032503818,
+          "delta_ci95": [
+            0.0030472320975114273,
+            0.017521584560690705
+          ],
+          "D": 0.012696800406297615,
+          "G": 0.0019468427289655033,
+          "S": 0.0005925173522939309,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r32_e2",
+          "selected_seed": 103,
+          "delta": 0.004062976130015272,
+          "delta_ci95": [
+            -0.003301168105637379,
+            0.0111731843575419
+          ],
+          "D": 0.012696800406297615,
+          "G": 0.0,
+          "S": 0.008633824276282343,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": -0.005332656170644934,
+          "delta_ci95": [
+            -0.01218892839004571,
+            0.0015236160487557136
+          ],
+          "D": 0.012696800406297615,
+          "G": 0.014643643135263229,
+          "S": 0.0033858134416793195,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 3163440,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r8_e2",
+          "selected_seed": 103,
+          "delta": 0.03098019299136623,
+          "delta_ci95": [
+            0.021838496698831894,
+            0.03987430167597756
+          ],
+          "D": 0.008718469612324364,
+          "G": -0.026917216861350957,
+          "S": 0.004655493482309092,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r8_e4",
+          "selected_seed": 103,
+          "delta": 0.02082275266632816,
+          "delta_ci95": [
+            0.013204672422549517,
+            0.028440832910106652
+          ],
+          "D": 0.008718469612324364,
+          "G": -0.012696800406297726,
+          "S": 0.0005925173522939309,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r32_e2",
+          "selected_seed": 103,
+          "delta": 0.014728288471305251,
+          "delta_ci95": [
+            0.007110208227526663,
+            0.02260030472320975
+          ],
+          "D": 0.008718469612324364,
+          "G": -0.014643643135263229,
+          "S": 0.008633824276282343,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 3163440,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": 0.005332656170645045,
+          "delta_ci95": [
+            0.0,
+            0.010919248349415947
+          ],
+          "D": 0.008718469612324364,
+          "G": 0.0,
+          "S": 0.0033858134416793195,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 6326880,
+          "cost_tokens_single": 6326880,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        }
+      ],
+      "failed_flags": {
+        "r8_s101_e2": false,
+        "r8_s102_e2": false,
+        "r8_s103_e2": false,
+        "r8_s101_e4": false,
+        "r8_s102_e4": false,
+        "r8_s103_e4": false,
+        "r32_s101_e2": false,
+        "r32_s102_e2": false,
+        "r32_s103_e2": false,
+        "r32_s101_e4": false,
+        "r32_s102_e4": false,
+        "r32_s103_e4": false
+      }
+    },
+    "Qwen2.5-0.5B": {
+      "status": "ok",
+      "cells": {
+        "r8_e2": {
+          "dev_test_acc_mean": 0.8714237345522262,
+          "dev_test_acc_sd": 0.005286099541559506,
+          "dev_test_acc_by_seed": [
+            0.8773489080751651,
+            0.8697308278313864,
+            0.867191467750127
+          ],
+          "tokens_per_seed": 933072,
+          "gpu_seconds_by_seed": [
+            1309.5,
+            447.5,
+            442.6
+          ]
+        },
+        "r8_e4": {
+          "dev_test_acc_mean": 0.8706619265278484,
+          "dev_test_acc_sd": 0.0017285066748486185,
+          "dev_test_acc_by_seed": [
+            0.87201625190452,
+            0.8687150837988827,
+            0.8712544438801422
+          ],
+          "tokens_per_seed": 1866144,
+          "gpu_seconds_by_seed": [
+            1836.5,
+            901.6,
+            895.3
+          ]
+        },
+        "r32_e2": {
+          "dev_test_acc_mean": 0.8518706619265278,
+          "dev_test_acc_sd": 0.01648890277048994,
+          "dev_test_acc_by_seed": [
+            0.8372270187912646,
+            0.8697308278313864,
+            0.8486541391569324
+          ],
+          "tokens_per_seed": 933072,
+          "gpu_seconds_by_seed": [
+            452.2,
+            441.2,
+            717.6
+          ]
+        },
+        "r32_e4": {
+          "dev_test_acc_mean": 0.8652446250211613,
+          "dev_test_acc_sd": 0.0005864400905938353,
+          "dev_test_acc_by_seed": [
+            0.8649060436769934,
+            0.8649060436769934,
+            0.8659217877094972
+          ],
+          "tokens_per_seed": 1866144,
+          "gpu_seconds_by_seed": [
+            892.3,
+            888.1,
+            1196.5
+          ]
+        }
+      },
+      "pairings": [
+        {
+          "ensemble": "r8_e2",
+          "single": "r8_e2",
+          "selected_seed": 102,
+          "delta": 0.012188928390045706,
+          "delta_ci95": [
+            0.006094464195022855,
+            0.018283392585068562
+          ],
+          "D": 0.010496021669205935,
+          "G": 0.0,
+          "S": -0.0016929067208397708,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r8_e4",
+          "selected_seed": 102,
+          "delta": 0.013204672422549413,
+          "delta_ci95": [
+            0.005840528186896902,
+            0.02031488065007618
+          ],
+          "D": 0.010496021669205935,
+          "G": -0.0007618080243778635,
+          "S": -0.0019468427289656143,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r32_e2",
+          "selected_seed": 102,
+          "delta": 0.012188928390045706,
+          "delta_ci95": [
+            0.004310563737938042,
+            0.02031488065007618
+          ],
+          "D": 0.010496021669205935,
+          "G": -0.019553072625698387,
+          "S": 0.017860165904858616,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e2",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": 0.015997968511934912,
+          "delta_ci95": [
+            0.006856272219400711,
+            0.02488572879634332
+          ],
+          "D": 0.010496021669205935,
+          "G": -0.00617910953106493,
+          "S": 0.0006771626883359527,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r8_e2",
+          "selected_seed": 102,
+          "delta": 0.011934992381919751,
+          "delta_ci95": [
+            0.004824784154393093,
+            0.019299136617572373
+          ],
+          "D": 0.011003893685457844,
+          "G": 0.0007618080243778635,
+          "S": -0.0016929067208397708,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r8_e4",
+          "selected_seed": 102,
+          "delta": 0.012950736414423458,
+          "delta_ci95": [
+            0.006856272219400711,
+            0.019299136617572373
+          ],
+          "D": 0.011003893685457844,
+          "G": 0.0,
+          "S": -0.0019468427289656143,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r32_e2",
+          "selected_seed": 102,
+          "delta": 0.011934992381919751,
+          "delta_ci95": [
+            0.0035551041137633316,
+            0.02006094464195023
+          ],
+          "D": 0.011003893685457844,
+          "G": -0.018791264601320523,
+          "S": 0.017860165904858616,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r8_e4",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": 0.015744032503808958,
+          "delta_ci95": [
+            0.007110208227526663,
+            0.02437785678009142
+          ],
+          "D": 0.011003893685457844,
+          "G": -0.005417301506687067,
+          "S": 0.0006771626883359527,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r8_e2",
+          "selected_seed": 102,
+          "delta": 0.00787201625190459,
+          "delta_ci95": [
+            0.0,
+            0.015490096495683088
+          ],
+          "D": 0.025732182156763206,
+          "G": 0.019553072625698387,
+          "S": -0.0016929067208397708,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r8_e4",
+          "selected_seed": 102,
+          "delta": 0.008887760284408297,
+          "delta_ci95": [
+            0.0005078720162519045,
+            0.017521584560690705
+          ],
+          "D": 0.025732182156763206,
+          "G": 0.018791264601320523,
+          "S": -0.0019468427289656143,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r32_e2",
+          "selected_seed": 102,
+          "delta": 0.00787201625190459,
+          "delta_ci95": [
+            0.0,
+            0.015490096495683088
+          ],
+          "D": 0.025732182156763206,
+          "G": 0.0,
+          "S": 0.017860165904858616,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e2",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": 0.011681056373793797,
+          "delta_ci95": [
+            0.0035551041137633316,
+            0.019807008633824275
+          ],
+          "D": 0.025732182156763206,
+          "G": 0.013373963094633456,
+          "S": 0.0006771626883359527,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 2799216,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 2.0,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r8_e2",
+          "selected_seed": 102,
+          "delta": 0.008633824276282454,
+          "delta_ci95": [
+            0.0005078720162519045,
+            0.0170137125444388
+          ],
+          "D": 0.013120027086507613,
+          "G": 0.00617910953106493,
+          "S": -0.0016929067208397708,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r8_e4",
+          "selected_seed": 102,
+          "delta": 0.00964956830878616,
+          "delta_ci95": [
+            0.0012696800406297613,
+            0.017775520568816656
+          ],
+          "D": 0.013120027086507613,
+          "G": 0.005417301506687067,
+          "S": -0.0019468427289656143,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r32_e2",
+          "selected_seed": 102,
+          "delta": 0.008633824276282454,
+          "delta_ci95": [
+            0.0005078720162519045,
+            0.01675977653631285
+          ],
+          "D": 0.013120027086507613,
+          "G": -0.013373963094633456,
+          "S": 0.017860165904858616,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 2799216,
+          "cost_ratio_single_over_ensemble": 0.5,
+          "equal_cost": false
+        },
+        {
+          "ensemble": "r32_e4",
+          "single": "r32_e4",
+          "selected_seed": 103,
+          "delta": 0.01244286439817166,
+          "delta_ci95": [
+            0.006094464195022855,
+            0.018791264601320468
+          ],
+          "D": 0.013120027086507613,
+          "G": 0.0,
+          "S": 0.0006771626883359527,
+          "identity_residual": 0.0,
+          "cost_tokens_ensemble": 5598432,
+          "cost_tokens_single": 5598432,
+          "cost_ratio_single_over_ensemble": 1.0,
+          "equal_cost": true
+        }
+      ],
+      "failed_flags": {
+        "r8_s101_e2": false,
+        "r8_s102_e2": false,
+        "r8_s103_e2": false,
+        "r8_s101_e4": false,
+        "r8_s102_e4": false,
+        "r8_s103_e4": false,
+        "r32_s101_e2": false,
+        "r32_s102_e2": false,
+        "r32_s103_e2": false,
+        "r32_s101_e4": false,
+        "r32_s102_e4": false,
+        "r32_s103_e4": false
+      }
+    }
+  },
+  "expansion_rule_passed": true
+}

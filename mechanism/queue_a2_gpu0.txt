@@ -1,0 +1,6 @@
+a2_bert_r8_s101 bert-base-uncased 8 32 101
+a2_bert_r32_s101 bert-base-uncased 32 32 101
+a2_bert_r8_s102 bert-base-uncased 8 32 102
+a2_bert_r32_s102 bert-base-uncased 32 32 102
+a2_bert_r8_s103 bert-base-uncased 8 32 103
+a2_bert_r32_s103 bert-base-uncased 32 32 103

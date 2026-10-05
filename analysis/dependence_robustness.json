@@ -1,0 +1,190 @@
+{
+  "_note": "The 192 headline cells (accuracy vs n_rank, 23 encoder + 25 decoder pools)\nare not independent: four combination rules share each pool, and pools of\nthe same (model, task) share one n_rank baseline and one test set. This\nscript makes that structure explicit and re-tests the family-level claims at\nthe level where observations are independent enough to count:",
+  "families": {
+    "encoder": {
+      "n_cells": 92,
+      "n_pools": 23,
+      "n_baseline_clusters": 10,
+      "pools_per_cluster": {
+        "baseline_compute_matched_agnews_bert_base": [
+          "pool_a_agnews_bert_base",
+          "pool_b_agnews_bert_base",
+          "pool_c_agnews_bert_base_method_mixed"
+        ],
+        "baseline_compute_matched_agnews_bert_large": [
+          "pool_a_agnews_bert_large"
+        ],
+        "baseline_compute_matched_anli_bert_large": [
+          "pool_a_anli_bert_large",
+          "pool_b_anli_bert_large"
+        ],
+        "baseline_compute_matched_anli_roberta_base": [
+          "pool_a_anli_roberta_base",
+          "pool_b_anli_roberta_base"
+        ],
+        "baseline_compute_matched_mnli_bert": [
+          "pool_a_mnli_bert",
+          "pool_b_mnli_bert",
+          "pool_c_mnli_bert_method_mixed"
+        ],
+        "baseline_compute_matched_mnli_bert_large": [
+          "pool_a_mnli_bert_large",
+          "pool_b_mnli_bert_large",
+          "pool_c_mnli_bert_large_method_mixed"
+        ],
+        "baseline_compute_matched_mnli_roberta_base": [
+          "pool_a_mnli_roberta_base",
+          "pool_b_mnli_roberta_base",
+          "pool_c_mnli_roberta_base_method_mixed"
+        ],
+        "baseline_compute_matched_qnli_bert_base": [
+          "pool_a_qnli_bert_base",
+          "pool_b_qnli_bert_base",
+          "pool_c_qnli_bert_base_method_mixed"
+        ],
+        "baseline_compute_matched_qnli_bert_large": [
+          "pool_a_qnli_bert_large"
+        ],
+        "baseline_compute_matched_sst2_bert": [
+          "pool_a_sst2_bert",
+          "pool_b_sst2_bert"
+        ]
+      },
+      "cluster_mean_delta_pp": {
+        "baseline_compute_matched_agnews_bert_base": -0.3152412280701754,
+        "baseline_compute_matched_agnews_bert_large": -0.1480263157894737,
+        "baseline_compute_matched_anli_bert_large": -5.390625,
+        "baseline_compute_matched_anli_roberta_base": -1.328125,
+        "baseline_compute_matched_mnli_bert": -2.4494820852436745,
+        "baseline_compute_matched_mnli_bert_large": -0.685600271692987,
+        "baseline_compute_matched_mnli_roberta_base": -0.5624893869926983,
+        "baseline_compute_matched_qnli_bert_base": -1.3266239707227812,
+        "baseline_compute_matched_qnli_bert_large": 0.022872827081427266,
+        "baseline_compute_matched_sst2_bert": 0.21428571428571433
+      },
+      "cluster_sign_test": {
+        "positive": 2,
+        "negative": 8,
+        "p": 0.109375
+      },
+      "cluster_bootstrap_mean_delta_pp": {
+        "mean": -1.196905471714465,
+        "ci95": [
+          -2.3049724929016246,
+          -0.36744901634755006
+        ]
+      },
+      "BY_accuracy": {
+        "supported": 0,
+        "reversed": 17,
+        "n": 92
+      },
+      "BY_ece": {
+        "supported": 44,
+        "reversed": 17,
+        "n": 92
+      }
+    },
+    "decoder": {
+      "n_cells": 100,
+      "n_pools": 25,
+      "n_baseline_clusters": 15,
+      "pools_per_cluster": {
+        "baseline_compute_matched_agnews_qwen25_05b": [
+          "pool_a_agnews_qwen25_05b",
+          "pool_b_agnews_qwen25_05b",
+          "pool_c_agnews_qwen25_05b_method_mixed"
+        ],
+        "baseline_compute_matched_agnews_qwen25_15b": [
+          "pool_a_agnews_qwen25_15b"
+        ],
+        "baseline_compute_matched_agnews_tinyllama_11b": [
+          "pool_a_agnews_tinyllama_11b"
+        ],
+        "baseline_compute_matched_anli_qwen25_05b": [
+          "pool_a_anli_qwen25_05b"
+        ],
+        "baseline_compute_matched_anli_qwen25_15b": [
+          "pool_a_anli_qwen25_15b"
+        ],
+        "baseline_compute_matched_anli_tinyllama_11b": [
+          "pool_a_anli_tinyllama_11b"
+        ],
+        "baseline_compute_matched_mnli_pythia_14b": [
+          "pool_a_mnli_pythia_14b"
+        ],
+        "baseline_compute_matched_mnli_qwen25_05b": [
+          "pool_a_mnli_qwen25_05b",
+          "pool_b_mnli_qwen25_05b",
+          "pool_c_mnli_qwen25_05b_method_mixed"
+        ],
+        "baseline_compute_matched_mnli_qwen25_15b": [
+          "pool_a_mnli_qwen25_15b",
+          "pool_b_mnli_qwen25_15b",
+          "pool_c_mnli_qwen25_15b_method_mixed"
+        ],
+        "baseline_compute_matched_mnli_qwen25_3b": [
+          "pool_a_mnli_qwen25_3b"
+        ],
+        "baseline_compute_matched_mnli_smollm2_17b": [
+          "pool_a_mnli_smollm2_17b"
+        ],
+        "baseline_compute_matched_mnli_tinyllama_11b": [
+          "pool_a_mnli_tinyllama_11b",
+          "pool_b_mnli_tinyllama_11b",
+          "pool_c_mnli_tinyllama_11b_method_mixed"
+        ],
+        "baseline_compute_matched_qnli_qwen25_05b": [
+          "pool_a_qnli_qwen25_05b",
+          "pool_b_qnli_qwen25_05b",
+          "pool_c_qnli_qwen25_05b_method_mixed"
+        ],
+        "baseline_compute_matched_qnli_qwen25_15b": [
+          "pool_a_qnli_qwen25_15b"
+        ],
+        "baseline_compute_matched_qnli_tinyllama_11b": [
+          "pool_a_qnli_tinyllama_11b"
+        ]
+      },
+      "cluster_mean_delta_pp": {
+        "baseline_compute_matched_agnews_qwen25_05b": 0.17543859649122806,
+        "baseline_compute_matched_agnews_qwen25_15b": 0.20559210526315794,
+        "baseline_compute_matched_agnews_tinyllama_11b": 0.4769736842105262,
+        "baseline_compute_matched_anli_qwen25_05b": -3.3854166666666665,
+        "baseline_compute_matched_anli_qwen25_15b": 0.8854166666666666,
+        "baseline_compute_matched_anli_tinyllama_11b": 3.072916666666667,
+        "baseline_compute_matched_mnli_pythia_14b": 1.6110545084055017,
+        "baseline_compute_matched_mnli_qwen25_05b": 0.6664968585498388,
+        "baseline_compute_matched_mnli_qwen25_15b": 0.54338597384955,
+        "baseline_compute_matched_mnli_qwen25_3b": 3.4895568008150786,
+        "baseline_compute_matched_mnli_smollm2_17b": 0.6749872643912379,
+        "baseline_compute_matched_mnli_tinyllama_11b": 0.4797079300390559,
+        "baseline_compute_matched_qnli_qwen25_05b": 0.11817627325404088,
+        "baseline_compute_matched_qnli_qwen25_15b": 0.16010978956999086,
+        "baseline_compute_matched_qnli_tinyllama_11b": 0.7776761207685269
+      },
+      "cluster_sign_test": {
+        "positive": 14,
+        "negative": 1,
+        "p": 0.0009765625
+      },
+      "cluster_bootstrap_mean_delta_pp": {
+        "mean": 0.6634715048182933,
+        "ci95": [
+          -0.08933130378473329,
+          1.3704590587512313
+        ]
+      },
+      "BY_accuracy": {
+        "supported": 8,
+        "reversed": 0,
+        "n": 100
+      },
+      "BY_ece": {
+        "supported": 51,
+        "reversed": 9,
+        "n": 100
+      }
+    }
+  }
+}

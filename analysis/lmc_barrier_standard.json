@@ -1,0 +1,54 @@
+{
+  "pool_a_mnli_bert": {
+    "n_pairs": 5,
+    "barrier_standard_mean": 0.9112983476638794,
+    "barrier_standard_sd": 0.25207997192944703,
+    "barrier_old_mean": 0.9078093776702882,
+    "per_pair_standard": [
+      0.9561425266265869,
+      0.6945215759277343,
+      0.7467406053543091,
+      0.7753837966918946,
+      1.3837032337188722
+    ]
+  },
+  "pool_a_mnli_deberta_v3_base": {
+    "n_pairs": 5,
+    "barrier_standard_mean": 0.016396145248413062,
+    "barrier_standard_sd": 0.023760798916982726,
+    "barrier_old_mean": 0.0009193595886230366,
+    "per_pair_standard": [
+      0.020907709121704032,
+      0.0,
+      0.061073017120361284,
+      0.0,
+      0.0
+    ]
+  },
+  "pool_a_mnli_qwen25_05b": {
+    "n_pairs": 5,
+    "barrier_standard_mean": 0.46344355955123895,
+    "barrier_standard_sd": 0.10911926340099584,
+    "barrier_old_mean": 0.4566743438720703,
+    "per_pair_standard": [
+      0.5180044746398926,
+      0.27756030988693237,
+      0.5852038259506226,
+      0.40849891567230223,
+      0.5279502716064453
+    ]
+  },
+  "pool_c_mnli_bert_method_mixed": {
+    "n_pairs": 5,
+    "barrier_standard_mean": 0.9017064599990843,
+    "barrier_standard_sd": 0.07656434316309904,
+    "barrier_old_mean": 0.6048365421295165,
+    "per_pair_standard": [
+      0.8596155090332029,
+      0.9407090969085693,
+      0.8298082170486449,
+      0.8442345075607298,
+      1.0341649694442752
+    ]
+  }
+}

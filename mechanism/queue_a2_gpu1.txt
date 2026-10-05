@@ -1,0 +1,6 @@
+a2_q05_r8_s101 Qwen/Qwen2.5-0.5B 8 16 101
+a2_q05_r32_s101 Qwen/Qwen2.5-0.5B 32 16 101
+a2_q05_r8_s102 Qwen/Qwen2.5-0.5B 8 16 102
+a2_q05_r32_s102 Qwen/Qwen2.5-0.5B 32 16 102
+a2_q05_r8_s103 Qwen/Qwen2.5-0.5B 8 16 103
+a2_q05_r32_s103 Qwen/Qwen2.5-0.5B 32 16 103

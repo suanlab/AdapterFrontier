@@ -41,11 +41,11 @@
     "numpy_version": "2.2.6",
     "cuda_visible_devices": null
   },
-  "bh_q_value": 0.002602038646710042,
+  "bh_q_value": 0.0014787107599545078,
   "bh_pass": true,
   "bh_q_threshold": 0.05,
-  "bh_batch_size": 566,
-  "bh_batch_hash": "70a99a18ac0d8df8",
+  "bh_batch_size": 515,
+  "bh_batch_hash": "520be8678b086b99",
   "holm_adjusted_p_batch": 0.28754249150169964,
   "adjudication_pre_fdr": "reversed",
   "adjudication_post_fdr": "reversed",
@@ -61,5 +61,19 @@
     "adjudication": "reversed"
   },
   "bh_arm": "accuracy",
-  "p_for_bh": 0.00039996000399960006
+  "p_for_bh": 0.0001378215853938182,
+  "legacy_per_arm_mc": {
+    "p_for_bh": 0.00039996000399960006,
+    "bh_q_value": 0.002602038646710042,
+    "bh_pass": true,
+    "bh_batch_size": 566,
+    "bh_batch_hash": "70a99a18ac0d8df8",
+    "adjudication_post_fdr": "reversed",
+    "adjudication": "reversed"
+  },
+  "sign_exact_p": 0.0001378215853938182,
+  "n_ens_only_correct": 143,
+  "n_base_only_correct": 216,
+  "holm_whole_arm_p": 0.06450050196430693,
+  "adjudication_holm_whole_arm": "unsupported"
 }

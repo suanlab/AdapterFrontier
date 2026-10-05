@@ -55,6 +55,7 @@ MAILTO = "anon@example.org"   # anonymised; any contact address works
 # --- what to fetch ----------------------------------------------------------
 
 ANTHOLOGY = {
+    "bowman2015snli": "D15-1075",
     "adamix": "2022.emnlp-main.388",
     "wang2018glue": "W18-5446",
     "zellers2019hellaswag": "P19-1472",
@@ -117,10 +118,12 @@ ARXIV: dict[str, tuple[str, str, str, str | None]] = {
     "ovadia2019trust":          ("1906.02530", "inproceedings", NEURIPS, None),
     "ashukha2020pitfalls":      ("2002.06470", "inproceedings", ICLR, None),
     "wang2023loraensembles":    ("2310.00035", "article", "arXiv preprint arXiv:2310.00035", None),
+    "zhang2015character":       ("1509.01626", "inproceedings", NEURIPS, None),
 }
 
 YEAR = {  # publication year of the *venue*, which is not always the arXiv year
     "wang2023loraensembles": "2023",
+    "zhang2015character": "2015",
     "hu2021lora": "2022", "wortsman2022model": "2022", "yadav2023ties": "2023",
     "yu2024dare": "2024", "dora": "2024", "pissa": "2024", "adalora": "2023",
     "vera": "2024", "mole": "2024", "molora": "2023", "hydralora": "2024",

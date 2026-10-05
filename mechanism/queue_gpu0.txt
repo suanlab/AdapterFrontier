@@ -1,0 +1,16 @@
+h3b_all_s21 21 21 21 2
+h3b_all_s41 41 41 41 2
+h3b_all_s61 61 61 61 2
+h3b_head_s31 31 11 11 2
+h3b_head_s51 51 11 11 2
+h3b_lora_s21 11 21 11 2
+h3b_lora_s41 11 41 11 2
+h3b_lora_s61 11 61 11 2
+h3b_data_s31 11 11 31 2
+h3b_data_s51 11 11 51 2
+h3b_none_r1 11 11 11 2
+h3b_none_r3 11 11 11 2
+h3a_ep1_s41 41 41 41 1
+h3a_ep1_s61 61 61 61 1
+h3a_ep4_s31 31 31 31 4
+h3a_ep4_s51 51 51 51 4

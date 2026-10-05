@@ -1,0 +1,1 @@
+a3b_yahoo_q05_c1_s301 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 16 301

@@ -10,23 +10,23 @@
     "holm_corpus_by_arm": {
       "n": 92,
       "supported": 0,
-      "reversed": 0,
+      "reversed": 12,
       "pct_supported": 0.0,
-      "pct_reversed": 0.0
+      "pct_reversed": 13.0
     },
     "holm_within_table": {
       "n": 92,
       "supported": 0,
-      "reversed": 16,
+      "reversed": 15,
       "pct_supported": 0.0,
-      "pct_reversed": 17.4
+      "pct_reversed": 16.3
     },
     "bh_corpus_q05": {
       "n": 92,
       "supported": 0,
-      "reversed": 29,
+      "reversed": 27,
       "pct_supported": 0.0,
-      "pct_reversed": 31.5
+      "pct_reversed": 29.3
     }
   },
   "ECE": {
@@ -61,8 +61,8 @@
   },
   "summary": {
     "accuracy_supported_zero_under_all_procedures": true,
-    "accuracy_reversed_pct_min": 0.0,
+    "accuracy_reversed_pct_min": 13.0,
     "accuracy_reversed_pct_max": 41.3,
-    "note": "SUPPORTED=0 is invariant to the correction procedure and is the robust claim. The REVERSED rate is procedure-dependent: the pre-registered corpus-wide Holm (per arm) yields 0, within-table Holm 16, per-arm BH 29, and the raw per-cell CI 38. The paper reports the BH figure and states this dependence explicitly."
+    "note": "SUPPORTED=0 is invariant to the correction procedure and is the robust claim. The REVERSED rate is procedure-dependent: the pre-registered corpus-wide Holm (per arm) yields 12, within-table Holm 15, per-arm BH 27, and the raw per-cell CI 38. The paper reports the BH figure and states this dependence explicitly."
   }
 }

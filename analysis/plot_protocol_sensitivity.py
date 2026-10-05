@@ -4,7 +4,7 @@ evaluation protocol.
 
 Panel A (same denominator): on the 48 pools that carry both baselines, the
 share of cells adjudicated SUPPORTED and REVERSED against the weak baseline
-(best_of_n) and the compute-matched one (n_rank), per family. Every pair of
+(best_of_n) and the better-resourced n_rank single, per family. Every pair of
 bars compares the same pools, so the drop is the baseline and nothing else.
 An earlier version chained stages with different denominators.
 
@@ -62,7 +62,7 @@ def main() -> int:
     weak = [g[1] for g in groups]
     strong = [g[2] for g in groups]
     axA.bar(x - w / 2, weak, w, color=C_WEAK, label="vs best-of-N (weak)")
-    axA.bar(x + w / 2, strong, w, color=C_STRONG, label="vs N×rank (compute-matched)")
+    axA.bar(x + w / 2, strong, w, color=C_STRONG, label="vs n_rank (stronger single)")
     for xi, a_, b_ in zip(x, weak, strong):
         axA.text(xi - w / 2, a_ + 0.8, f"{a_:.1f}", ha="center", fontsize=8.5, color="#333333")
         axA.text(xi + w / 2, b_ + 0.8, f"{b_:.1f}", ha="center", fontsize=8.5, color="#333333")
@@ -92,7 +92,7 @@ def main() -> int:
     axB.axvline(d.mean(), color="#1565C0", lw=1.2, ls="--")
     axB.text(d.mean() - 0.25, len(d) * 0.55, f"mean {d.mean():+.2f}pp",
              color="#1565C0", fontsize=9, ha="right")
-    axB.set_xlabel("Δ accuracy vs compute-matched single (pp)", fontsize=10)
+    axB.set_xlabel("Δ accuracy vs the n_rank single (pp)", fontsize=10)
     axB.set_ylabel("cells (sorted)", fontsize=10)
     n_rev = sum(1 for v in verd if v == "reversed")
     axB.set_title(f"B  Strict encoder comparison: 0/{len(d)} SUPPORTED, "

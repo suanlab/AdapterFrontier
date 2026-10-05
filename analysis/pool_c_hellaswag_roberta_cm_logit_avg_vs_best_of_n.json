@@ -27,7 +27,7 @@
   "stats_backend": "compute_match.local",
   "n_boot": 5000,
   "seed": 0,
-  "adjudication": "reversed",
+  "adjudication": "excluded",
   "provenance": {
     "schema_version": 1,
     "timestamp_utc": "2026-05-14T10:14:54.001987+00:00",
@@ -44,14 +44,10 @@
     "numpy_version": "2.2.6",
     "cuda_visible_devices": null
   },
-  "bh_q_value": 0.0008322697142050502,
-  "bh_pass": true,
   "bh_q_threshold": 0.05,
-  "bh_batch_size": 566,
-  "bh_batch_hash": "70a99a18ac0d8df8",
   "holm_adjusted_p_batch": 0.10278972102789721,
   "adjudication_pre_fdr": "reversed",
-  "adjudication_post_fdr": "reversed",
+  "adjudication_post_fdr": "excluded",
   "bh_fdr_note": "Corpus-wide BH-FDR applied by scripts/apply_corpus_bh_fdr.py (Audit response, Blocker 2 fix). bh_batch_hash pins the cell set used in the correction.",
   "legacy_mixed_batch": {
     "bh_q_value": 0.0006784800067848001,
@@ -64,5 +60,18 @@
     "adjudication": "reversed"
   },
   "bh_arm": "accuracy",
-  "p_for_bh": 9.999000099990002e-05
+  "p_for_bh": 4.875716130236654e-128,
+  "legacy_per_arm_mc": {
+    "p_for_bh": 9.999000099990002e-05,
+    "bh_q_value": 0.0008322697142050502,
+    "bh_pass": true,
+    "bh_batch_size": 566,
+    "bh_batch_hash": "70a99a18ac0d8df8",
+    "adjudication_post_fdr": "reversed",
+    "adjudication": "reversed"
+  },
+  "sign_exact_p": 4.875716130236654e-128,
+  "n_ens_only_correct": 173,
+  "n_base_only_correct": 940,
+  "excluded_from_multiplicity": "hellaswag_evaluator_inconsistent"
 }

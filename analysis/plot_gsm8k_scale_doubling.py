@@ -75,7 +75,7 @@ for i, p in enumerate([pool_05b, pool_15b]):
              ha='center', va='bottom', fontsize=7)
 ax1.set_xticks(x); ax1.set_xticklabels(labels)
 ax1.set_ylabel('GSM8K exact-match'); ax1.set_ylim(0, 0.65)
-ax1.set_title('Accuracy: ensemble effect doubles with scale'); ax1.legend(fontsize=8, loc='upper left')
+ax1.set_title('Accuracy (GSM8K; selection on test, no claim)'); ax1.legend(fontsize=8, loc='upper left')
 
 best_eces = [pool_05b['best_ece'], pool_15b['best_ece']]
 ens_eces = [pool_05b['ens_ece'], pool_15b['ens_ece']]
@@ -88,7 +88,7 @@ for i, p in enumerate([pool_05b, pool_15b]):
              ha='center', va='bottom', fontsize=7)
 ax2.set_xticks(x); ax2.set_xticklabels(labels)
 ax2.set_ylabel('per-token logprob ECE (lower is better)'); ax2.set_ylim(0, 0.7)
-ax2.set_title('Calibration: ECE drop doubles with scale'); ax2.legend(fontsize=8, loc='upper right')
+ax2.set_title('Calibration (GSM8K; selection on test, no claim)'); ax2.legend(fontsize=8, loc='upper right')
 
 plt.tight_layout()
 out_pdf = Path('paper/figures/fig_gsm8k_scale_doubling.pdf')

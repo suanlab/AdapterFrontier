@@ -1,0 +1,54 @@
+{
+ "models": {
+  "BERT-base": {
+   "params_m": 110,
+   "n_pool": 6,
+   "n_base": 6,
+   "n_pool_trained": 6,
+   "n_base_trained": 6,
+   "pool_mean_acc": 0.7971897748434061,
+   "base_mean_acc": 0.8280429998307094,
+   "G_tt": 0.03085322498730325,
+   "D_pool_soft_vote": 0.008041306923988523,
+   "Delta_ensemble_vs_selected_baseline_exploratory": -0.024631792788217366
+  },
+  "Qwen-2.5-0.5B": {
+   "params_m": 494,
+   "n_pool": 6,
+   "n_base": 6,
+   "n_pool_trained": 6,
+   "n_base_trained": 6,
+   "pool_mean_acc": 0.8778567800914169,
+   "base_mean_acc": 0.8695192144912816,
+   "G_tt": -0.008337565600135322,
+   "D_pool_soft_vote": 0.007110208227526726,
+   "Delta_ensemble_vs_selected_baseline_exploratory": 0.011681056373793797
+  },
+  "Qwen-2.5-1.5B": {
+   "params_m": 1544,
+   "n_pool": 6,
+   "n_base": 6,
+   "n_pool_trained": 6,
+   "n_base_trained": 6,
+   "pool_mean_acc": 0.909725749111224,
+   "base_mean_acc": 0.9008379888268156,
+   "G_tt": -0.008887760284408297,
+   "D_pool_soft_vote": 0.007998984255967567,
+   "Delta_ensemble_vs_selected_baseline_exploratory": 0.014220416455053342
+  },
+  "Qwen-2.5-3B": {
+   "params_m": 3086,
+   "n_pool": 6,
+   "n_base": 6,
+   "n_pool_trained": 6,
+   "n_base_trained": 4,
+   "pool_mean_acc": 0.9139156932453022,
+   "base_mean_acc": 0.7866937531742001,
+   "G_tt": -0.1272219400711021,
+   "D_pool_soft_vote": 0.0076180802437785244,
+   "Delta_ensemble_vs_selected_baseline_exploratory": 0.019553072625698276
+  }
+ },
+ "completeness_problems": [],
+ "verdict": "PASS"
+}

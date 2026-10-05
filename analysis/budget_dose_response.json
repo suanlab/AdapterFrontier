@@ -173,8 +173,8 @@
    "mean_delta_pp": -1.2808783165599267,
    "n_cells": 4,
    "supported": 0,
-   "reversed": 4,
-   "unsupported": 0
+   "reversed": 2,
+   "unsupported": 2
   },
   {
    "pool_id": "pool_a_mnli_roberta_base",

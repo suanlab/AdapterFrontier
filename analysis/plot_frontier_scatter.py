@@ -72,10 +72,10 @@ def scatter(ax, pts, ylabel, title):
 
 scatter(ax1, pts_acc,
         r"$\Delta$ accuracy (ensemble $-$ baseline)",
-        "Frontier (accuracy arm): encoder LOPO $R^2{=}0.60$, decoder $R^2{<}0$")
+        "Accuracy arm vs disagreement (descriptive; features partly from test, L1c)")
 scatter(ax2, pts_ece,
         r"$\Delta$ ECE (positive $=$ lower ECE)",
-        "Frontier (calibration arm): both families improve with disagreement")
+        "Calibration arm vs disagreement (descriptive)")
 ax2.set_xlabel("pairwise prediction disagreement", fontsize=10)
 
 plt.tight_layout()

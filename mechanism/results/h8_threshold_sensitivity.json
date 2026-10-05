@@ -1,0 +1,109 @@
+{
+  "_note": "Post-hoc sensitivity of H8/H9 to the training-loss failure threshold (registered: 0.85).",
+  "by_threshold": {
+    "0.85": {
+      "BERT-base": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": 3.09,
+        "Delta": -2.46
+      },
+      "Qwen-2.5-0.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.83,
+        "Delta": 1.17
+      },
+      "Qwen-2.5-1.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.89,
+        "Delta": 1.42
+      },
+      "Qwen-2.5-3B": {
+        "n_pool": 6,
+        "n_base": 4,
+        "G_tt": -12.72,
+        "Delta": 1.96
+      }
+    },
+    "0.8": {
+      "BERT-base": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": 3.09,
+        "Delta": -2.46
+      },
+      "Qwen-2.5-0.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.83,
+        "Delta": 1.17
+      },
+      "Qwen-2.5-1.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.89,
+        "Delta": 1.42
+      },
+      "Qwen-2.5-3B": {
+        "n_pool": 6,
+        "n_base": 3,
+        "G_tt": -8.07,
+        "Delta": 1.96
+      }
+    },
+    "0.75": {
+      "BERT-base": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": 3.09,
+        "Delta": -2.46
+      },
+      "Qwen-2.5-0.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.83,
+        "Delta": 1.17
+      },
+      "Qwen-2.5-1.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.89,
+        "Delta": 1.42
+      },
+      "Qwen-2.5-3B": {
+        "n_pool": 6,
+        "n_base": 2,
+        "G_tt": -2.64,
+        "Delta": 1.96
+      }
+    },
+    "0.7": {
+      "BERT-base": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": 3.09,
+        "Delta": -2.46
+      },
+      "Qwen-2.5-0.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.83,
+        "Delta": 1.17
+      },
+      "Qwen-2.5-1.5B": {
+        "n_pool": 6,
+        "n_base": 6,
+        "G_tt": -0.89,
+        "Delta": 1.42
+      },
+      "Qwen-2.5-3B": {
+        "n_pool": 6,
+        "n_base": 2,
+        "G_tt": -2.64,
+        "Delta": 1.96
+      }
+    }
+  }
+}

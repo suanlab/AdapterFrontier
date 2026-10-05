@@ -1,0 +1,14 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B",
+  "task": "mnli",
+  "epochs": 2.0,
+  "head_seed": 21,
+  "lora_seed": 21,
+  "data_seed": 21,
+  "train_loss": 0.5260947296142578,
+  "train_loss_over_ln3": 0.47887205981653724,
+  "acc_full_validation": 0.8369842078451349,
+  "train_runtime_s": 1450.3,
+  "device": "NVIDIA RTX A6000",
+  "torch": "2.7.1+cu126"
+}

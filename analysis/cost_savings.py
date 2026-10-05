@@ -80,6 +80,8 @@ def load_groups() -> dict[tuple, dict]:
         if pool.startswith("baseline_"):          # self-comparison, not a pool
             continue
         d = json.loads(Path(f).read_text())
+        if d.get("excluded_from_multiplicity"):     # HellaSwag (L9), smoke test
+            continue
         metric = "ece" if m.group("ece") else "accuracy"
         diff = d.get("ece_diff") if metric == "ece" else d.get("accuracy_diff")
         if diff is None:

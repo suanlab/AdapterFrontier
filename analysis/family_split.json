@@ -5,9 +5,9 @@
   "acc_vs_n_rank": {
    "n": 92,
    "supported": 0,
-   "reversed": 29,
+   "reversed": 27,
    "pct_supported": 0.0,
-   "pct_reversed": 31.5
+   "pct_reversed": 29.3
   },
   "acc_vs_n_rank_pre_fdr": {
    "n": 92,
@@ -37,9 +37,9 @@
    "logit_avg": {
     "n": 23,
     "supported": 0,
-    "reversed": 7,
+    "reversed": 6,
     "pct_supported": 0.0,
-    "pct_reversed": 30.4
+    "pct_reversed": 26.1
    },
    "majority_vote": {
     "n": 23,
@@ -51,9 +51,9 @@
    "soft_vote": {
     "n": 23,
     "supported": 0,
-    "reversed": 7,
+    "reversed": 6,
     "pct_supported": 0.0,
-    "pct_reversed": 30.4
+    "pct_reversed": 26.1
    }
   },
   "ece_vs_n_rank": {
@@ -75,9 +75,9 @@
   "n_pools": 25,
   "acc_vs_n_rank": {
    "n": 100,
-   "supported": 14,
+   "supported": 13,
    "reversed": 0,
-   "pct_supported": 14.0,
+   "pct_supported": 13.0,
    "pct_reversed": 0.0
   },
   "acc_vs_n_rank_pre_fdr": {
@@ -97,14 +97,14 @@
   "pools_mean_delta_negative": 3,
   "pool_sign_test_p": 0.00016,
   "supported_cells_by_task": {
-   "mnli": 14
+   "mnli": 13
   },
   "acc_by_method": {
    "greedy_soup": {
     "n": 25,
-    "supported": 3,
+    "supported": 2,
     "reversed": 0,
-    "pct_supported": 12.0,
+    "pct_supported": 8.0,
     "pct_reversed": 0.0
    },
    "logit_avg": {
@@ -138,9 +138,9 @@
   },
   "acc_vs_best_of_n": {
    "n": 100,
-   "supported": 34,
+   "supported": 33,
    "reversed": 0,
-   "pct_supported": 34.0,
+   "pct_supported": 33.0,
    "pct_reversed": 0.0
   }
  }

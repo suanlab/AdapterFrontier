@@ -1,0 +1,18 @@
+{
+ "confirmatory": {
+  "spearman_rho_vs_D": -0.6334129396439427,
+  "p": 1.3526138045698159e-06,
+  "n_pools": 48,
+  "criterion": "<= -0.3",
+  "verdict": "PASS"
+ },
+ "first_criterion": "NOT TESTABLE as registered (\u00a79 deviation 1)",
+ "mean_rho_by_family": {
+  "encoder": 0.7087592409234832,
+  "decoder": 0.6991407908428977
+ },
+ "exploratory_majority_vote_median_abs_dev": 0.16945048930270157,
+ "exploratory_majority_vote_n_points": 134,
+ "exploratory_soft_vote_cached_median_abs_dev": 0.09501633986922714,
+ "exploratory_soft_vote_cached_n_points": 8
+}

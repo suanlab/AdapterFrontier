@@ -2,6 +2,12 @@
   "note": "Temperature fitted on the pre-registered val_combine split (reserved for combination hyperparameters and otherwise unused), evaluated on test. Six pools: the ones whose per-adapter logits cache was retained. These are best_of_n pools, not the headline n_rank slice, so direction transfers and magnitude does not.",
   "n_pools": 6,
   "n_bins": 15,
+  "without_anli": {
+    "n_pools": 5,
+    "mean_gain_vs_uncalibrated": 0.011041123287994581,
+    "mean_gain_vs_temp_scaled": 0.00038353400354886773,
+    "mean_gain_temp_both": 7.458066667326395e-05
+  },
   "ensemble_better_than": {
     "uncalibrated_single": {
       "pools": 4,
@@ -9,26 +15,35 @@
     },
     "temperature_scaled_single": {
       "pools": 2,
-      "mean_ece_gain": -0.03161039066950096
+      "mean_ece_gain": -0.03160622950291215
     },
     "temperature_scaled_both_arms": {
       "pools": 3,
-      "mean_ece_gain": 0.0020238422394506226
+      "mean_ece_gain": 0.0020290932367676494
     }
   },
-  "median_fitted_temperature": 1.31885790855394,
+  "median_fitted_temperature": 1.3189226728841286,
   "pools": [
     {
       "pool_id": "pool_a_agnews_roberta_base_local10",
       "n_adapters": 10,
       "n_test": 3040,
-      "T_single": 1.3356249460702294,
-      "T_ensemble": 1.3395756517551451,
+      "both_scaled_ece_gain_ci95": [
+        -0.00858388984036681,
+        0.004221838255854028
+      ],
+      "both_scaled_nll_gain": 0.005552814342081547,
+      "both_scaled_nll_gain_ci95": [
+        0.002651707432232797,
+        0.00851643185596913
+      ],
+      "T_single": 1.3357335205889256,
+      "T_ensemble": 1.3393401950329227,
       "ece": {
         "ensemble": 0.01958914148180107,
         "single": 0.01636008910442653,
-        "single_temp": 0.014772043259520282,
-        "ensemble_temp": 0.017499326463592695
+        "single_temp": 0.014779874094222724,
+        "ensemble_temp": 0.017481972590873134
       },
       "accuracy": {
         "ensemble": 0.9345394736842105,
@@ -37,23 +52,32 @@
       "mean_conf": {
         "ensemble": 0.9499090313911438,
         "single": 0.9485357999801636,
-        "single_temp": 0.9214096069335938
+        "single_temp": 0.9213999509811401
       },
       "gain_vs_uncalibrated": -0.0032290523773745375,
-      "gain_vs_temp_scaled": -0.004817098222280786,
-      "gain_temp_both": -0.0027272832040724122
+      "gain_vs_temp_scaled": -0.004809267387578345,
+      "gain_temp_both": -0.00270209849665041
     },
     {
       "pool_id": "pool_a_anli_roberta_base_local10",
       "n_adapters": 10,
       "n_test": 480,
-      "T_single": 4.025244006505005,
-      "T_ensemble": 3.8247706425214307,
+      "both_scaled_ece_gain_ci95": [
+        -0.03697706212600071,
+        0.05120502461989718
+      ],
+      "both_scaled_nll_gain": 0.00530149694532156,
+      "both_scaled_nll_gain_ci95": [
+        -0.0013300622638780623,
+        0.011485124542377887
+      ],
+      "T_single": 4.023269586230921,
+      "T_ensemble": 3.823956658974373,
       "ece": {
         "ensemble": 0.2613537530104319,
         "single": 0.2531964719295502,
-        "single_temp": 0.06977706750233968,
-        "ensemble_temp": 0.057984944184621176
+        "single_temp": 0.06979870597521463,
+        "ensemble_temp": 0.057997049887975057
       },
       "accuracy": {
         "ensemble": 0.3958333333333333,
@@ -62,23 +86,32 @@
       "mean_conf": {
         "ensemble": 0.6571871042251587,
         "single": 0.659612238407135,
-        "single_temp": 0.4313839077949524
+        "single_temp": 0.43143144249916077
       },
       "gain_vs_uncalibrated": -0.008157281080881706,
-      "gain_vs_temp_scaled": -0.1915766855080922,
-      "gain_temp_both": 0.011792123317718506
+      "gain_vs_temp_scaled": -0.19155504703521725,
+      "gain_temp_both": 0.011801656087239577
     },
     {
       "pool_id": "pool_a_boolq_roberta_base_local10",
       "n_adapters": 10,
       "n_test": 1308,
-      "T_single": 1.3020908710376509,
-      "T_ensemble": 0.9899551795873226,
+      "both_scaled_ece_gain_ci95": [
+        -0.020077751449306444,
+        0.023962285880010776
+      ],
+      "both_scaled_nll_gain": 0.01096536684781313,
+      "both_scaled_nll_gain_ci95": [
+        0.0022657209250610323,
+        0.01959181153215468
+      ],
+      "T_single": 1.3021118251793316,
+      "T_ensemble": 0.9896717398549196,
       "ece": {
         "ensemble": 0.025130278291323145,
         "single": 0.0489798576459972,
-        "single_temp": 0.027311394611994427,
-        "ensemble_temp": 0.025015945463734677
+        "single_temp": 0.02731129372156359,
+        "ensemble_temp": 0.025012701704232348
       },
       "accuracy": {
         "ensemble": 0.7752293577981652,
@@ -87,23 +120,32 @@
       "mean_conf": {
         "ensemble": 0.7756266593933105,
         "single": 0.8148958683013916,
-        "single_temp": 0.7748854160308838
+        "single_temp": 0.7748829126358032
       },
       "gain_vs_uncalibrated": 0.023849579354674057,
-      "gain_vs_temp_scaled": 0.0021811163206712815,
-      "gain_temp_both": 0.0022954491482597497
+      "gain_vs_temp_scaled": 0.0021810154302404454,
+      "gain_temp_both": 0.0022985920173312427
     },
     {
       "pool_id": "pool_a_qnli_roberta_base_local10",
       "n_adapters": 10,
       "n_test": 2186,
-      "T_single": 1.0522966860312182,
-      "T_ensemble": 1.014817045763027,
+      "both_scaled_ece_gain_ci95": [
+        -0.010803325282033156,
+        0.010168426826064565
+      ],
+      "both_scaled_nll_gain": 0.0021444871090352535,
+      "both_scaled_nll_gain_ci95": [
+        -0.0037645837292075157,
+        0.008201051596552133
+      ],
+      "T_single": 1.0522879616815457,
+      "T_ensemble": 1.0148192300352386,
       "ece": {
         "ensemble": 0.011998484141218025,
         "single": 0.014085161854996125,
-        "single_temp": 0.01161503516417082,
-        "ensemble_temp": 0.01184124722463322
+        "single_temp": 0.011615294523448545,
+        "ensemble_temp": 0.011841219249168653
       },
       "accuracy": {
         "ensemble": 0.9066788655077768,
@@ -112,23 +154,32 @@
       "mean_conf": {
         "ensemble": 0.9105098247528076,
         "single": 0.9135012030601501,
-        "single_temp": 0.9081138968467712
+        "single_temp": 0.9081147909164429
       },
       "gain_vs_uncalibrated": 0.0020866777137780994,
-      "gain_vs_temp_scaled": -0.00038344897704720507,
-      "gain_temp_both": -0.00022621206046239892
+      "gain_vs_temp_scaled": -0.00038318961776948046,
+      "gain_temp_both": -0.00022592472572010788
     },
     {
       "pool_id": "pool_b_sst2_bert_local6",
       "n_adapters": 6,
       "n_test": 350,
-      "T_single": 1.8633915704326334,
-      "T_ensemble": 1.6169089542079171,
+      "both_scaled_ece_gain_ci95": [
+        -0.021882643290928417,
+        0.023239112385681687
+      ],
+      "both_scaled_nll_gain": 0.0041049811989068985,
+      "both_scaled_nll_gain_ci95": [
+        -0.007063612353522331,
+        0.015124792908318335
+      ],
+      "T_single": 1.8632920070207621,
+      "T_ensemble": 1.6167259161091767,
       "ece": {
         "ensemble": 0.03685511997767857,
         "single": 0.0511348295211792,
-        "single_temp": 0.04891888328960964,
-        "ensemble_temp": 0.043438070842197966
+        "single_temp": 0.048915263073784965,
+        "ensemble_temp": 0.04343062571116856
       },
       "accuracy": {
         "ensemble": 0.9142857142857143,
@@ -137,23 +188,32 @@
       "mean_conf": {
         "ensemble": 0.9446671009063721,
         "single": 0.9626789093017578,
-        "single_temp": 0.9059819579124451
+        "single_temp": 0.9059891104698181
       },
       "gain_vs_uncalibrated": 0.014279709543500628,
-      "gain_vs_temp_scaled": 0.01206376331193107,
-      "gain_temp_both": 0.005480812447411672
+      "gain_vs_temp_scaled": 0.012060143096106396,
+      "gain_temp_both": 0.005484637362616403
     },
     {
       "pool_id": "pool_c_mnli_roberta_base_method_mixed_local8",
       "n_adapters": 8,
       "n_test": 3926,
-      "T_single": 1.2630598318984172,
-      "T_ensemble": 1.044199197979569,
+      "both_scaled_ece_gain_ci95": [
+        -0.012393244458775217,
+        0.007456838598041217
+      ],
+      "both_scaled_nll_gain": 0.012962518259882927,
+      "both_scaled_nll_gain_ci95": [
+        0.0071777916513383385,
+        0.0192911451216787
+      ],
+      "T_single": 1.2628618842213102,
+      "T_ensemble": 1.043992244632836,
       "ece": {
         "ensemble": 0.024718726889794405,
         "single": 0.04293742909518906,
-        "single_temp": 0.01758873594760653,
-        "ensemble_temp": 0.02206057215975791
+        "single_temp": 0.017587695386539728,
+        "ensemble_temp": 0.022069998210750535
       },
       "accuracy": {
         "ensemble": 0.8441161487519103,
@@ -162,11 +222,11 @@
       "mean_conf": {
         "ensemble": 0.851689875125885,
         "single": 0.8763556480407715,
-        "single_temp": 0.8374691605567932
+        "single_temp": 0.8374985456466675
       },
       "gain_vs_uncalibrated": 0.018218702205394652,
-      "gain_vs_temp_scaled": -0.007129990942187876,
-      "gain_temp_both": -0.00447183621215138
+      "gain_vs_temp_scaled": -0.007131031503254677,
+      "gain_temp_both": -0.004482302824210808
     }
   ]
 }

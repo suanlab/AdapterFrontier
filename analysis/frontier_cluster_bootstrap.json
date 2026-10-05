@@ -1,0 +1,14 @@
+{
+  "slice": "accuracy vs n_rank",
+  "n_cells": 192,
+  "n_pools": 48,
+  "n_model_task_groups": 25,
+  "r2_lopo": 0.5974126687028668,
+  "r2_lopo_ci95_cluster_bootstrap": [
+    -0.42495879890269744,
+    0.7500894156964676
+  ],
+  "bootstrap_draws_used": 1000,
+  "r2_leave_one_model_task_out": 0.5933855679701775,
+  "_note": "The script that wrote analysis/frontier_r2_cis.json was not preserved, and the\npaper described its resampling three different ways. This one is explicit:"
+}

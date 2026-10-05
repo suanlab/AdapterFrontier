@@ -1,0 +1,342 @@
+{
+ "exploratory": true,
+ "rows": [
+  {
+   "pool": "pool_a_agnews_bert_base",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.005684017027863697,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_agnews_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.004041027046783663,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_agnews_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": -0.000409974845201333,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_agnews_qwen25_15b",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": -0.0008739680082558987,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_agnews_tinyllama_11b",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": -0.0007970647773279937,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_anli_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.026515151515151547,
+   "pool_failed": 9
+  },
+  {
+   "pool": "pool_a_anli_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.009062499999999918,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_anli_qwen25_15b",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": 0.0030943627450977784,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_anli_roberta_base",
+   "fam": "encoder",
+   "size": 125,
+   "G_tt": 0.010061274509803875,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_anli_tinyllama_11b",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": -0.005009920634920673,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_bert",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.023509933774834346,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.015011037527593696,
+   "pool_failed": 2
+  },
+  {
+   "pool": "pool_a_mnli_pythia_14b",
+   "fam": "decoder",
+   "size": 1400,
+   "G_tt": -0.006974261941149584,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": -0.003135640936268169,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_qwen25_15b",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": -0.0034131431482424812,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_qwen25_3b",
+   "fam": "decoder",
+   "size": 3090,
+   "G_tt": -0.017136469123223974,
+   "pool_failed": 3
+  },
+  {
+   "pool": "pool_a_mnli_roberta_base",
+   "fam": "encoder",
+   "size": 125,
+   "G_tt": 0.014633214467651756,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_smollm2_17b",
+   "fam": "decoder",
+   "size": 1710,
+   "G_tt": -0.002248744632850741,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_mnli_tinyllama_11b",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": -0.006063532823294415,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_qnli_bert_base",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.010232973945906387,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_qnli_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.008806038426349527,
+   "pool_failed": 1
+  },
+  {
+   "pool": "pool_a_qnli_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.0008207308540982838,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_qnli_qwen25_15b",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": -0.011972018908203763,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_qnli_tinyllama_11b",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": -0.0028527498221002645,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_a_sst2_bert",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.0,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_agnews_bert_base",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.011119286703601183,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_agnews_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.0010661419172931508,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_anli_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.04672619047619048,
+   "pool_failed": 9
+  },
+  {
+   "pool": "pool_b_anli_roberta_base",
+   "fam": "encoder",
+   "size": 125,
+   "G_tt": 0.011606413398692839,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_mnli_bert",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.04480811682798447,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_mnli_bert_large",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.021839749654318896,
+   "pool_failed": 3
+  },
+  {
+   "pool": "pool_b_mnli_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.0041236560581280335,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_mnli_qwen25_15b",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": 0.002317210499503952,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_mnli_roberta_base",
+   "fam": "encoder",
+   "size": 125,
+   "G_tt": 0.01845177449482105,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_mnli_tinyllama_11b",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": 0.0007334569079796571,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_qnli_bert_base",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.01744889060100685,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_qnli_qwen25_05b",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.008800019261327896,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_b_sst2_bert",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": -0.004452380952380874,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_agnews_bert_base_method_mixed",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.004457236842105083,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_agnews_qwen25_05b_method_mixed",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": 0.0005492246240602627,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_mnli_bert_large_method_mixed",
+   "fam": "encoder",
+   "size": 340,
+   "G_tt": 0.01064696892511452,
+   "pool_failed": 10
+  },
+  {
+   "pool": "pool_c_mnli_bert_method_mixed",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.017995415180845575,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_mnli_qwen25_05b_method_mixed",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": -0.0030592272836955647,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_mnli_qwen25_15b_method_mixed",
+   "fam": "decoder",
+   "size": 1540,
+   "G_tt": -0.0027508914926135386,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_mnli_roberta_base_method_mixed",
+   "fam": "encoder",
+   "size": 125,
+   "G_tt": 0.006571574121242985,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_mnli_tinyllama_11b_method_mixed",
+   "fam": "decoder",
+   "size": 1100,
+   "G_tt": -0.004045428665607864,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_qnli_bert_base_method_mixed",
+   "fam": "encoder",
+   "size": 110,
+   "G_tt": 0.007622780737790658,
+   "pool_failed": 0
+  },
+  {
+   "pool": "pool_c_qnli_qwen25_05b_method_mixed",
+   "fam": "decoder",
+   "size": 494,
+   "G_tt": -0.0007938216457672453,
+   "pool_failed": 0
+  }
+ ],
+ "skipped": []
+}

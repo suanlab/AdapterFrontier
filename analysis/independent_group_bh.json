@@ -3,23 +3,23 @@
   "representative": "soft_vote",
   "arms": {
     "accuracy": {
-      "n_groups": 139,
-      "bh_cutoff_p": 0.0168983101689831,
-      "supported": 27,
-      "reversed": 20
+      "n_groups": 129,
+      "bh_cutoff_p": 0.014343276565379584,
+      "supported": 25,
+      "reversed": 14
     },
     "ece": {
-      "n_groups": 113,
+      "n_groups": 103,
       "bh_cutoff_p": 0.0356,
-      "supported": 78,
-      "reversed": 6
+      "supported": 73,
+      "reversed": 4
     }
   },
   "total": {
-    "n": 252,
-    "supported": 105,
-    "reversed": 26,
-    "pct_supported": 41.7,
-    "pct_reversed": 10.3
+    "n": 232,
+    "supported": 98,
+    "reversed": 18,
+    "pct_supported": 42.2,
+    "pct_reversed": 7.8
   }
 }

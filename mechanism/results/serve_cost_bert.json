@@ -1,0 +1,65 @@
+{
+  "model": "bert-base-uncased",
+  "gpu": "NVIDIA RTX A6000",
+  "batch": 32,
+  "timed_batches": 50,
+  "rows": {
+    "single_unmerged": {
+      "p50_ms": 18.3755129983183,
+      "p95_ms": 28.623473082552657,
+      "throughput_qps": 1741.4479804144023,
+      "peak_mem_mb": 266.33642578125,
+      "latency_x_vs_merged_single": 1.516771186338905
+    },
+    "single_merged": {
+      "p50_ms": 12.114887969801202,
+      "p95_ms": 13.836268155137075,
+      "throughput_qps": 2641.378119200643,
+      "peak_mem_mb": 262.42529296875,
+      "latency_x_vs_merged_single": 1.0
+    },
+    "ensemble_N2": {
+      "p50_ms": 53.621929488144815,
+      "p95_ms": 64.65484504878987,
+      "throughput_qps": 596.7707672114789,
+      "peak_mem_mb": 271.21484375,
+      "latency_x_vs_merged_single": 4.426118476853296
+    },
+    "ensemble_N2_batched": {
+      "p50_ms": 61.54725651140325,
+      "p95_ms": 66.60554753325414,
+      "throughput_qps": 519.9256930984594,
+      "peak_mem_mb": 307.2890625,
+      "latency_x_vs_merged_single": 5.080299270189058
+    },
+    "ensemble_N4": {
+      "p50_ms": 107.81929749646224,
+      "p95_ms": 149.9052375904284,
+      "throughput_qps": 296.7928816365176,
+      "peak_mem_mb": 271.21484375,
+      "latency_x_vs_merged_single": 8.899735413585628
+    },
+    "ensemble_N4_batched": {
+      "p50_ms": 103.59549752320163,
+      "p95_ms": 128.24116440606304,
+      "throughput_qps": 308.89373346397764,
+      "peak_mem_mb": 378.4931640625,
+      "latency_x_vs_merged_single": 8.551090012671539
+    },
+    "ensemble_N8": {
+      "p50_ms": 223.77608448732644,
+      "p95_ms": 313.2147783733671,
+      "throughput_qps": 143.00008901001357,
+      "peak_mem_mb": 271.21484375,
+      "latency_x_vs_merged_single": 18.471164161413082
+    },
+    "ensemble_N8_batched": {
+      "p50_ms": 172.27420545532368,
+      "p95_ms": 198.61423028924034,
+      "throughput_qps": 185.75038506445844,
+      "peak_mem_mb": 522.0888671875,
+      "latency_x_vs_merged_single": 14.220041149761503
+    }
+  },
+  "_note": "The paper prices ensembles in adapter forward passes per query and says their\nwall-clock cost was never measured (L8). This script measures it for the A3\nSNLI pools. One fixed batch of validation queries goes through\n  - the single adapter, merged into the base weights (no adapter overhead),\n  - the single adapter, unmerged,\n  - an ensemble of N members, N in {2, 4, 8}: each member's forward pass on\n    the same batch, then probability averaging,\non one GPU, in bf16, with batch size 32 and max length 128. It reports the\nmedian and p95 latency per batch, the throughput and the peak GPU memory."
+}

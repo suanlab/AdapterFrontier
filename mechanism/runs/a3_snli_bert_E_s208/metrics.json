@@ -1,0 +1,26 @@
+{
+  "model": "bert-base-uncased",
+  "task": "snli",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "epochs_scheduled": 2.0,
+  "batch_size": 32,
+  "seed": 208,
+  "train_rows": 20000,
+  "train_loss_mean": 0.7061733123779297,
+  "gpu": "NVIDIA RTX A6000",
+  "checkpoints": [
+    {
+      "epoch": 2,
+      "global_step": 1250,
+      "train_seconds": 126.3,
+      "eval_seconds": 20.7,
+      "train_tokens": 1054480,
+      "train_loss_recent": 0.5815147972106933,
+      "failed": false
+    }
+  ],
+  "acc_full_validation": {
+    "2": 0.7965860597439545
+  }
+}

@@ -1,0 +1,6 @@
+a3b_yahoo_q05_c1_s301 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 16 301
+a3b_yahoo_q05_c2_s302 yahoo Qwen/Qwen2.5-0.5B 8 3e-4 16 302
+a3b_yahoo_q05_c3_s303 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 16 303
+a3b_yahoo_q05_c1_s311 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 16 311
+a3b_yahoo_q05_c2_s312 yahoo Qwen/Qwen2.5-0.5B 8 3e-4 16 312
+a3b_yahoo_q05_c3_s313 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 16 313

@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B",
+  "task": "snli",
+  "recipe": "pool",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "epochs": 2.0,
+  "batch_size": 8,
+  "seed": 31,
+  "train_rows": 20000,
+  "train_loss": 0.42409608211517336,
+  "train_loss_over_ln3": 0.3860288897999872,
+  "acc_full_validation": 0.9112985165616745,
+  "train_runtime_s": 892.5
+}

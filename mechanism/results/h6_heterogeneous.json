@@ -1,0 +1,31 @@
+{
+ "repeats": 200,
+ "tasks": {
+  "mnli": {
+   "weighted_kclass": 0.8810264900662252,
+   "weighted_binary_registered": 0.8846001018848701,
+   "unweighted": 0.8791772796739683,
+   "best_single": 0.8936780438104942,
+   "n_backbones": 10,
+   "frac_repeats_weighted_ge_best": 0.01
+  },
+  "qnli": {
+   "weighted_kclass": 0.9365187557182069,
+   "weighted_binary_registered": 0.9365187557182069,
+   "unweighted": 0.9256267154620312,
+   "best_single": 0.9482479414455625,
+   "n_backbones": 6,
+   "frac_repeats_weighted_ge_best": 0.04
+  },
+  "agnews": {
+   "weighted_kclass": 0.9448322368421053,
+   "weighted_binary_registered": 0.9448322368421053,
+   "unweighted": 0.9448980263157896,
+   "best_single": 0.9463388157894737,
+   "n_backbones": 6,
+   "frac_repeats_weighted_ge_best": 0.355
+  }
+ },
+ "tasks_weighted_ge_best": "0/3",
+ "verdict": "FALSIFIED"
+}

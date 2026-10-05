@@ -1,0 +1,36 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B",
+  "task": "snli",
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "epochs_scheduled": 4.0,
+  "batch_size": 16,
+  "seed": 253,
+  "train_rows": 20000,
+  "train_loss_mean": 0.37885884819030763,
+  "gpu": "NVIDIA RTX A6000",
+  "checkpoints": [
+    {
+      "epoch": 2,
+      "global_step": 2500,
+      "train_seconds": 466.7,
+      "eval_seconds": 47.8,
+      "train_tokens": 933072,
+      "train_loss_recent": 0.3607686424255371,
+      "failed": false
+    },
+    {
+      "epoch": 4,
+      "global_step": 5000,
+      "train_seconds": 939.4,
+      "eval_seconds": 41.4,
+      "train_tokens": 1866144,
+      "train_loss_recent": 0.10794845581054686,
+      "failed": false
+    }
+  ],
+  "acc_full_validation": {
+    "2": 0.8693355009144483,
+    "4": 0.8733997155049786
+  }
+}

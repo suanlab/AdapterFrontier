@@ -1,0 +1,26 @@
+{
+ "n_items_test": 647,
+ "entropy_cuts": [
+  0.9795764322,
+  1.1715080132
+ ],
+ "groups": {
+  "decoder_supported": {
+   "n_pools": 8,
+   "D_by_tercile_low_mid_high": [
+    0.017115917028707732,
+    0.014178520078052792,
+    0.01564138269986894
+   ]
+  },
+  "encoder_mnli_exploratory": {
+   "n_pools": 9,
+   "D_by_tercile_low_mid_high": [
+    0.04529402552658367,
+    0.0416446395418358,
+    0.020818660612238592
+   ]
+  }
+ },
+ "verdict": "FALSIFIED"
+}

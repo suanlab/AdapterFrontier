@@ -1,0 +1,1325 @@
+{
+  "_note": "EXPLORATORY dev_test run of the confirmatory pipeline",
+  "git_sha": "c134aa804aced9ba19f5e9a73a18becf46547ecc",
+  "eval_split": "dev_test",
+  "cells": {
+    "snli/bert/B4": {
+      "delta_acc": {
+        "mean": -0.0340274250888776,
+        "ci95": [
+          -0.041645505332656166,
+          -0.026409344845099034
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.0340274250888776,
+        "ci95": [
+          -0.04189944134078212,
+          -0.02653631284916201
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.06458097527123188,
+        "ci95": [
+          0.053080652797010554,
+          0.07634438690075655
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.04384258465846503,
+        "ci95": [
+          0.029771788121032643,
+          0.05828883492048244
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.026932854084451813,
+        "ci95": [
+          0.019509219701935906,
+          0.03436902819125723
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202
+          ],
+          "seeds_S": [
+            251
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            202
+          ],
+          "T_S": 1.2916452939604433,
+          "T_E": 0.9850588129411049,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "prob_margin_ts",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8057389537836466,
+          "acc_S": 0.8412899949212799,
+          "acc_E_greedy": 0.8057389537836466,
+          "nll_E_ts": 0.5006449017176813,
+          "nll_S_ts": 0.44481931201845826
+        },
+        {
+          "seeds_E": [
+            211,
+            212
+          ],
+          "seeds_S": [
+            261
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            211,
+            212
+          ],
+          "T_S": 1.331125319578382,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "logit_margin",
+          "conf_E": "msp_ts",
+          "acc_E": 0.803453529710513,
+          "acc_S": 0.8359573387506348,
+          "acc_E_greedy": 0.803453529710513,
+          "nll_E_ts": 0.5117366838073373,
+          "nll_S_ts": 0.4384003229640965
+        }
+      ],
+      "predicted": false,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "snli/bert/B8": {
+      "delta_acc": {
+        "mean": -0.027805992889791773,
+        "ci95": [
+          -0.03580497714575927,
+          -0.019807008633824275
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.03237684103605891,
+        "ci95": [
+          -0.04063293550025394,
+          -0.024247714575926914
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.05696672626354617,
+        "ci95": [
+          0.04484180083259851,
+          0.0693258670554508
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.03162044007191051,
+        "ci95": [
+          0.015296230117788513,
+          0.047773187383429234
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.022641167418788966,
+        "ci95": [
+          0.015026766790208736,
+          0.030506433833720457
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204
+          ],
+          "seeds_S": [
+            251,
+            252
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            202,
+            203
+          ],
+          "T_S": 1.2916452939604433,
+          "T_E": 0.9558428205787866,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "prob_margin_ts",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8131030980192991,
+          "acc_S": 0.8412899949212799,
+          "acc_E_greedy": 0.8115794819705434,
+          "nll_E_ts": 0.5032919247601736,
+          "nll_S_ts": 0.44481931201845826
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214
+          ],
+          "seeds_S": [
+            261,
+            262
+          ],
+          "selected_S_seed": 262,
+          "greedy_members": [
+            213,
+            212
+          ],
+          "T_S": 1.331125319578382,
+          "T_E": 0.9850588129411049,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8047232097511428,
+          "acc_S": 0.8321482986287455,
+          "acc_E_greedy": 0.7971051295073641,
+          "nll_E_ts": 0.5067744515579673,
+          "nll_S_ts": 0.45131361177259016
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "snli/bert/B16": {
+      "delta_acc": {
+        "mean": -0.03288471305231082,
+        "ci95": [
+          -0.04101383951244287,
+          -0.025012696800406298
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.031868969019807014,
+        "ci95": [
+          -0.039867953275774505,
+          -0.023743016759776536
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.060863870552959096,
+        "ci95": [
+          0.04865376741681652,
+          0.07361737608830905
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.04264787717905156,
+        "ci95": [
+          0.02737790614076245,
+          0.05686719516129388
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.027486839801840038,
+        "ci95": [
+          0.01932448956478803,
+          0.035745133498917316
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "seeds_S": [
+            251,
+            252,
+            253,
+            254
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            202,
+            208
+          ],
+          "T_S": 1.2916452939604433,
+          "T_E": 0.9558428205787866,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "prob_margin_ts",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8090401218892839,
+          "acc_S": 0.8412899949212799,
+          "acc_E_greedy": 0.8090401218892839,
+          "nll_E_ts": 0.5064466131346853,
+          "nll_S_ts": 0.44481931201845826
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218
+          ],
+          "seeds_S": [
+            261,
+            262,
+            263,
+            264
+          ],
+          "selected_S_seed": 264,
+          "greedy_members": [
+            213,
+            215,
+            214,
+            217,
+            211
+          ],
+          "T_S": 1.2533362117539693,
+          "T_E": 0.9558428205787866,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8062468257998985,
+          "acc_S": 0.8397663788725241,
+          "acc_E_greedy": 0.808278313864906,
+          "nll_E_ts": 0.5004429546176749,
+          "nll_S_ts": 0.4403425146279837
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "snli/q05/B4": {
+      "delta_acc": {
+        "mean": 0.014220416455053328,
+        "ci95": [
+          0.007745048247841544,
+          0.02069578466226511
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": 0.014220416455053328,
+        "ci95": [
+          0.00787201625190452,
+          0.02069578466226511
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": -0.06574207366285736,
+        "ci95": [
+          -0.07893018791779408,
+          -0.05295487674191427
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": -0.38815512191515467,
+        "ci95": [
+          -0.4326270711111552,
+          -0.34265559256087746
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": -0.01396863156702604,
+        "ci95": [
+          -0.01983422207534903,
+          -0.008222679552670505
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202
+          ],
+          "seeds_S": [
+            251
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            202
+          ],
+          "T_S": 2.911967887486568,
+          "T_E": 1.0461971136577408,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "logit_margin",
+          "acc_E": 0.8798882681564246,
+          "acc_S": 0.8679532757745049,
+          "acc_E_greedy": 0.8798882681564246,
+          "nll_E_ts": 0.3271029765121955,
+          "nll_S_ts": 0.38653562064220365
+        },
+        {
+          "seeds_E": [
+            211,
+            212
+          ],
+          "seeds_S": [
+            261
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            211,
+            212
+          ],
+          "T_S": 2.7417965440005405,
+          "T_E": 1.0781748470507644,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8821736922295581,
+          "acc_S": 0.8656678517013713,
+          "acc_E_greedy": 0.8821736922295581,
+          "nll_E_ts": 0.3260510454156793,
+          "nll_S_ts": 0.3981025486113859
+        }
+      ],
+      "predicted": false,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "snli/q05/B8": {
+      "delta_acc": {
+        "mean": 0.014220416455053328,
+        "ci95": [
+          0.007491112239715592,
+          0.020822752666328086
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": 0.014855256475368207,
+        "ci95": [
+          0.008125952260030472,
+          0.021711528694768917
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": -0.06910421142397866,
+        "ci95": [
+          -0.08161900162371923,
+          -0.056606431359269425
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": -0.39181266570656426,
+        "ci95": [
+          -0.4360295345752708,
+          -0.3476101971491247
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": -0.016331832956151468,
+        "ci95": [
+          -0.02221341075401316,
+          -0.010270511562470334
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204
+          ],
+          "seeds_S": [
+            251,
+            252
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            203
+          ],
+          "T_S": 2.911967887486568,
+          "T_E": 1.0461971136577408,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp",
+          "acc_E": 0.8809040121889284,
+          "acc_S": 0.8679532757745049,
+          "acc_E_greedy": 0.8831894362620619,
+          "nll_E_ts": 0.3224050666312536,
+          "nll_S_ts": 0.38653562064220365
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214
+          ],
+          "seeds_S": [
+            261,
+            262
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            211,
+            213
+          ],
+          "T_S": 2.7417965440005405,
+          "T_E": 1.0781748470507644,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp",
+          "acc_E": 0.8811579481970544,
+          "acc_S": 0.8656678517013713,
+          "acc_E_greedy": 0.8801422041645506,
+          "nll_E_ts": 0.3240246797743786,
+          "nll_S_ts": 0.3981025486113859
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "snli/q05/B16": {
+      "delta_acc": {
+        "mean": 0.015617064499746064,
+        "ci95": [
+          0.009014728288471306,
+          0.0223463687150838
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": 0.015490096495683087,
+        "ci95": [
+          0.009141696292534283,
+          0.022346368715083796
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": -0.06768118753091229,
+        "ci95": [
+          -0.0802584373446242,
+          -0.05520395815945889
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": -0.3531012101060687,
+        "ci95": [
+          -0.3931771717334537,
+          -0.31188983592144076
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": -0.01722883495361756,
+        "ci95": [
+          -0.023706116969728044,
+          -0.01082309975097142
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "seeds_S": [
+            251,
+            252,
+            253,
+            254
+          ],
+          "selected_S_seed": 253,
+          "greedy_members": [
+            201,
+            207,
+            203,
+            208,
+            202
+          ],
+          "T_S": 2.5815697765753556,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp",
+          "acc_E": 0.8844591163026917,
+          "acc_S": 0.8715083798882681,
+          "acc_E_greedy": 0.8847130523108176,
+          "nll_E_ts": 0.31962909601969974,
+          "nll_S_ts": 0.3773915744148126
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218
+          ],
+          "seeds_S": [
+            261,
+            262,
+            263,
+            264
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            217,
+            216,
+            215
+          ],
+          "T_S": 2.7417965440005405,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.8839512442864398,
+          "acc_S": 0.8656678517013713,
+          "acc_E_greedy": 0.8834433722701879,
+          "nll_E_ts": 0.32050265194467414,
+          "nll_S_ts": 0.3981025486113859
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/bert/B4": {
+      "delta_acc": {
+        "mean": -0.014875,
+        "ci95": [
+          -0.021875,
+          -0.007625
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.01675,
+        "ci95": [
+          -0.02425,
+          -0.009625
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.04680370017834673,
+        "ci95": [
+          0.03435411702407322,
+          0.05947214040467324
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.030870788228465035,
+        "ci95": [
+          0.0157197183508747,
+          0.04648823830846564
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.008356704928534325,
+        "ci95": [
+          0.0009988301339359886,
+          0.015735189549040206
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202
+          ],
+          "seeds_S": [
+            251
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            202
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp",
+          "acc_E": 0.723,
+          "acc_S": 0.74075,
+          "acc_E_greedy": 0.71925,
+          "nll_E_ts": 0.8867109487784938,
+          "nll_S_ts": 0.8401615626536226
+        },
+        {
+          "seeds_E": [
+            211,
+            212
+          ],
+          "seeds_S": [
+            261
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            212,
+            211
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp",
+          "acc_E": 0.72575,
+          "acc_S": 0.73775,
+          "acc_E_greedy": 0.72575,
+          "nll_E_ts": 0.8783203014101555,
+          "nll_S_ts": 0.8312622871783331
+        }
+      ],
+      "predicted": false,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/bert/B8": {
+      "delta_acc": {
+        "mean": -0.010375,
+        "ci95": [
+          -0.017625000000000002,
+          -0.003
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.0095,
+        "ci95": [
+          -0.0165,
+          -0.0025000000000000005
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.0334719446388725,
+        "ci95": [
+          0.021518737587049835,
+          0.045043053519119
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.017548369761878173,
+        "ci95": [
+          0.0024734632197698668,
+          0.032280874246309904
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.004973660994961215,
+        "ci95": [
+          -0.0022684375932562595,
+          0.012315600007621276
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204
+          ],
+          "seeds_S": [
+            251,
+            252
+          ],
+          "selected_S_seed": 252,
+          "greedy_members": [
+            202,
+            204,
+            201
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 0.9850588129411049,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp_ts",
+          "acc_E": 0.7245,
+          "acc_S": 0.73325,
+          "acc_E_greedy": 0.72625,
+          "nll_E_ts": 0.8717852490943453,
+          "nll_S_ts": 0.845004664141993
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214
+          ],
+          "seeds_S": [
+            261,
+            262
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            214,
+            211
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 1.0151678121779197,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp",
+          "acc_E": 0.72575,
+          "acc_S": 0.73775,
+          "acc_E_greedy": 0.72575,
+          "nll_E_ts": 0.8714255915037259,
+          "nll_S_ts": 0.8312622871783331
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/bert/B16": {
+      "delta_acc": {
+        "mean": -0.012375,
+        "ci95": [
+          -0.019625,
+          -0.005
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": -0.014,
+        "ci95": [
+          -0.021124999999999998,
+          -0.007
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": 0.030373095944055357,
+        "ci95": [
+          0.019298568369392026,
+          0.04141118371965236
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": 0.016874189021195744,
+        "ci95": [
+          0.002516238454234712,
+          0.031317934720929294
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": 0.014366786885802008,
+        "ci95": [
+          0.0073434459306391375,
+          0.021730024118678005
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208
+          ],
+          "seeds_S": [
+            251,
+            252,
+            253,
+            254
+          ],
+          "selected_S_seed": 254,
+          "greedy_members": [
+            205,
+            208,
+            207,
+            201
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 0.9850588129411049,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.7285,
+          "acc_S": 0.74,
+          "acc_E_greedy": 0.728,
+          "nll_E_ts": 0.861314890059117,
+          "nll_S_ts": 0.8327267853951948
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218
+          ],
+          "seeds_S": [
+            261,
+            262,
+            263,
+            264
+          ],
+          "selected_S_seed": 264,
+          "greedy_members": [
+            214,
+            211
+          ],
+          "T_S": 1.2161633437901858,
+          "T_E": 0.9850588129411049,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.7285,
+          "acc_S": 0.74175,
+          "acc_E_greedy": 0.72575,
+          "nll_E_ts": 0.8654029180419222,
+          "nll_S_ts": 0.8332448308177335
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/q05/B4": {
+      "delta_acc": {
+        "mean": 0.024625,
+        "ci95": [
+          0.016625,
+          0.0325
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": 0.024625,
+        "ci95": [
+          0.016871875,
+          0.032625
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": -0.09468335508048624,
+        "ci95": [
+          -0.10927951360674637,
+          -0.08002817892041553
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": -0.40668826771396904,
+        "ci95": [
+          -0.4443599976911543,
+          -0.3690766798848076
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": -0.02265820693216139,
+        "ci95": [
+          -0.030762374389921292,
+          -0.014597446989156153
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202
+          ],
+          "seeds_S": [
+            251
+          ],
+          "selected_S_seed": 251,
+          "greedy_members": [
+            201,
+            202
+          ],
+          "T_S": 2.2886593426961603,
+          "T_E": 1.0781748470507644,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp_ts",
+          "acc_E": 0.7455,
+          "acc_S": 0.723,
+          "acc_E_greedy": 0.7455,
+          "nll_E_ts": 0.7747815561211849,
+          "nll_S_ts": 0.8652655853822339
+        },
+        {
+          "seeds_E": [
+            211,
+            212
+          ],
+          "seeds_S": [
+            261
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            212,
+            211
+          ],
+          "T_S": 2.0289831537534364,
+          "T_E": 1.1111300018298784,
+          "failed_E": [
+            false,
+            false
+          ],
+          "failed_S": [
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp",
+          "acc_E": 0.74775,
+          "acc_S": 0.721,
+          "acc_E_greedy": 0.74775,
+          "nll_E_ts": 0.7731326142627759,
+          "nll_S_ts": 0.8720152951626994
+        }
+      ],
+      "predicted": false,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/q05/B8": {
+      "delta_acc": {
+        "mean": 0.027375,
+        "ci95": [
+          0.019375,
+          0.035500000000000004
+        ]
+      },
+      "delta_acc_greedy": {
+        "mean": 0.025,
+        "ci95": [
+          0.01725,
+          0.032875
+        ]
+      },
+      "dnll_calibrated": {
+        "mean": -0.10609939948532,
+        "ci95": [
+          -0.12063526626656781,
+          -0.0916512102517992
+        ]
+      },
+      "dnll_uncalibrated": {
+        "mean": -0.368872162532337,
+        "ci95": [
+          -0.40482452296294474,
+          -0.33539593865806094
+        ]
+      },
+      "risk90_EminusS": {
+        "mean": -0.022090874856125042,
+        "ci95": [
+          -0.030309016739725723,
+          -0.013659918821048781
+        ]
+      },
+      "replicates": [
+        {
+          "seeds_E": [
+            201,
+            202,
+            203,
+            204
+          ],
+          "seeds_S": [
+            251,
+            252
+          ],
+          "selected_S_seed": 252,
+          "greedy_members": [
+            203,
+            204,
+            201,
+            202
+          ],
+          "T_S": 1.9688052683880506,
+          "T_E": 1.0781748470507644,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp_ts",
+          "conf_E": "msp",
+          "acc_E": 0.7475,
+          "acc_S": 0.72475,
+          "acc_E_greedy": 0.7475,
+          "nll_E_ts": 0.7644427380928455,
+          "nll_S_ts": 0.8662044885813875
+        },
+        {
+          "seeds_E": [
+            211,
+            212,
+            213,
+            214
+          ],
+          "seeds_S": [
+            261,
+            262
+          ],
+          "selected_S_seed": 261,
+          "greedy_members": [
+            212,
+            214
+          ],
+          "T_S": 2.0289831537534364,
+          "T_E": 1.0781748470507644,
+          "failed_E": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "failed_S": [
+            false,
+            false
+          ],
+          "conf_S": "msp",
+          "conf_E": "msp_ts",
+          "acc_E": 0.753,
+          "acc_S": 0.721,
+          "acc_E_greedy": 0.74825,
+          "nll_E_ts": 0.7615782466806015,
+          "nll_S_ts": 0.8720152951626994
+        }
+      ],
+      "predicted": true,
+      "A3_adjudication": "SUPPORTED",
+      "B_adjudication": "SUPPORTED"
+    },
+    "yahoo/q05/B16": {
+      "status": "missing ./mechanism/runs/a3_yahoo_q05_S_s264"
+    }
+  },
+  "A3_P1": {
+    "cells": [
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED"
+    ],
+    "verdict": "incomplete"
+  },
+  "B_P1": {
+    "cells": [
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED",
+      "SUPPORTED"
+    ],
+    "verdict": "incomplete"
+  }
+}
