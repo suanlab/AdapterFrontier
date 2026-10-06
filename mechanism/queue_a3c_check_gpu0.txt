@@ -1,0 +1,2 @@
+a3c_check_bertl_r8_s901 snli bert-large-uncased 8 2 32 901
+a3c_check_bertl_r32_s901 snli bert-large-uncased 32 4 32 901

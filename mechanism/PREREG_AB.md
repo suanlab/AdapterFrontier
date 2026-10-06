@@ -313,3 +313,61 @@ Two statements above are imprecise. Neither changes a result.
 One A3b run (`a3b_yahoo_q05_c1_s301`) was killed by an unrelated job on the
 shared GPU at 19% of training. It was rerun with the same seed and
 configuration, and no partial output was used (`6cdf327`).
+
+### 9.4 A3c: family or size? Two size-matched backbones (2026-10-05)
+
+Written after §9.1–9.2 results were seen and before any A3c run. A3 and A3b
+compare BERT-base (110M, encoder) with Qwen2.5-0.5B (494M, decoder), so family
+and size move together. A3c adds a size-matched pair from opposite families:
+
+| tag | model | family | parameters | batch size |
+|---|---|---|---|---|
+| `bertl` | `bert-large-uncased` | encoder | 335M | 32 |
+| `smol` | `HuggingFaceTB/SmolLM2-360M` | decoder | 362M | 16 |
+
+**Protocol.** Exactly §9.1: tasks SNLI and Yahoo Answers, the same splits,
+E(B) = soft vote over B/2 rank-8 two-epoch adapters, S(B) = the
+`val_selection`-best of B/4 rank-32 four-epoch adapters, B in {4, 8, 16}
+nested within replicate, two replicates with the §9.1 seeds (201–208 and
+251–254; 211–218 and 261–264), and §5's temperature arms. That is 48 runs per
+backbone, 96 in all. Runs are named `a3_{task}_{tag}_{E|S}_s{seed}`.
+
+**Learning rate, fixed by a test-free check.** lr is 3e-4 as in §9.1,
+unless a backbone fails the check below, in which case it is 1e-4 for all of
+that backbone's runs. The check, run before any main run: one r = 8 two-epoch
+run and one r = 32 four-epoch run on SNLI per backbone, seed 901 (used
+nowhere else), judged by the training-loss rule (final loss >= 0.85 ln 3
+means failed). It reads no validation or test data. Its outcome is recorded
+in §9.5 before the main runs start.
+
+**Predictions** (from the family account; a size account predicts the two
+backbones behave alike):
+- A3-P3: at B in {8, 16}, on both tasks, Delta < 0 for `bertl` and
+  Delta > 0 for `smol`.
+- B-P3: the calibrated NLL difference has the same signs.
+
+Pass rules as in §9.1, 8 cells per prediction:
+- *Replicates* if none is REVERSED and at least 4 are SUPPORTED.
+- *Fails* if any is REVERSED.
+- Otherwise inconclusive.
+
+If A3-P3 fails because `smol` behaves like the encoders, the paper reports
+that the split tracks size rather than family.
+
+**Protection.** `mechanism/TEST_FREEZE` already exists, so the protection is
+ordering: this amendment and `a3c_analysis.py` are committed before any A3c
+run (check runs included).
+
+### 9.5 Outcome of the §9.4 learning-rate check (2026-10-06, before any main A3c run)
+
+All four check runs passed the training-loss rule (final loss < 0.85 ln 3 = 0.934):
+
+| run | final loss |
+|---|---|
+| BERT-large r8, 2 epochs | 0.479 |
+| BERT-large r32, 4 epochs | 0.312 |
+| SmolLM2-360M r8, 2 epochs | 0.340 |
+| SmolLM2-360M r32, 4 epochs | 0.210 |
+
+Both backbones therefore use lr 3e-4, as in §9.1. The check runs (seed 901)
+are not part of any comparison.

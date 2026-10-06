@@ -1,0 +1,2 @@
+a3c_check_smol_r8_s901 snli HuggingFaceTB/SmolLM2-360M 8 2 16 901
+a3c_check_smol_r32_s901 snli HuggingFaceTB/SmolLM2-360M 32 4 16 901

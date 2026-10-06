@@ -616,8 +616,9 @@ def main():
     oracle_ok = all(max(r["eval_acc_by_config"].values()) < r["acc_E"]
                     for k, c in a3b["cells"].items() if "/q05/" in k for r in c["replicates"])
     tally(check("no Qwen config reaches the ensemble even picked on test", oracle_ok, True))
+    sec5 = lambda n: n.startswith("a3b_") or any(n.startswith(f"a3_{t}_{b}_") for t in ("snli", "yahoo") for b in ("bert", "q05"))
     n_runs = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
-                 if d.name.startswith(("a2_", "a3_", "a3b_")) and (d / "metrics.json").exists())
+                 if (d.name.startswith("a2_") or sec5(d.name)) and (d / "metrics.json").exists())
     tally(check("released runs with test logits and adapters", n_runs, 132))
 
     picked = {}
@@ -628,8 +629,25 @@ def main():
     tally(check("test-picked Qwen single vs ensemble (SNLI)", picked["snli/q05/B16"], (87.3, 88.4), tol=0.06))
     tally(check("test-picked Qwen single vs ensemble (Yahoo)", picked["yahoo/q05/B16"], (73.8, 75.6), tol=0.06))
     runs_sec5 = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
-                    if d.name.startswith(("a3_", "a3b_")) and (d / "metrics.json").exists())
+                    if sec5(d.name) and (d / "metrics.json").exists())
     tally(check("runs of Sec. 5 (A3 + A3b)", runs_sec5, 120))
+
+    header("Family or size? A3c (Sec. a3)")
+    a3c = json.loads((ROOT / "mechanism/results/a3c_confirmatory.json").read_text())
+    tally(check("A3-P3 verdict", a3c["A3_P3"]["verdict"], "REPLICATES"))
+    tally(check("B-P3 verdict", a3c["B_P3"]["verdict"], "REPLICATES"))
+    tally(check("A3-P3 predicted cells (SUP, REV)", (a3c["A3_P3"]["cells"].count("SUPPORTED"), a3c["A3_P3"]["cells"].count("REVERSED")), (6, 0)))
+    tally(check("B-P3 predicted cells SUPPORTED", a3c["B_P3"]["cells"].count("SUPPORTED"), 8))
+    cc = {k: round(100 * v["delta_acc"]["mean"], 1) for k, v in a3c["cells"].items()}
+    bl = [v for k, v in cc.items() if "/bertl/" in k and not k.endswith("B4") or k == "yahoo/bertl/B4"]
+    tally(check("BERT-large range excluding the failed-run cell (pp)", (min(bl), max(bl)), (-2.0, -0.9), tol=0.06))
+    tally(check("SmolLM2 Yahoo B=16 / SNLI B=8 (pp)", (cc["yahoo/smol/B16"], cc["snli/smol/B8"]), (1.1, 0.4), tol=0.06))
+    failed = [d.name for d in (ROOT / "mechanism/runs").iterdir()
+              if d.name.startswith("a3_") and ("_bertl_" in d.name or "_smol_" in d.name)
+              and json.loads((d / "metrics.json").read_text())["checkpoints"][-1]["failed"]]
+    tally(check("A3c runs failing the training-loss rule", sorted(failed), ["a3_snli_bertl_S_s261", "a3_yahoo_bertl_E_s208"]))
+    tally(check("A3c lr check: all four healthy", all(not json.loads((d / "metrics.json").read_text())["checkpoints"][-1]["failed"]
+                for d in (ROOT / "mechanism/runs").iterdir() if d.name.startswith("a3c_check_")), True))
 
     header("Measured serving cost (App. latency)")
     xs = []
@@ -645,6 +663,13 @@ def main():
     tally(check("both scaled: NLL favours ensemble in 6/6", sum(r["both_scaled_nll_gain"] > 0 for r in tc["pools"]), 6))
     tally(check("both scaled: NLL significant pools", sum(r["both_scaled_nll_gain_ci95"][0] > 0 for r in tc["pools"]), 3))
     tally(check("ECE gain vs scaled single without ANLI", round(tc["without_anli"]["mean_gain_vs_temp_scaled"], 4), 0.0004, tol=0.00006))
+
+    header("Decoder temperature control, exploratory (App. tempmech)")
+    dex = json.loads((ROOT / "analysis/temperature_control.json").read_text())["decoder_exploratory"]
+    tally(check("decoder pools rebuilt", dex["n_pools"], 6))
+    tally(check("decoder both scaled: NLL favours ensemble / significant",
+                (dex["both_scaled_nll_favours_ensemble"], dex["both_scaled_nll_significant"]), (6, 6)))
+    tally(check("decoder both scaled: ECE significant either way", dex["both_scaled_ece_significant_either_way"], 1))
 
     header("LMC barriers, standard definition (App. lmc)")
     lmc = json.loads((ROOT / "analysis/lmc_barrier_standard.json").read_text())

@@ -183,6 +183,10 @@ def main() -> int:
     if not rows:
         print("no pool has both a logits cache and stored split indices")
         return 1
+    # Decoder pools (Qwen, added 2026-10-06, exploratory) are summarised
+    # separately so the six-pool encoder control keeps its own numbers.
+    dec_rows = [r for r in rows if "qwen" in r["pool_id"]]
+    rows = [r for r in rows if "qwen" not in r["pool_id"]]
 
     print(f"{'pool':46s} {'T':>5s} {'ens':>7s} {'single':>7s} "
           f"{'sng+T':>7s} {'A-vs-B':>8s} {'A-vs-C':>8s}")
@@ -239,6 +243,25 @@ def main() -> int:
         "median_fitted_temperature": float(np.median([r["T_single"] for r in rows])),
         "pools": rows,
     }
+    if dec_rows:
+        out["decoder_exploratory"] = {
+            "note": ("Decoder counterpart (Qwen2.5 0.5B/1.5B, 6-10 surviving members of each "
+                     "pool), exploratory; same procedure."),
+            "n_pools": len(dec_rows),
+            "ensemble_better_than": {
+                "uncalibrated_single": sum(r["gain_vs_uncalibrated"] > 0 for r in dec_rows),
+                "temperature_scaled_single": sum(r["gain_vs_temp_scaled"] > 0 for r in dec_rows),
+                "temperature_scaled_both_arms": sum(r["gain_temp_both"] > 0 for r in dec_rows)},
+            "both_scaled_nll_favours_ensemble": sum(r["both_scaled_nll_gain"] > 0 for r in dec_rows),
+            "both_scaled_nll_significant": sum(r["both_scaled_nll_gain_ci95"][0] > 0 for r in dec_rows),
+            "both_scaled_ece_significant_either_way": sum(
+                r["both_scaled_ece_gain_ci95"][0] > 0 or r["both_scaled_ece_gain_ci95"][1] < 0 for r in dec_rows),
+            "pools": dec_rows,
+        }
+        print("\ndecoder pools (exploratory), both arms scaled:")
+        for r in dec_rows:
+            print(f"  {r['pool_id'][:40]:40s} dECE {r['gain_temp_both']:+.4f} {r['both_scaled_ece_gain_ci95']}  "
+                  f"dNLL {r['both_scaled_nll_gain']:+.4f} {r['both_scaled_nll_gain_ci95']}")
     p = ROOT / "analysis/temperature_control.json"
     p.write_text(json.dumps(out, indent=2))
     print(f"\nwrote {p}")

@@ -319,3 +319,38 @@ A3-P2 **REPLICATES** (4/4 SUPPORTED) and B-P2 **REPLICATES** (4/4).
 
 So the §9.1 Qwen result is not an artefact of the fixed recipe, within this
 search space (two ranks, two learning rates, 4 epochs).
+
+## Confirmatory: A3c, family or size? (`a3c_analysis.py`)
+
+`PREREG_AB.md` §9.4 (`44b3499`, before any A3c run) and §9.5 (lr check:
+all healthy, lr 3e-4). A size-matched pair from opposite families,
+BERT-large (encoder, 335M) and SmolLM2-360M (decoder, 362M), runs the §9.1
+protocol on SNLI and Yahoo Answers. Runs committed at `49d4f12`.
+
+| task | backbone | B=4 | B=8 | B=16 | NLL E+TS - S+TS at B=16 |
+|---|---|---|---|---|---|
+| SNLI | BERT-large | +24.98pp (REVERSED, see below) | -1.44pp | -1.97pp | +0.033 |
+| SNLI | SmolLM2-360M | +0.14pp | +0.36pp | +0.26pp | -0.024 |
+| Yahoo | BERT-large | -1.54pp | -1.14pp | -0.91pp | +0.041 |
+| Yahoo | SmolLM2-360M | +0.96pp | +1.10pp | +1.13pp | -0.048 |
+
+**Verdicts.**
+- A3-P3 **REPLICATES**: of the 8 predicted cells (B in {8, 16}), 6 are
+  SUPPORTED and 0 REVERSED. The two SNLI SmolLM2 cells are positive but
+  unsupported.
+- B-P3 **REPLICATES**, 8/8 SUPPORTED.
+
+At matched size the encoder ensemble loses and the decoder ensemble wins or
+ties, in accuracy and in calibrated NLL. The sign tracks family, not size,
+for these two backbones. The decoder accuracy gain is smaller at 360M than at
+0.5B on SNLI.
+
+**Two runs failed the training-loss rule**, and both stay in their pipelines
+as registered.
+- `a3_snli_bertl_S_s261` (validation accuracy 0.33, chance). At B=4 it is
+  replicate 2's only single candidate, so the unpredicted SNLI/BERT-large
+  B=4 cell (+25pp, REVERSED) is an artefact of that one failed run.
+  Replicate 1 alone gives -1.5pp. At B >= 8 the single picks a healthy
+  candidate.
+- `a3_yahoo_bertl_E_s208` (validation accuracy 0.10, chance) is averaged
+  into replicate 1's E(16). BERT-large still loses there.

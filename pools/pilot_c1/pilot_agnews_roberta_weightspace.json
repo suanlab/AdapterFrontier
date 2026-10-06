@@ -1,0 +1,41 @@
+{
+  "pool_id": "pilot_agnews_roberta_weightspace",
+  "pool_type": "weight_space_merged",
+  "base_model": "FacebookAI/roberta-base",
+  "adapters": [
+    {
+      "adapter_id": "weightspace_uniform",
+      "path": "merged_adapters/pilot_agnews_roberta/uniform",
+      "base_model": "FacebookAI/roberta-base",
+      "peft_method": "merged_uniform",
+      "hyperparams": {},
+      "metrics": {},
+      "metadata": {
+        "weight_space_merge": "uniform"
+      }
+    },
+    {
+      "adapter_id": "weightspace_ties",
+      "path": "merged_adapters/pilot_agnews_roberta/ties",
+      "base_model": "FacebookAI/roberta-base",
+      "peft_method": "merged_ties",
+      "hyperparams": {},
+      "metrics": {},
+      "metadata": {
+        "weight_space_merge": "ties"
+      }
+    },
+    {
+      "adapter_id": "weightspace_dare",
+      "path": "merged_adapters/pilot_agnews_roberta/dare",
+      "base_model": "FacebookAI/roberta-base",
+      "peft_method": "merged_dare",
+      "hyperparams": {},
+      "metrics": {},
+      "metadata": {
+        "weight_space_merge": "dare"
+      }
+    }
+  ],
+  "note": "3 weight-space merged adapters (uniform/TIES/DARE) from the 10-adapter pilot pool. Evaluated to get REAL weight-space soup test accuracy vs the prediction-space proxy (AUDIT Critical 2 closure)."
+}

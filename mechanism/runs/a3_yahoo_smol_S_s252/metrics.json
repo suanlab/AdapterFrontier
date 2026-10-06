@@ -1,0 +1,37 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-360M",
+  "task": "yahoo",
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "learning_rate": 0.0003,
+  "epochs_scheduled": 4.0,
+  "batch_size": 16,
+  "seed": 252,
+  "train_rows": 20000,
+  "train_loss_mean": 0.7063680343627929,
+  "gpu": "NVIDIA RTX A6000",
+  "checkpoints": [
+    {
+      "epoch": 2,
+      "global_step": 2500,
+      "train_seconds": 488.4,
+      "eval_seconds": 162.0,
+      "train_tokens": 3337696,
+      "train_loss_recent": 0.6818147277832032,
+      "failed": false
+    },
+    {
+      "epoch": 4,
+      "global_step": 5000,
+      "train_seconds": 976.9,
+      "eval_seconds": 161.9,
+      "train_tokens": 6675392,
+      "train_loss_recent": 0.45780358314514163,
+      "failed": false
+    }
+  ],
+  "acc_full_validation": {
+    "2": 0.7521,
+    "4": 0.7396
+  }
+}

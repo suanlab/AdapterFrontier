@@ -1,0 +1,37 @@
+{
+  "model": "bert-large-uncased",
+  "task": "snli",
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "learning_rate": 0.0003,
+  "epochs_scheduled": 4.0,
+  "batch_size": 32,
+  "seed": 264,
+  "train_rows": 20000,
+  "train_loss_mean": 0.48197398262023927,
+  "gpu": "NVIDIA RTX A6000",
+  "checkpoints": [
+    {
+      "epoch": 2,
+      "global_step": 1250,
+      "train_seconds": 163.8,
+      "eval_seconds": 25.8,
+      "train_tokens": 1054480,
+      "train_loss_recent": 0.44952707290649413,
+      "failed": false
+    },
+    {
+      "epoch": 4,
+      "global_step": 2500,
+      "train_seconds": 327.8,
+      "eval_seconds": 26.3,
+      "train_tokens": 2108960,
+      "train_loss_recent": 0.3147635221481323,
+      "failed": false
+    }
+  ],
+  "acc_full_validation": {
+    "2": 0.8604958341800447,
+    "4": 0.8683194472668156
+  }
+}
