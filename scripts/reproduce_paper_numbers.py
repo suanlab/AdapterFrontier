@@ -677,6 +677,10 @@ def main():
     sec5_all = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
                    if d.name.startswith(("a3_", "a3b_", "a3d_")) and (d / "metrics.json").exists())
     tally(check("mechanism runs in total / runs of Sec. 5", (n_runs_all, sec5_all), (361, 264)))
+    with_test = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
+                    if d.name.startswith(("a2_", "a3_", "a3b_", "a3c_", "a3d_"))
+                    and any((d / f"epoch{e}" / "logits_test.npy").exists() for e in (2, 4)))
+    tally(check("runs with released test logits (Sec. 5 + pilot + checks)", with_test, 280))
 
     header("Measured serving cost (App. latency)")
     xs = []
