@@ -371,3 +371,159 @@ All four check runs passed the training-loss rule (final loss < 0.85 ln 3 = 0.93
 
 Both backbones therefore use lr 3e-4, as in §9.1. The check runs (seed 901)
 are not part of any comparison.
+
+### 9.6 A3d: an ensemble that tunes its members inside the budget (2026-10-06)
+
+Written after the §9.1–9.4 results were seen and before any A3d run. A3b
+gave the single a search over r x lr; A3d gives the ensemble the same
+freedom, so neither side is advantaged by tuning.
+
+**Pipeline.** E_tuned(16) trains eight 2-epoch members inside the same
+16-epoch budget: two seeds for each of four member recipes,
+
+| config | r | lr | replicate-1 seeds | replicate-2 seeds |
+|---|---|---|---|---|
+| m1 | 8 | 3e-4 | existing E runs s201, s202 | existing E runs s211, s212 |
+| m2 | 8 | 1e-4 | 401, 402 | 411, 412 |
+| m3 | 32 | 3e-4 | 403, 404 | 413, 414 |
+| m4 | 32 | 1e-4 | 405, 406 | 415, 416 |
+
+It combines them by greedy forward selection on `val_selection` (soft vote,
+as `a3_analysis.greedy_subset`). That is the primary arm; the soft vote over
+all eight is secondary. It is compared with S_tuned(16) of §9.2, the
+`val_selection`-best of four 4-epoch configurations, which costs the same 16
+epoch-units.
+
+Backbones and tasks are those of §9.2 (BERT-base, Qwen2.5-0.5B; SNLI, Yahoo
+Answers), giving 6 new runs per replicate, backbone and task: 48 runs.
+
+**Outcomes and adjudication.** As in §9.2: Delta accuracy, the calibrated NLL
+difference with temperatures fitted on val_combine, and the replicate mean
+with a joint CI over test examples.
+
+**Predictions** (from the family account):
+- A3-P4: Delta < 0 for BERT-base and Delta > 0 for Qwen2.5-0.5B, on both
+  tasks (4 cells).
+- B-P4: the calibrated NLL difference has the same signs.
+
+For each prediction:
+- *Replicates* if none of the 4 cells is REVERSED and at least 3 are
+  SUPPORTED.
+- *Fails* if any cell is REVERSED.
+- Otherwise inconclusive.
+
+If A3-P4 fails for BERT-base, the paper reports that the encoder result
+depended on the ensemble's untuned recipe.
+
+**Protection.** As in §9.2–9.4: this amendment and `a3d_analysis.py` are
+committed before any A3d run.
+
+### 9.7 A3e: averaging and allocation, separated, on new seeds (2026-10-07)
+
+Written after a second internal review panel and after two **post-hoc**
+analyses of already-unsealed test logits (`a3_decompose.py`,
+`a3_samebank.py`). The predictions below were informed by those analyses,
+and we say so. The confirmatory test uses only new seeds, never used before.
+
+**Why.** In §9.1–9.6 the ensemble and the single differ in averaging, member
+recipe and selection at once. The post-hoc analyses suggest two separate
+effects:
+- an *averaging* effect, positive for both families, when the ensemble and
+  the single are built from the same trained runs;
+- an *allocation* effect, with opposite signs by family, when the single may
+  spend the budget on longer, higher-rank runs.
+
+A3e tests each one.
+
+**Runs, per backbone x task x replicate.**
+- A bank of eight 2-epoch runs: r in {8, 32} x lr in {3e-4, 1e-4} x 2 seeds.
+- Four 4-epoch configuration runs (c1–c4 as in §9.2), each with its epoch-2
+  checkpoint.
+
+Each set costs 16 epoch-units. Backbones are BERT-base and Qwen2.5-0.5B; tasks
+are SNLI and Yahoo Answers; splits and recipe otherwise as §9.1. There are
+**six new replicates**: replicate i = 0..5 uses bank seeds 600+20i+{1..8} and
+configuration seeds 600+20i+{11..14}. That is 12 x 6 x 4 = 288 runs, named
+`a3e_{task}_{bb}_{b1..b8|c1..c4}_s{seed}`.
+
+**Arms** (all choices on `val_selection`, temperatures on `val_combine`):
+- E_tuned: greedy forward selection over the bank, soft vote (as §9.6).
+- S_bank: the best single run of the same bank.
+- S_es: the best of the eight checkpoints {c1..c4} x {epoch 2, epoch 4}, i.e.
+  an early-stopping tuned single.
+
+**Estimands, per cell** (backbone x task):
+- *Averaging*: acc(E_tuned) - acc(S_bank).
+- *Allocation*: acc(E_tuned) - acc(S_es).
+- The calibrated NLL difference for each.
+
+**Primary inference: replicate is the unit.** For each cell, take the six
+replicate-level test-set differences and form a paired t-interval (two-sided
+95%, 5 df). A cell is SUPPORTED if the interval excludes 0 in the predicted
+direction, REVERSED if it excludes 0 the other way, and unsupported
+otherwise. The example-level paired bootstrap of §9.1 is secondary. The two
+earlier replicates (§9.6 runs) are reported separately and never pooled with
+the new ones.
+
+**Predictions**:
+- A3-P5a (averaging): averaging > 0 in all 4 cells.
+- A3-P5b (allocation): allocation < 0 for BERT-base and > 0 for Qwen2.5-0.5B,
+  on both tasks.
+- B-P5a and B-P5b: the calibrated NLL differences have signs consistent with
+  the accuracy predictions (ensemble lower NLL for averaging in all cells; for
+  allocation, higher for BERT-base and lower for Qwen2.5-0.5B).
+
+Each prediction *replicates* if none of its 4 cells is REVERSED and at least
+3 are SUPPORTED, and *fails* if any cell is REVERSED.
+
+Under the null, with independent cells, the chance that the pass rule
+passes is at most 4 x 0.025^3 + 0.025^4 ≈ 6.3e-5 per prediction. Cells share
+backbones and tasks, so this is a heuristic bound, not an exact rate.
+
+**If P5a fails** (no averaging gain at matched runs), the paper's account
+returns to the §9.1 framing. **If P5b fails for BERT-base**, the encoder
+result is a recipe artefact.
+
+**Protection.** This amendment and `a3e_analysis.py` are committed before any
+A3e run.
+
+### 9.8 A3f: a larger decoder, Qwen2.5-1.5B (2026-10-07)
+
+Written after the second internal panel and the post-hoc analyses, and before
+any A3f run. It extends §9.7's two estimands to a decoder three times larger
+than any tested so far. All decoder results so far are from models of at most
+0.5B.
+
+**Design.** Exactly §9.7 (bank, configurations, arms, estimands, primary
+replicate-level t-interval), with these changes:
+- backbone `Qwen/Qwen2.5-1.5B`, batch size 8;
+- task Yahoo Answers only (larger effects, test n = 60,000);
+- B = 16 only;
+- **four replicates**, i = 0..3, with bank seeds 700+20i+{1..8} and
+  configuration seeds 700+20i+{11..14};
+- 48 runs, named `a3f_yahoo_q15_{b1..b8|c1..c4}_s{seed}`.
+
+**No separate learning-rate check.** Both learning rates (1e-4, 3e-4) are
+inside the searched space on each side, and every choice is made on
+`val_selection`, so a run that fails to train is simply not selected. Failed
+runs are kept and reported.
+
+**Cost estimate**, written before running, from measured Qwen2.5-0.5B Yahoo
+runs (2 epochs: about 10 min; 4 epochs: about 25–80 min depending on GPU
+contention) and a factor of about 3 for 1.5B:
+- about 30 min per 2-epoch run and 70 min per 4-epoch run;
+- about 9 GPU-hours per replicate, about 35 GPU-hours in all;
+- about 17 hours on two free GPUs.
+
+**Predictions:**
+- A3-P6a: averaging > 0.
+- A3-P6b: allocation > 0.
+- B-P6a and B-P6b: the ensemble has the lower calibrated NLL in both.
+
+Each is one cell, adjudicated SUPPORTED / REVERSED / unsupported by the 95%
+t-interval over the four replicates (3 df), so power is limited, and an
+unsupported cell is reported as inconclusive, not as a failure. A REVERSED
+allocation cell would mean the decoder result does not extend to 1.5B.
+
+**Order and protection.** Runs start only after the §9.7 queues finish. This
+amendment, `a3f_analysis.py` and the queues are committed before any A3f run.

@@ -1,0 +1,268 @@
+{
+  "_note": "Post-hoc decomposition of the equal-budget gap (panel 2, A-M1 / B-M1 /\nD-M1 / E-M2). Not pre-registered: it reads the sealed test logits after the\nfreeze, so every number here is EXPLORATORY. E(B) and S(B) differ in three ways at once: averaging, member recipe (rank 8,\n2 epochs vs rank 32, 4 epochs) and selection (best of B/4). Using only the\nreleased logits, split",
+  "B": 16,
+  "cells": {
+    "snli/bert": {
+      "delta": [
+        -2.76,
+        -3.26,
+        -2.25
+      ],
+      "averaging": [
+        0.51,
+        0.17,
+        0.83
+      ],
+      "recipe": [
+        -3.27,
+        -3.76,
+        -2.76
+      ],
+      "e_vs_choose_any": [
+        -2.76,
+        -3.26,
+        -2.25
+      ],
+      "acc": {
+        "E": 81.38,
+        "M_best_member": 80.87,
+        "S": 84.14,
+        "M_all": 84.14
+      },
+      "M_all_is": [
+        "S candidate",
+        "S candidate"
+      ]
+    },
+    "snli/q05": {
+      "delta": [
+        1.22,
+        0.78,
+        1.64
+      ],
+      "averaging": [
+        0.6,
+        0.33,
+        0.88
+      ],
+      "recipe": [
+        0.62,
+        0.18,
+        1.04
+      ],
+      "e_vs_choose_any": [
+        0.6,
+        0.34,
+        0.87
+      ],
+      "acc": {
+        "E": 88.39,
+        "M_best_member": 87.79,
+        "S": 87.16,
+        "M_all": 87.79
+      },
+      "M_all_is": [
+        "E member",
+        "E member"
+      ]
+    },
+    "snli/bertl": {
+      "delta": [
+        -1.97,
+        -2.43,
+        -1.54
+      ],
+      "averaging": [
+        0.59,
+        0.26,
+        0.89
+      ],
+      "recipe": [
+        -2.56,
+        -3.01,
+        -2.12
+      ],
+      "e_vs_choose_any": [
+        -1.97,
+        -2.41,
+        -1.53
+      ],
+      "acc": {
+        "E": 84.5,
+        "M_best_member": 83.92,
+        "S": 86.48,
+        "M_all": 86.48
+      },
+      "M_all_is": [
+        "S candidate",
+        "S candidate"
+      ]
+    },
+    "snli/smol": {
+      "delta": [
+        0.26,
+        -0.13,
+        0.65
+      ],
+      "averaging": [
+        0.41,
+        0.14,
+        0.7
+      ],
+      "recipe": [
+        -0.15,
+        -0.54,
+        0.24
+      ],
+      "e_vs_choose_any": [
+        0.26,
+        -0.13,
+        0.64
+      ],
+      "acc": {
+        "E": 88.3,
+        "M_best_member": 87.89,
+        "S": 88.03,
+        "M_all": 88.03
+      },
+      "M_all_is": [
+        "S candidate",
+        "S candidate"
+      ]
+    },
+    "yahoo/bert": {
+      "delta": [
+        -1.0,
+        -1.19,
+        -0.82
+      ],
+      "averaging": [
+        0.66,
+        0.55,
+        0.78
+      ],
+      "recipe": [
+        -1.66,
+        -1.85,
+        -1.48
+      ],
+      "e_vs_choose_any": [
+        -1.0,
+        -1.19,
+        -0.82
+      ],
+      "acc": {
+        "E": 72.37,
+        "M_best_member": 71.71,
+        "S": 73.37,
+        "M_all": 73.37
+      },
+      "M_all_is": [
+        "S candidate",
+        "S candidate"
+      ]
+    },
+    "yahoo/q05": {
+      "delta": [
+        3.2,
+        3.01,
+        3.41
+      ],
+      "averaging": [
+        0.82,
+        0.7,
+        0.94
+      ],
+      "recipe": [
+        2.39,
+        2.19,
+        2.59
+      ],
+      "e_vs_choose_any": [
+        0.82,
+        0.69,
+        0.94
+      ],
+      "acc": {
+        "E": 75.58,
+        "M_best_member": 74.76,
+        "S": 72.37,
+        "M_all": 74.76
+      },
+      "M_all_is": [
+        "E member",
+        "E member"
+      ]
+    },
+    "yahoo/bertl": {
+      "delta": [
+        -0.91,
+        -1.1,
+        -0.73
+      ],
+      "averaging": [
+        0.54,
+        0.41,
+        0.66
+      ],
+      "recipe": [
+        -1.45,
+        -1.62,
+        -1.27
+      ],
+      "e_vs_choose_any": [
+        -0.91,
+        -1.09,
+        -0.74
+      ],
+      "acc": {
+        "E": 73.32,
+        "M_best_member": 72.78,
+        "S": 74.23,
+        "M_all": 74.23
+      },
+      "M_all_is": [
+        "S candidate",
+        "S candidate"
+      ]
+    },
+    "yahoo/smol": {
+      "delta": [
+        1.13,
+        0.96,
+        1.31
+      ],
+      "averaging": [
+        0.44,
+        0.33,
+        0.54
+      ],
+      "recipe": [
+        0.7,
+        0.52,
+        0.87
+      ],
+      "e_vs_choose_any": [
+        0.44,
+        0.33,
+        0.54
+      ],
+      "acc": {
+        "E": 75.78,
+        "M_best_member": 75.34,
+        "S": 74.64,
+        "M_all": 75.34
+      },
+      "M_all_is": [
+        "E member",
+        "E member"
+      ]
+    }
+  },
+  "a2_equal_epoch_dev_test_pp": {
+    "bert_epoch2": -1.65,
+    "bert_epoch4": -1.42,
+    "q05_epoch2": 1.22,
+    "q05_epoch4": 1.57
+  }
+}

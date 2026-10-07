@@ -354,3 +354,48 @@ as registered.
   candidate.
 - `a3_yahoo_bertl_E_s208` (validation accuracy 0.10, chance) is averaged
   into replicate 1's E(16). BERT-large still loses there.
+
+
+## Confirmatory: A3d, a tuned ensemble against the tuned single (`a3d_analysis.py`)
+
+`PREREG_AB.md` §9.6 (`4ab41b3`, before any run); runs `49e0c9a`, none failed.
+E_tuned(16) = greedy selection over eight 2-epoch members (r in {8, 32} x
+lr in {3e-4, 1e-4} x 2 seeds), against S_tuned(16) of §9.2.
+
+| task | backbone | Delta acc [95% CI] | all-8 soft vote | NLL E+TS - S+TS |
+|---|---|---|---|---|
+| SNLI | BERT-base | -0.93pp [-1.33, -0.52] | -2.41pp | +0.018 |
+| SNLI | Qwen-0.5B | +0.78pp [+0.42, +1.16] | +1.04pp | -0.037 |
+| Yahoo | BERT-base | -0.47pp [-0.63, -0.32] | -1.09pp | +0.012 |
+| Yahoo | Qwen-0.5B | +1.45pp [+1.29, +1.61] | +1.57pp | -0.054 |
+
+A3-P4 and B-P4 **REPLICATE** (4/4 each). Tuning the ensemble's members
+shrinks the BERT loss from -2.6 to -0.9pp on SNLI.
+
+## Exploratory, post hoc: averaging vs allocation (`a3_decompose.py`, `a3_samebank.py`)
+
+Run after the test logits were unsealed, so exploratory.
+
+**Decomposition** at B=16, across 4 backbones x 2 tasks:
+Delta = [E - its val-best member] + [that member - S].
+- The averaging term is positive in all 8 cells: +0.4 to +0.8pp.
+- The recipe term carries the family split: -1.4 to -3.3pp on encoders,
+  -0.1 to +2.4pp on decoders.
+
+**Same bank** (A3d runs): E_tuned against the best single run of the *same*
+eight runs.
+
+| | BERT SNLI | BERT Yahoo | Qwen SNLI | Qwen Yahoo |
+|---|---|---|---|---|
+| E_tuned - S_bank | +0.49pp | +0.08pp | +0.38pp | +0.48pp |
+| E_tuned - S_es | -0.93pp | -0.24pp | +0.78pp | +1.06pp |
+
+- E_tuned - S_bank is positive in all four cells and every CI excludes 0;
+  calibrated NLL is lower everywhere.
+- S_es is an early-stopping tuned single (best of c1–c4 x epochs {2, 4}).
+  Against it the family split remains.
+
+Averaging helps both families a little. The family split is about allocation,
+i.e. what the budget buys a single adapter's recipe, which is the corpus G
+term. §9.7 (A3e) registers both effects on six new replicates. It is queued
+to start when the shared GPUs are free.

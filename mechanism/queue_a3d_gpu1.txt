@@ -1,0 +1,12 @@
+a3d_yahoo_q05_m2_s401 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 2 16 401
+a3d_yahoo_q05_m2_s402 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 2 16 402
+a3d_yahoo_q05_m3_s403 yahoo Qwen/Qwen2.5-0.5B 32 3e-4 2 16 403
+a3d_yahoo_q05_m3_s404 yahoo Qwen/Qwen2.5-0.5B 32 3e-4 2 16 404
+a3d_yahoo_q05_m4_s405 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 2 16 405
+a3d_yahoo_q05_m4_s406 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 2 16 406
+a3d_yahoo_q05_m2_s411 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 2 16 411
+a3d_yahoo_q05_m2_s412 yahoo Qwen/Qwen2.5-0.5B 8 1e-4 2 16 412
+a3d_yahoo_q05_m3_s413 yahoo Qwen/Qwen2.5-0.5B 32 3e-4 2 16 413
+a3d_yahoo_q05_m3_s414 yahoo Qwen/Qwen2.5-0.5B 32 3e-4 2 16 414
+a3d_yahoo_q05_m4_s415 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 2 16 415
+a3d_yahoo_q05_m4_s416 yahoo Qwen/Qwen2.5-0.5B 32 1e-4 2 16 416

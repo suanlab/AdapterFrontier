@@ -649,6 +649,35 @@ def main():
     tally(check("A3c lr check: all four healthy", all(not json.loads((d / "metrics.json").read_text())["checkpoints"][-1]["failed"]
                 for d in (ROOT / "mechanism/runs").iterdir() if d.name.startswith("a3c_check_")), True))
 
+    header("Tuned ensemble A3d and post-hoc decomposition (Sec. a3)")
+    a3d = json.loads((ROOT / "mechanism/results/a3d_confirmatory.json").read_text())
+    tally(check("A3-P4 / B-P4 verdicts", (a3d["A3_P4"]["verdict"], a3d["B_P4"]["verdict"]), ("REPLICATES", "REPLICATES")))
+    dd = {k: round(100 * c["delta_acc"]["mean"], 1) for k, c in a3d["cells"].items()}
+    tally(check("A3d deltas (snli/bert, yahoo/bert, snli/q05, yahoo/q05)",
+                [dd["snli/bert/B16"], dd["yahoo/bert/B16"], dd["snli/q05/B16"], dd["yahoo/q05/B16"]], [-0.9, -0.5, 0.8, 1.5], tol=0.06))
+    dec = json.loads((ROOT / "mechanism/results/a3_decompose_exploratory.json").read_text())["cells"]
+    av = [c["averaging"][0] for c in dec.values()]
+    tally(check("averaging term range, 8 cells (pp)", (round(min(av), 1), round(max(av), 1)), (0.4, 0.8), tol=0.06))
+    tally(check("averaging term CI excludes 0 in all 8", all(c["averaging"][1] > 0 for c in dec.values()), True))
+    enc_r = [c["recipe"][0] for k, c in dec.items() if k.split("/")[1] in ("bert", "bertl")]
+    dec_r = [c["recipe"][0] for k, c in dec.items() if k.split("/")[1] in ("q05", "smol")]
+    tally(check("recipe term encoders (min, max)", (round(min(enc_r), 1), round(max(enc_r), 1)), (-3.3, -1.4), tol=0.06))
+    tally(check("recipe term decoders (min, max)", (round(min(dec_r), 1), round(max(dec_r), 1)), (-0.1, 2.4), tol=0.06))
+    sb = json.loads((ROOT / "mechanism/results/a3_samebank_exploratory.json").read_text())["cells"]
+    tally(check("same bank: E_tuned - S_bank > 0 (CI) in all 4", all(c["Etuned_minus_Sbank"]["ci95"][0] > 0 for c in sb.values()), True))
+    tally(check("same bank range (pp)", (round(100 * min(c["Etuned_minus_Sbank"]["mean"] for c in sb.values()), 1),
+                                         round(100 * max(c["Etuned_minus_Sbank"]["mean"] for c in sb.values()), 1)), (0.1, 0.5), tol=0.06))
+    tally(check("E_tuned - S_es (snli/bert, yahoo/bert, snli/q05, yahoo/q05)",
+                [round(100 * sb[k]["Etuned_minus_Ses"]["mean"], 1) for k in ("snli/bert", "yahoo/bert", "snli/q05", "yahoo/q05")],
+                [-0.9, -0.2, 0.8, 1.1], tol=0.06))
+    # pinned to the run families the paper reports, so later runs (A3e) do not move it
+    n_runs_all = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
+                     if d.name.startswith(("a2_", "a3_", "a3b_", "a3c_", "a3d_", "h3a_", "h3b_", "h8_"))
+                     and (d / "metrics.json").exists())
+    sec5_all = sum(1 for d in (ROOT / "mechanism/runs").iterdir()
+                   if d.name.startswith(("a3_", "a3b_", "a3d_")) and (d / "metrics.json").exists())
+    tally(check("mechanism runs in total / runs of Sec. 5", (n_runs_all, sec5_all), (361, 264)))
+
     header("Measured serving cost (App. latency)")
     xs = []
     for bb in ("bert", "q05"):

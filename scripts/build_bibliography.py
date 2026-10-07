@@ -55,6 +55,8 @@ MAILTO = "anon@example.org"   # anonymised; any contact address works
 # --- what to fetch ----------------------------------------------------------
 
 ANTHOLOGY = {
+    "desai2020calibration": "2020.emnlp-main.21",
+    "vanmiltenburg2021preregistering": "2021.naacl-main.51",
     "bowman2015snli": "D15-1075",
     "adamix": "2022.emnlp-main.388",
     "wang2018glue": "W18-5446",
@@ -119,11 +121,21 @@ ARXIV: dict[str, tuple[str, str, str, str | None]] = {
     "ashukha2020pitfalls":      ("2002.06470", "inproceedings", ICLR, None),
     "wang2023loraensembles":    ("2310.00035", "article", "arXiv preprint arXiv:2310.00035", None),
     "zhang2015character":       ("1509.01626", "inproceedings", NEURIPS, None),
+    "chirkova2020deep":         ("2005.07292", "article", "arXiv preprint arXiv:2005.07292", None),
+    "balabanov2024uncertainty": ("2402.12264", "article", "arXiv preprint arXiv:2402.12264", None),
+    "yang2024bayesian":         ("2308.13111", "inproceedings", ICLR, None),
+    "muhlematter2024loraensemble": ("2405.14438", "article", "arXiv preprint arXiv:2405.14438", None),
+    "wenzel2020hyperparameter": ("2006.13570", "inproceedings", NEURIPS, None),
+    "dodge2020finetuning":      ("2002.06305", "article", "arXiv preprint arXiv:2002.06305", None),
+    "bouthillier2021accounting": ("2103.03098", "inproceedings", MLSYS, None),
 }
 
 YEAR = {  # publication year of the *venue*, which is not always the arXiv year
     "wang2023loraensembles": "2023",
     "zhang2015character": "2015",
+    "chirkova2020deep": "2020", "balabanov2024uncertainty": "2024", "yang2024bayesian": "2024",
+    "muhlematter2024loraensemble": "2024", "wenzel2020hyperparameter": "2020", "dodge2020finetuning": "2020",
+    "bouthillier2021accounting": "2021",
     "hu2021lora": "2022", "wortsman2022model": "2022", "yadav2023ties": "2023",
     "yu2024dare": "2024", "dora": "2024", "pissa": "2024", "adalora": "2023",
     "vera": "2024", "mole": "2024", "molora": "2023", "hydralora": "2024",
